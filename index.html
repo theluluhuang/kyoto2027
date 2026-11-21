@@ -556,6 +556,7 @@ const SPENT=[ {n:"包車（Klook 一日遊）",pp:2725}, {n:"住宿 5 人 5 晚�
 const BUDGET=[ {n:"大眾運輸",lo:8700,hi:10900}, {n:"門票與體驗",lo:2350,hi:4000}, {n:"餐費 6 天",lo:24000,hi:42000} ];
 
 /* 欄位預設值（可在畫面上自行修改） */
+const LIGHTSPLIT="https://liff.line.me/1655320992-Y8GowEpw/g/gRdZjWTcS75ToMgJKvUs7P";
 const FIELD_DEF={ teco_tel:"06-6227-8623", teco_sos:"090-8794-4568" };
 
 /* 伴手禮與購物（皆為範例） */
@@ -743,13 +744,11 @@ function trHTML(t,i){
   return '<div class="tr'+(t.tbc?' alert':'')+' pop" style="--i:'+i+'"><span class="m">'+t.mode+' '+t.route+'</span>'+route+
    '<span class="w">⏱ '+t.dur+'</span>'+(t.walk?'<span class="w">'+(/步行/.test(t.walk)?'🚶 ':'📍 ')+t.walk+'</span>':'')+(t.note?'<span class="nt">'+(t.tbc?'⚠️ ':'')+t.note+'</span>':'')+(t.tbc?'<span class="tg tbc" style="margin:2px 0 0">待確認</span>':'')+'</div>';
 }
-function expHTML(n){
-  const list=S.exp["d"+n]||[];const sum=list.reduce((a,b)=>a+(+b.jpy||0),0);
-  return '<h3 style="font-size:18px">💴 今日花費紀錄</h3>'+
-   '<div class="exp-f"><input id="expL" type="text" placeholder="項目（如：午餐）" maxlength="30"><input id="expY" type="number" inputmode="numeric" placeholder="日圓 ¥" min="0"><button class="btn fill" data-exp-add="'+n+'">加入</button></div>'+
-   (list.length?list.map((e,i)=>'<div class="exp-i"><span>'+esc(e.label||"花費")+'</span><span>'+yen(e.jpy)+'</span><button data-exp-del="'+n+':'+i+'" aria-label="刪除">✕</button></div>').join(""):'<p style="font-size:15px">還沒有紀錄。</p>')+
-   '<p style="margin-top:8px"><b>今日小計：'+yen(sum)+' ≈ '+ntd(sum*S.rate)+'</b></p>'+
-   '<label class="fld" style="margin-top:6px"><span>匯率（¥1 = NT$ ?）</span><input type="number" inputmode="decimal" step="0.001" min="0" value="'+S.rate+'" data-rate="1"></label>';
+function lsCard(){
+  return '<div class="card" style="margin-top:14px"><h3 style="font-size:18px">💴 記帳與分帳</h3>'+
+   '<p style="margin:4px 0 8px">今天的花費統一記在 Lightsplit，5 個人的帳會自動分攤算清楚。</p>'+
+   '<a class="btn pri" target="_blank" rel="noopener" href="'+LIGHTSPLIT+'">📒 開啟 Lightsplit 記帳</a>'+
+   '<p style="font-size:15px;margin-top:8px">第一次開啟需要用 LINE 登入，記完帳直接回到這個頁面即可。</p></div>';
 }
 function dailyHTML(){
   if(!(S.day>=1&&S.day<=6)){const t=tripDay();S.day=(t>=1&&t<=6)?t:1}
@@ -772,7 +771,7 @@ function dailyHTML(){
    (hasRain?'<div class="seg" role="group" aria-label="天氣方案"><button data-mode="sun" class="'+(!rainOn?'on':'')+'">☀️ 晴天行程</button><button data-mode="rain" class="'+(rainOn?'on':'')+'">☔ 雨／雪備案</button></div>'+(rainOn?'<div class="info"><p>以下替代方案皆為「範例」，只替換受天氣影響的項目，其餘照原行程。</p></div>':''):
      (D.noRain?'<div class="info"><p>'+D.noRain+'</p></div>':''))+
    '<div class="tl" id="tl">'+out+'</div>'+
-   '<div class="card" id="exp-box" style="margin-top:14px">'+expHTML(D.n)+'</div>'+backBtn();
+   lsCard()+backBtn();
 }
 
 /* ---------- 行前清單 ---------- */
@@ -801,7 +800,6 @@ function fld(key,label,ph){return '<label class="fld"><span>'+label+'</span><inp
 function stayHTML(){
   const spentPP=SPENT.reduce((a,b)=>a+b.pp,0);
   const lo=BUDGET.reduce((a,b)=>a+b.lo,0),hi=BUDGET.reduce((a,b)=>a+b.hi,0);
-  const rec=Object.values(S.exp).reduce((a,l)=>a+l.reduce((x,y)=>x+(+y.jpy||0),0),0);
   const P=TRIP.people;
   return '<h2 class="stitle">住宿速查</h2>'+
   '<div class="card" style="background:var(--t-neutral)"><h3 style="font-size:19px">'+HOTEL.name+'</h3><p style="font-size:15px">'+HOTEL.jp+'</p>'+
@@ -839,10 +837,10 @@ function stayHTML(){
    '<tr class="tot"><td>預算小計<br><span style="font-size:15px">'+yen(lo)+"–"+yen(hi)+'</span></td><td>'+ntd(lo*S.rate)+"–"+ntd(hi*S.rate)+'</td></tr></table>'+
    '<h3 style="font-size:17px;margin-top:14px">總預算（每人）</h3><p><b style="font-size:20px">'+ntd(spentPP+lo*S.rate)+" – "+ntd(spentPP+hi*S.rate)+'</b></p>'+
    '<p style="font-size:15px">5 人合計約 '+ntd((spentPP+lo*S.rate)*P)+" – "+ntd((spentPP+hi*S.rate)*P)+'（匯率 ¥1 = NT$'+S.rate+'）</p>'+
-   '<p style="margin-top:8px">每日花費紀錄累計：<b>'+yen(rec)+' ≈ '+ntd(rec*S.rate)+'</b></p>'+
+   '<p style="margin-top:8px">旅途中的花費與分帳請記在 Lightsplit：</p><a class="btn pri" target="_blank" rel="noopener" href="'+LIGHTSPLIT+'">📒 開啟 Lightsplit 記帳</a>'+
    '<label class="fld" style="margin-top:6px"><span>匯率（¥1 = NT$ ?）</span><input type="number" inputmode="decimal" step="0.001" min="0" value="'+S.rate+'" data-rate="1"></label></div>'+
 
-  '<div class="card"><h3 style="font-size:17px">資料備份</h3><p style="font-size:15px;margin:4px 0 8px">勾選、花費、清單與欄位都只存在這支手機的瀏覽器。換手機前請先匯出。</p>'+
+  '<div class="card"><h3 style="font-size:17px">資料備份</h3><p style="font-size:15px;margin:4px 0 8px">清單與欄位都只存在這支手機的瀏覽器。換手機前請先匯出。</p>'+
    '<div class="acts"><button class="btn" data-export="1">⬇️ 匯出備份檔</button><button class="btn" data-copy="1">📋 複製備份文字</button></div>'+
    '<label class="fld" style="margin-top:10px"><span>匯入：選擇備份檔</span><input type="file" accept=".json,application/json" data-import-file="1"></label>'+
    '<label class="fld"><span>或貼上備份文字</span><textarea id="impTxt" placeholder="貼上備份內容"></textarea></label>'+
@@ -879,12 +877,6 @@ document.addEventListener("click",e=>{
   if(t.dataset.sum){S.sum=!S.sum;save();const D=DAYS[S.day-1];$("#sum").outerHTML=wxHTML(D);return}
   if(t.dataset.wxr){t.textContent='抓取中…';refreshWx(true).then(updSum).catch(()=>{t.textContent='抓取失敗，請稍後再試'});return}
   if(t.dataset.mode){S.mode["d"+S.day]=t.dataset.mode;save();render();return}
-  if(t.dataset.expAdd){
-    const n=+t.dataset.expAdd,l=$("#expL").value.trim(),y=parseFloat($("#expY").value);
-    if(!(y>=0)){ $("#expY").focus();return}
-    (S.exp["d"+n]=S.exp["d"+n]||[]).push({label:l,jpy:y});save();$("#exp-box").innerHTML=expHTML(n);return}
-  if(t.dataset.expDel){
-    const [n,i]=t.dataset.expDel.split(":").map(Number);(S.exp["d"+n]||[]).splice(i,1);save();$("#exp-box").innerHTML=expHTML(n);return}
   if(t.dataset.ckDel){
     const [cat,id]=t.dataset.ckDel.split(":");
     if(CK[cat]&&CK[cat].some(x=>x.id===id))S.ck.removed[id]=true;
