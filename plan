@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>京都・伊根 六天五夜</title>
+<meta name="theme-color" content="#23406B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kyo:#23406B;      /* 京藍 */
+  --torii:#D9482F;    /* 鳥居朱紅 */
+  --lantern:#F2B441;  /* 燈籠黃 */
+  --ume:#E58FA6;      /* 梅花粉 */
+  --matcha:#2F7D6B;   /* 抹茶綠 */
+  --snow:#7FB9D6;     /* 淺雪藍 */
+  --bg:#EEF4F3;
+  --t-sight:#DDEEF7; --t-food:#FDF0CC; --t-shop:#FBE1E8; --t-neutral:#F2F4F5;
+  --line:1.5px solid var(--kyo); --r:16px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--kyo);font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;font-size:16px;line-height:1.75;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:640px;margin:0 auto;padding:12px 14px calc(40px + env(safe-area-inset-bottom))}
+h1,h2,h3,p{margin:0}
+a{color:var(--kyo)}
+button,input,textarea{font:inherit;color:inherit}
+.card{background:#fff;border:var(--line);border-radius:var(--r);padding:14px;margin:0 0 12px}
+
+/* ===== Hero ===== */
+.hero{background:#fff;border:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.scene{display:block;width:100%;height:auto;border-bottom:var(--line)}
+.hero-body{padding:14px 16px 16px}
+.hero h1{font-size:26px;line-height:1.3;font-weight:700;letter-spacing:.02em}
+.hero .sub{margin-top:4px;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-block;padding:1px 10px;border-radius:999px;border:var(--line);background:#fff;font-size:14px;line-height:1.7}
+.cd{margin-top:12px;border:var(--line);border-radius:12px;padding:10px 12px;background:var(--t-sight)}
+.cd-l{font-size:15px;font-weight:500}
+.cd-n{font-size:18px}
+.cd-n b{font-size:30px;font-weight:700;color:var(--torii);padding:0 2px}
+.cd-s{font-size:15px;margin-top:2px}
+
+/* ===== Nav ===== */
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.navbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:64px;border:var(--line);border-radius:16px;background:#fff;font-weight:700;font-size:17px;cursor:pointer;padding:8px 10px}
+.navbtn svg{width:26px;height:26px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.navbtn.on{background:var(--kyo);color:#fff}
+.navbtn:active{transform:scale(.98)}
+
+/* ===== Tags ===== */
+.tg{display:inline-block;font-size:14px;line-height:1.6;padding:0 8px;border-radius:999px;margin-left:6px;vertical-align:middle;font-weight:500;white-space:nowrap}
+.tg.must{background:var(--torii);color:#fff}
+.tg.tbc{background:var(--lantern);color:var(--kyo)}
+.tg.ex{background:#fff;border:1.5px dashed var(--kyo)}
+.tg.mid{background:var(--snow);color:var(--kyo)}
+.tg.pri{background:var(--kyo);color:#fff}
+.tg.ok{background:var(--matcha);color:#fff}
+
+/* ===== Section title ===== */
+.stitle{font-size:20px;font-weight:700;margin:4px 2px 10px}
+.stitle small{font-size:15px;font-weight:400;margin-left:6px}
+
+/* ===== Day buttons ===== */
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.dbtn{min-height:64px;border:var(--line);border-radius:14px;background:#fff;cursor:pointer;padding:6px 4px;text-align:center;line-height:1.35}
+.dbtn b{display:block;font-size:19px}
+.dbtn span{display:block;font-size:14px}
+.dbtn i{display:block;font-style:normal;font-size:13px;color:var(--torii);font-weight:700}
+.dbtn.on{background:var(--kyo);color:#fff}
+.dbtn.on i{color:var(--lantern)}
+
+/* ===== Sticky summary ===== */
+.sticky{position:sticky;top:8px;z-index:30;padding:8px 12px;margin-bottom:12px}
+.sum-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:44px}
+.sum-row .ic{font-size:26px;line-height:1}
+.sum-row .tp{font-weight:700;font-size:17px}
+.sum-btn{margin-left:auto;min-height:44px;padding:0 12px;border:var(--line);border-radius:12px;background:#fff;cursor:pointer;font-weight:500}
+.sum-more{border-top:1.5px dashed var(--snow);margin-top:6px;padding-top:8px;font-size:16px}
+.sum-more p{margin:0 0 6px}
+.warn{background:var(--lantern);border-radius:10px;padding:2px 10px;font-weight:700;font-size:15px}
+
+/* ===== Day header ===== */
+.dayhead{margin:0 2px 10px}
+.dayhead h2{font-size:21px;line-height:1.4}
+.dayhead .meta{font-size:15px}
+.info{background:var(--t-neutral);border:var(--line);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:16px}
+.info p{margin:0 0 4px}
+.info p:last-child{margin:0}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px;background:#fff}
+.seg button{min-height:48px;border:0;background:#fff;cursor:pointer;font-weight:700;font-size:16px}
+.seg button+button{border-left:var(--line)}
+.seg button.on{background:var(--kyo);color:#fff}
+
+/* ===== Timeline cards ===== */
+.tl{position:relative}
+.it{border:var(--line);border-radius:var(--r);padding:12px 14px;margin:0;background:var(--t-neutral)}
+.it.sight{background:var(--t-sight)}
+.it.food{background:var(--t-food)}
+.it.shop{background:var(--t-shop)}
+.it .top{display:flex;align-items:center;flex-wrap:wrap;gap:2px 0;font-size:15px}
+.it .time{font-weight:700;font-size:17px}
+.it .kind{margin-left:8px;font-size:14px;border:var(--line);border-radius:999px;padding:0 8px;background:#fff}
+.it h3{font-size:19px;line-height:1.45;margin:4px 0 2px}
+.it .stay{font-size:15px;font-weight:500}
+.it .d{margin:4px 0 6px}
+.row{display:grid;grid-template-columns:5.2em 1fr;gap:8px;font-size:16px;margin:3px 0;padding-top:4px;border-top:1.5px dashed rgba(35,64,107,.25)}
+.row b{font-weight:700}
+.orig{font-size:15px;margin-bottom:2px;text-decoration:line-through;opacity:.7}
+.acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ckl input{width:24px;height:24px;accent-color:var(--matcha);flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 14px;border:var(--line);border-radius:12px;background:#fff;text-decoration:none;font-weight:700;font-size:16px;cursor:pointer}
+.btn.fill{background:var(--kyo);color:#fff}
+.btn.pri{background:var(--torii);border-color:var(--torii);color:#fff}
+.btn.sm{min-height:44px}
+.btn:active{transform:scale(.98)}
+
+/* ===== Transit ===== */
+.tr{margin:0 0 0 16px;padding:8px 10px 8px 14px;border-left:3px dashed var(--snow);font-size:16px;line-height:1.6}
+.tr .m{font-weight:700}
+.tr .w{display:block;font-size:15px}
+.tr .nt{display:block;font-size:15px}
+.tr.alert{border-left-color:var(--torii)}
+.gap{height:10px}
+
+/* ===== Boarding pass ===== */
+.bp{background:#fff;border:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.bp-top{display:flex;justify-content:space-between;align-items:center;background:var(--kyo);color:#fff;padding:8px 14px;font-weight:700;font-size:15px}
+.bp-main{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;padding:12px 14px 4px}
+.bp-pt .code{font-size:34px;font-weight:700;line-height:1.1}
+.bp-pt .nm{font-size:15px}
+.bp-pt .tm{font-size:26px;font-weight:700;line-height:1.2;color:var(--torii)}
+.bp-pt .tz{font-size:14px}
+.bp-pt.r{text-align:right}
+.bp-mid{text-align:center;font-size:14px}
+.bp-mid .plane{font-size:26px;line-height:1}
+.bp-cut{border-top:2px dashed var(--kyo);margin:10px 0 0;position:relative}
+.bp-cut::before,.bp-cut::after{content:"";position:absolute;top:-10px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:var(--line)}
+.bp-cut::before{left:-10px}.bp-cut::after{right:-10px}
+.bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:12px 14px 4px}
+.bp-grid div small{display:block;font-size:14px;opacity:.8;line-height:1.4}
+.bp-grid div b{font-size:17px}
+.bpi{border:var(--line);border-radius:10px;min-height:40px;width:100%;padding:0 8px;font-size:16px;background:#fff}
+.barcode{display:block;width:70%;height:28px;margin:8px 14px 14px}
+
+/* ===== Lists / forms ===== */
+.prog{height:14px;border:var(--line);border-radius:999px;background:#fff;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--matcha);width:0;transition:width .4s ease}
+.ck{display:flex;align-items:flex-start;gap:4px;border-top:1.5px dashed rgba(35,64,107,.25);padding:2px 0}
+.ck:first-of-type{border-top:0}
+.ckl{display:flex;gap:10px;align-items:flex-start;flex:1;min-height:48px;padding:10px 0;cursor:pointer}
+.ckl .txt{flex:1}
+.ckl small{display:block;font-size:15px;opacity:.85;line-height:1.55}
+.ck.is-done .txt{text-decoration:line-through;opacity:.6}
+.ck .x{width:44px;height:44px;border:0;background:transparent;font-size:18px;cursor:pointer;flex:none}
+.add{display:flex;gap:8px;margin-top:8px}
+.add input,.fld input,.exp-f input,textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 12px;min-height:46px;width:100%;font-size:16px}
+textarea{padding:10px 12px;min-height:90px}
+.fld{display:block;margin:0 0 10px}
+.fld span{display:block;font-size:15px;font-weight:500}
+.exp-f{display:grid;grid-template-columns:1fr 7.5em auto;gap:8px;margin:8px 0}
+.exp-i{display:flex;align-items:center;gap:8px;border-top:1.5px dashed rgba(35,64,107,.25);min-height:46px}
+.exp-i span:first-child{flex:1}
+.exp-i button{width:44px;height:44px;border:0;background:transparent;font-size:18px;cursor:pointer}
+.tbl{width:100%;border-collapse:collapse;font-size:16px}
+.tbl td{padding:6px 4px;border-top:1.5px dashed rgba(35,64,107,.25);vertical-align:top}
+.tbl td:last-child{text-align:right;white-space:nowrap}
+.tbl tr:first-child td{border-top:0}
+.tot td{font-weight:700;border-top:var(--line)!important}
+.kv{display:grid;grid-template-columns:6.5em 1fr;gap:4px 10px;margin:0}
+.kv dt{font-weight:700}
+.kv dd{margin:0}
+.acc{border:var(--line);border-radius:12px;margin:0 0 8px;background:#fff}
+.acc summary{min-height:48px;padding:10px 12px;font-weight:700;cursor:pointer;list-style:none}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"＋";float:right}
+.acc[open] summary::after{content:"－"}
+.acc .in{padding:0 12px 10px}
+.acc.shopc{background:var(--t-shop)}
+.acc.sightc{background:var(--t-sight)}
+.acc.foodc{background:var(--t-food)}
+.acc ul,.in ul{margin:4px 0;padding-left:1.2em}
+.back{display:flex;margin:18px auto 0;min-height:56px;width:100%}
+.foot{font-size:15px;margin-top:16px;opacity:.85}
+
+/* ===== Motion ===== */
+.pop{animation:pop .45s cubic-bezier(.34,1.4,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.snowf{fill:#fff;animation:fall var(--t,9s) linear var(--d,0s) infinite}
+@keyframes fall{0%{transform:translate(0,-12px)}100%{transform:translate(-8px,235px)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick 1.6s ease-in-out infinite}
+.flame.b{animation-duration:2.1s;animation-delay:-.6s}
+.flame.c{animation-duration:1.3s;animation-delay:-.3s}
+@keyframes flick{0%,100%{transform:scale(1,1)}35%{transform:scale(.94,1.1)}70%{transform:scale(1.05,.95)}}
+.glow{animation:glow 3.2s ease-in-out infinite}
+.glow.b{animation-delay:-1.4s}
+@keyframes glow{0%,100%{opacity:.7}50%{opacity:1}}
+.rip{animation:rip 5s ease-in-out infinite alternate}
+.rip.b{animation-duration:6.5s;animation-delay:-2s}
+@keyframes rip{from{transform:translateX(-6px)}to{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .snowf{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= 首頁：插畫＋標題＋倒數 ================= -->
+<header class="hero">
+<svg class="scene" viewBox="0 0 360 220" role="img" aria-label="京都冬日插畫：朱紅鳥居、京都塔、火爐祭火焰、美山茅葺屋與雪燈籠、鴨川河面">
+  <rect width="360" height="220" fill="#D3E6F1"/>
+  <!-- 遠山 -->
+  <polygon points="0,140 50,96 95,130 150,86 210,132 265,92 320,128 360,106 360,172 0,172" fill="#BCD6E6"/>
+  <polygon points="0,156 70,122 130,150 200,120 270,150 330,126 360,140 360,176 0,176" fill="#A6C8DC"/>
+  <!-- 雪地 -->
+  <rect y="166" width="360" height="24" fill="#FFFFFF"/>
+  <!-- 鴨川 -->
+  <rect y="188" width="360" height="32" fill="#7FB9D6"/>
+  <g stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".85">
+    <path class="rip" d="M16 198 q6 -4 12 0 t12 0 t12 0"/>
+    <path class="rip b" d="M120 204 q6 -4 12 0 t12 0 t12 0 t12 0"/>
+    <path class="rip" d="M230 197 q6 -4 12 0 t12 0 t12 0"/>
+    <path class="rip b" d="M290 208 q6 -4 12 0 t12 0 t12 0"/>
+    <path class="rip" d="M60 212 q6 -4 12 0 t12 0 t12 0"/>
+  </g>
+  <!-- 鳥居 -->
+  <g>
+    <rect x="43" y="74" width="10" height="94" fill="#D9482F"/>
+    <rect x="97" y="74" width="10" height="94" fill="#D9482F"/>
+    <rect x="41" y="158" width="14" height="10" fill="#23406B"/>
+    <rect x="95" y="158" width="14" height="10" fill="#23406B"/>
+    <rect x="38" y="88" width="74" height="7" fill="#D9482F"/>
+    <path d="M26 66 Q75 56 124 66 L122 77 Q75 68 28 77 Z" fill="#D9482F"/>
+    <path d="M24 61 Q75 50 126 61 L124 67 Q75 57 26 67 Z" fill="#23406B"/>
+    <ellipse cx="75" cy="55" rx="30" ry="3" fill="#FFFFFF"/>
+  </g>
+  <!-- 吉田神社 火爐祭 -->
+  <g>
+    <rect x="118" y="152" width="40" height="14" rx="3" fill="#7A4A2B"/>
+    <rect x="124" y="146" width="28" height="8" rx="3" fill="#8F5A35"/>
+    <path class="flame" d="M138 150 C126 134 132 122 138 106 C144 122 152 134 138 150Z" fill="#D9482F"/>
+    <path class="flame b" d="M127 150 C122 142 126 136 128 130 C132 138 134 144 127 150Z" fill="#D9482F"/>
+    <path class="flame c" d="M149 150 C144 142 147 136 150 128 C154 138 156 144 149 150Z" fill="#D9482F"/>
+    <path class="flame c" d="M138 150 C132 140 135 133 138 124 C141 133 144 140 138 150Z" fill="#F2B441"/>
+  </g>
+  <!-- 京都塔 -->
+  <g stroke="#23406B" stroke-width="1.5" stroke-linejoin="round">
+    <rect x="172" y="150" width="38" height="18" rx="3" fill="#F5F7F8"/>
+    <path d="M184 150 L186 64 L196 64 L198 150 Z" fill="#FFFFFF"/>
+    <ellipse cx="191" cy="62" rx="12" ry="6" fill="#FFFFFF"/>
+    <rect x="186" y="50" width="10" height="8" fill="#FFFFFF"/>
+    <line x1="191" y1="50" x2="191" y2="30" stroke-width="2"/>
+  </g>
+  <circle cx="191" cy="30" r="2.4" fill="#D9482F"/>
+  <!-- 雪燈籠 -->
+  <g>
+    <path d="M214 168 Q222 150 230 168 Z" fill="#FFFFFF" stroke="#7FB9D6" stroke-width="1.5"/>
+    <rect class="glow" x="219" y="160" width="6" height="6" rx="1" fill="#F2B441"/>
+    <path d="M344 168 Q352 150 360 168 Z" fill="#FFFFFF" stroke="#7FB9D6" stroke-width="1.5"/>
+    <rect class="glow b" x="349" y="160" width="6" height="6" rx="1" fill="#F2B441"/>
+  </g>
+  <!-- 美山茅葺屋 -->
+  <g>
+    <rect x="238" y="138" width="58" height="30" fill="#8A5E3C"/>
+    <rect x="262" y="148" width="11" height="20" fill="#4A3524"/>
+    <rect class="glow" x="244" y="146" width="10" height="9" fill="#F2B441"/>
+    <path d="M228 142 L267 100 L306 142 Z" fill="#C79A52"/>
+    <path d="M241 128 L267 100 L293 128 Q267 120 241 128 Z" fill="#FFFFFF"/>
+    <rect x="306" y="148" width="34" height="20" fill="#8A5E3C"/>
+    <path d="M300 150 L323 126 L346 150 Z" fill="#C79A52"/>
+    <path d="M310 142 L323 126 L336 142 Q323 138 310 142 Z" fill="#FFFFFF"/>
+  </g>
+  <!-- 細雪 -->
+  <g>
+    <circle class="snowf" cx="18" cy="0" r="2.2" style="--t:9s;--d:0s"/>
+    <circle class="snowf" cx="52" cy="0" r="1.8" style="--t:11s;--d:-3s"/>
+    <circle class="snowf" cx="86" cy="0" r="2.4" style="--t:8s;--d:-5s"/>
+    <circle class="snowf" cx="118" cy="0" r="1.8" style="--t:12s;--d:-1s"/>
+    <circle class="snowf" cx="150" cy="0" r="2.2" style="--t:10s;--d:-6s"/>
+    <circle class="snowf" cx="176" cy="0" r="1.6" style="--t:13s;--d:-2s"/>
+    <circle class="snowf" cx="204" cy="0" r="2.3" style="--t:9.5s;--d:-7s"/>
+    <circle class="snowf" cx="236" cy="0" r="1.8" style="--t:11.5s;--d:-4s"/>
+    <circle class="snowf" cx="262" cy="0" r="2.4" style="--t:8.5s;--d:-8s"/>
+    <circle class="snowf" cx="290" cy="0" r="1.7" style="--t:12.5s;--d:-1.5s"/>
+    <circle class="snowf" cx="318" cy="0" r="2.2" style="--t:10s;--d:-5.5s"/>
+    <circle class="snowf" cx="346" cy="0" r="1.8" style="--t:9s;--d:-3.5s"/>
+    <circle class="snowf" cx="34" cy="0" r="1.6" style="--t:13s;--d:-9s"/>
+    <circle class="snowf" cx="134" cy="0" r="2" style="--t:10.5s;--d:-8.5s"/>
+    <circle class="snowf" cx="222" cy="0" r="1.6" style="--t:12s;--d:-10s"/>
+    <circle class="snowf" cx="304" cy="0" r="2" style="--t:9.8s;--d:-6.5s"/>
+  </g>
+</svg>
+<div class="hero-body">
+  <h1>京都・伊根 六天五夜</h1>
+  <p class="sub">2027/2/2（二）– 2/7（日）｜5 人同行</p>
+  <div class="chips"><span class="chip">節分祭典</span><span class="chip">京都近郊小眾路線</span></div>
+  <div class="cd" id="cd" aria-live="polite"></div>
+</div>
+</header>
+
+<!-- ================= 四大分類按鈕（隨頁面捲動，不固定） ================= -->
+<nav class="nav" id="menu" aria-label="主選單"></nav>
+
+<main id="content"></main>
+
+</div>
+
+<script>
+/* =====================================================================
+   資料區：之後要更新航班、住宿、行程，只要改這一段即可
+   標示說明：tbc:true → 畫面顯示「待確認」；ex:true → 畫面顯示「範例」
+   ===================================================================== */
+const TRIP={ start:"2027-02-02T06:55:00+08:00", people:5 };
+
+const FLIGHTS=[
+ { id:"out", dir:"去程 OUTBOUND", air:"台灣虎航 Tigerair Taiwan", no:"IT284", date:"2027/2/2（二）",
+   from:{c:"KHH",n:"高雄國際機場",t:"06:55",z:"台灣時間",term:"第 1 航廈"},
+   to:{c:"KIX",n:"關西國際機場",t:"10:40",z:"日本時間（台灣 09:40）",term:"第 1 航廈"},
+   dur:"約 2 小時 45 分" },
+ { id:"ret", dir:"回程 RETURN", air:"台灣虎航 Tigerair Taiwan", no:"IT285", date:"2027/2/7（日）",
+   from:{c:"KIX",n:"關西國際機場",t:"11:30",z:"日本時間（台灣 10:30）",term:"第 1 航廈"},
+   to:{c:"KHH",n:"高雄國際機場",t:"14:00",z:"台灣時間",term:"第 1 航廈"},
+   dur:"約 3 小時 30 分" }
+];
+
+const HOTEL={
+ name:"京王普雷利亞飯店 京都烏丸五條", jp:"京王プレリアホテル京都烏丸五条",
+ addr:"日本〒600-8418 Kyoto, Shimogyo Ward, Gojokarasumacho, 396 京王プレリアホテル 1F",
+ addrJp:"〒600-8418 京都府京都市下京区烏丸通松原下る五条烏丸町396",
+ booking:"1799541464", checkin:"15:00 起", checkout:"11:00",
+ maps:"京王プレリアホテル京都烏丸五条"
+};
+
+const WEATHER={ /* 全部為「範例」數值，非即時預報 */
+ 1:{i:"☁️",hi:9,lo:1,p:30,u:"降雨",wear:"洋蔥式穿搭：發熱衣＋毛衣＋防風外套。傍晚到夜間在吉田神社站著不動會很冷，建議帶暖暖包、手套。"},
+ 2:{i:"⛅",hi:9,lo:1,p:20,u:"降雨",wear:"白天可穿輕便些，但深夜火爐祭要在戶外站 1–2 小時，務必帶羽絨外套、暖暖包、帽子與手套。"},
+ 3:{i:"🌨️",hi:3,lo:-3,p:50,u:"降雪",wear:"伊根與美山山區比京都市區冷 5–6 度，路面可能結冰。請穿防滑鞋、厚羽絨外套，加圍巾、手套、毛帽與暖暖包。",alert:"伊根・美山：請穿防滑鞋＋厚外套"},
+ 4:{i:"☁️",hi:8,lo:0,p:30,u:"降雨",wear:"下鴨神社的糺の森樹蔭下更冷，保暖外套＋圍巾。晚上壽喜燒餐廳室內溫暖，衣服要方便穿脫。"},
+ 5:{i:"⛅",hi:10,lo:3,p:20,u:"降雨",wear:"大阪比京都稍暖，但勝尾寺在山上更冷。洋蔥式穿搭，走路多，穿舒適的鞋。"},
+ 6:{i:"☁️",hi:9,lo:2,p:30,u:"降雨",wear:"清晨出門偏冷，外套隨身帶；機場與飛機上比較暖。"}
+};
+
+/* 交通條：mode 圖示、route 交通工具、from/to 起訖、dur 搭乘時間、walk 步行資訊 */
+const TR=(mode,route,from,to,dur,walk,note,tbc)=>({k:"tr",mode,route,from,to,dur,walk,note,tbc});
+
+const DAYS=[
+/* ---------------------------- Day 1 ---------------------------- */
+{ n:1,date:"2/2",wd:"二",title:"Outlet → 京都節分夜",tags:["出發日"],
+ info:["吉田神社節分祭為期 3 天（預計 2/2–2/4），2/2 是追儺式（鬼やらい）、2/3 是火爐祭。2027 年的詳細時間官方尚未公布，皆標「待確認」。"],
+ items:[
+  {id:"d1a",k:"air",t:"04:30",n:"機場接送出發 → 高雄機場（KHH）",d:"搭接送車前往高雄機場，辦理 IT284 報到（建議起飛前 2.5–3 小時抵達）。",tbc:true,rows:[["待確認","接送車行、上車地點、聯絡電話"]],map:"高雄國際機場"},
+  {id:"d1b",k:"air",t:"06:55 → 10:40",n:"IT284 高雄 KHH → 大阪 KIX",d:"第 1 航廈起飛、第 1 航廈降落。10:40 為日本時間（日本比台灣快 1 小時），飛行約 2 小時 45 分。",map:"関西国際空港 第1ターミナル"},
+  {id:"d1c",k:"air",t:"10:40–11:40",n:"KIX 入境、領行李",d:"10:40 抵達；11:10–11:40 入境、領行李。",map:"関西国際空港 第1ターミナル"},
+  TR("🚆","JR 關空快速","關西空港站","りんくうタウン站","約 5 分（1 站）","出站步行約 5–6 分到 Outlet"),
+  {id:"d1d",k:"shop",t:"12:10–14:30",n:"Rinku Premium Outlets（りんくうプレミアム・アウトレット）",stay:"約 2 小時 20 分",
+   d:"位在 KIX 對岸臨空城的海濱型 Outlet，約 250 間日系與國際品牌，臨海、有摩天輪，午餐可在美食街解決。",
+   rows:[["營業時間","約 10:00–20:00（店舖與季節略有差異，以官網為準）"],
+         ["休館日","每年僅 1 天：2 月第 3 個週四（2027 年為 2/18），2/2 不受影響"],
+         ["行李","可用館內投幣置物櫃或付費寄放（現況與費用待確認）"],
+         ["退稅","帶護照。日本 2026/11/1 起改為「先付含稅價，出境時於機場海關確認後退款」，購買日起 90 日內出境；各店條件與退款流程待確認"],
+         ["優惠券","外國旅客可憑護照到服務台領折扣券（依現況待確認）"]],
+   map:"りんくうプレミアム・アウトレット"},
+  {id:"d1e",k:"food",t:"午餐（購物時段內）",n:"Outlet 美食街 Rinku Food Park",d:"在 Outlet 內自行選店，不需訂位。",
+   rows:[["料理類型","美食街，日式與各國料理皆有"],["預算","約 ¥1,000–1,800／人（範例）"],["訂位","不需要，現場選"]],ex:true,map:"りんくうプレミアム・アウトレット フードコート"},
+  TR("🚶🚆","步行 ＋ JR 關空快速","Outlet","關西空港站","步行約 5–6 分＋JR 約 5 分","14:30 領行李、步行回りんくうタウン站；約 14:55 搭 JR 回關西空港站（1 站）"),
+  TR("🚆","JR Haruka（指定席）","關西空港站","京都站","約 1 小時 15 分","約 15:15–15:30 發車，約 16:35–16:50 抵達；2/2 建議訂 Outlet 回程這一班",
+     "2027 年時刻表尚未公布，班次待確認。",true),
+  TR("🚇🚶","地鐵烏丸線＋步行","京都站","五條站 → 飯店","地鐵 1 站約 2 分","出站步行約 4 分到飯店"),
+  {id:"d1f",k:"hotel",t:"16:50–17:20",n:"飯店 check-in、放行李",d:"京王普雷利亞飯店 京都烏丸五條。15:00 起可入住，有大浴場。",map:HOTEL.maps},
+  TR("🚕","計程車或巴士","飯店","吉田神社","約 15–20 分","",
+     "節分期間吉田神社周邊可能有臨時交通管制，計程車未必能開到門口，請預留時間（待確認）。",true),
+  {id:"d1g",k:"sight",t:"18:00–19:00",must:true,tbc:true,n:"吉田神社 追儺式（鬼やらい）",stay:"約 1 小時",
+   d:"京都節分祭大本營。復原平安時代宮廷驅鬼儀式：戴四隻眼面具的「方相氏」帶隊，追趕紅、青、黃三隻鬼，很有古代儀式感。",
+   rows:[["時間","2027 年實際開始時間待官方公布"]],map:"吉田神社 京都"},
+  {id:"d1h",k:"food",t:"19:00–21:00",n:"吉田神社參道 節分屋台市集，逛吃當晚餐",d:"節分期間參道與境內擺滿攤位，例年約有 800 攤、人潮非常多，邊走邊吃。",
+   rows:[["料理類型","日式屋台小吃（章魚燒、烤物、甜點等）"],["預算","約 ¥1,500–2,500／人（範例）"],["訂位","不需要；人多請注意隨身物品與團體走散"]],ex:true,map:"吉田神社 京都"},
+  TR("🚕","計程車","吉田神社","飯店","約 15–20 分","約 ¥1,500–2,500；深夜人多可能需排隊叫車"),
+  {id:"d1i",k:"hotel",t:"21:00 後",n:"回飯店休息",d:"泡大浴場放鬆。明天可以睡晚一點，因為 2/3 要熬夜到凌晨。",map:HOTEL.maps}
+ ],
+ rain:{
+  d1d:{k:"shop",n:"雨天備案：多逛有屋頂的店舖，縮短海邊戶外區域",d:"海濱型 Outlet 風大，雨天以室內店舖與美食街為主，並提早搭車進京都。"},
+  d1h:{k:"food",n:"雨天備案：先在市區室內用餐，再前往吉田神社",d:"雨中屋台人擠又泥濘，可在飯店附近或京都站周邊先吃晚餐，再去看追儺式。"}
+ }
+},
+/* ---------------------------- Day 2 ---------------------------- */
+{ n:2,date:"2/3",wd:"三",title:"節分當日",tags:["節分","跨午夜"],
+ info:["昨天比較累，早上睡晚一點，因為今晚會熬夜到凌晨。","本日行程跨午夜：火爐祭結束後（約 00:30）的活動仍歸屬 2/3。"],
+ items:[
+  TR("🚶🚇🚌","步行＋地鐵烏丸線＋巴士","飯店 → 五條站 → 北大路 → 今宮神社前","","全程約 40 分","飯店步行約 4 分到五條站；烏丸線到北大路約 12 分；再轉巴士到「今宮神社前」"),
+  {id:"d2a",k:"sight",t:"10:00–12:00",n:"紫野・今宮神社周邊",stay:"約 2 小時",tbc:true,
+   d:"今宮神社以炙餅（あぶり餅）聞名，參道兩側有兩家老店對望：竹籤串小麻糬烤過後淋白味噌醬，一人份約 ¥600。旁邊的大德寺一帶安靜、遊客少。",
+   rows:[["注意","「かざりや」網路資訊為每週三公休，2/3 剛好是週三，可能沒開；對面「一和」公休日請出發前確認"]],map:"今宮神社 京都"},
+  {id:"d2b",k:"food",t:"12:00–12:45",n:"大德寺周邊簡餐或精進料理",d:"午餐在大德寺周邊找一家簡餐或精進料理。",
+   rows:[["料理類型","精進料理／日式簡餐"],["預算","約 ¥1,500–3,500／人（範例）"],["訂位","簡餐現場選；精進料理店建議先查是否需預約（待確認）"]],ex:true,map:"大徳寺 京都"},
+  TR("🚌","市巴士","大德寺周邊","祇園（八坂神社）","約 15 分（行程表）","路線待確認",
+     "提醒：從大德寺一帶到祇園，實際搭巴士通常要 35–45 分鐘，13:00 的演出又要提早 30–40 分卡位，這段時間很緊，建議再調整。",true),
+  {id:"d2c",k:"sight",t:"13:00–14:00",must:true,tbc:true,n:"八坂神社 藝妓舞妓撒豆（先斗町）",stay:"約 1 小時",
+   d:"節分當天，八坂神社舞殿上由藝妓、舞妓獻舞並撒福豆，是京都節分最具代表性的場面。人潮很多，建議提前 30–40 分鐘卡位。",
+   rows:[["時間","各花街（先斗町、宮川町等）出演時段每年不同，2027 年待官方公布"]],map:"八坂神社 京都"},
+  {id:"d2d",k:"sight",t:"15:00–16:00",tbc:true,n:"八坂神社 撒豆（宮川町），或二選一",stay:"約 1 小時",
+   d:"可留在八坂神社看宮川町的撒豆，或二選一：廬山寺「鬼法楽」（紫式部故居，紅、青、黑三鬼象徵貪、瞋、癡）；壬生寺「壬生狂言」（新選組據點，約 17:00–20:00，無言的傳統劇）。",
+   rows:[["時間","三處 2027 年時間皆待確認"]],map:"八坂神社 京都"},
+  {id:"d2e",k:"misc",t:"16:00–20:00",n:"休息、咖啡",d:"回飯店休息或在河原町喝咖啡，補足晚上熬夜的體力。",map:HOTEL.maps},
+  {id:"d2f",k:"food",t:"約 20:00–22:00",tbc:true,n:"晚餐（飯店附近或河原町，需訂位）",d:"節分當天餐廳人多，訂位時先說明 22:30 前要出發去吉田神社。",
+   rows:[["料理類型","由你決定（待定）"],["預算","約 ¥3,000–5,000／人（範例）"],["訂位","需要；備註「22:30 前要出發」"],["參考","清單中的「京洛焼肉やぶ」位在河原町、營業到凌晨 2:00，日期尚未定"]],ex:true,map:"京洛焼肉やぶ"},
+  TR("🚕","計程車","飯店 / 河原町","吉田神社","約 15–20 分（預計 22:30–23:00）","節分深夜周邊交通管制，可能需在外圍下車步行",
+     "提醒：火爐祭建議 22:30 前就卡位，目前預計 23:00 才抵達，看人潮可再提早。",true),
+  {id:"d2g",k:"sight",t:"23:00–00:30",must:true,tbc:true,mid:true,n:"吉田神社 火爐祭",stay:"約 1.5 小時",
+   d:"節分祭最高潮：把一年來的舊御札、護身符投進高約 4–5 公尺的巨大火爐焚燒，火焰沖天，氣氛震撼（跨午夜，歸屬 2/3）。",
+   rows:[["時間","2027 年實際時間待官方公布"],["保暖","深夜戶外站很久，手套、暖暖包、帽子必備"]],map:"吉田神社 京都"},
+  TR("🚕","計程車","吉田神社","飯店","約 15–20 分","00:30 後；深夜叫車可能需等候")
+ ],
+ rain:{
+  d2a:{k:"misc",n:"雨／雪天備案：改去京都站周邊或四條河原町室內逛街、喝咖啡",d:"今宮神社周邊在戶外，雨雪天可延後出發，改在市區室內活動，節省體力給晚上的火爐祭。"},
+  d2g:{k:"sight",n:"雨天備案：仍可前往，改穿雨衣",d:"火爐祭雨天通常照常進行，穿雨衣比撐傘方便（擠人場合撐傘會擋到後面的人）；鞋子與手機請做好防水。"}
+ }
+},
+/* ---------------------------- Day 3 ---------------------------- */
+{ n:3,date:"2/4",wd:"四",title:"伊根・天橋立・美山（Klook 一日遊）",tags:["跟團"],
+ alert:"昨晚火爐祭熬夜，睡眠偏少，上車後可以補眠。",
+ info:["導遊詳細資訊會在前一日 18:00–20:00 以 Email 寄出，請留意信箱。",
+       "行程連結：<a href=\"https://s.klook.com/c/awRzv6P6wB\" target=\"_blank\" rel=\"noopener\">Klook 行程頁</a>",
+       "費用：每人 NT$2,725（除餐食外全包）。以下各段時間為估算，以導遊實際安排為準。"],
+ noRain:"本日為跟團一日遊，由導遊依天候與路況安排，不另設雨／雪天備案。",
+ items:[
+  TR("🚶🚇🚶","步行＋地鐵烏丸線＋步行","飯店 → 五條站 → 京都站 → 八條口","","約 25 分（建議 09:05 前出發）","飯店步行約 4 分到五條站；烏丸線 1 站約 2 分；京都站到八條口步行約 10 分。也可搭計程車約 5–8 分",
+     "實際集合時間與地點以導遊 Email 為準。",true),
+  {id:"d3a",k:"misc",t:"09:30",tbc:true,n:"集合出發：京都駅八条口 貸切バス乗降場（EasyGo）",d:"Klook 一日遊集合點，請提前 10–15 分鐘到。",rows:[["待確認","導遊 Email（前一日 18:00–20:00）"]],map:"京都駅 八条口"},
+  TR("🚌","包車","京都","伊根","約 2.5 小時（估算，含休息）","",null,true),
+  {id:"d3b",k:"sight",t:"約 12:00–13:30",tbc:true,n:"伊根灣賞景・舟屋",stay:"約 1.5 小時",
+   d:"伊根舟屋是一樓當船庫、二樓住家的海邊木造建築，約 230 戶沿灣排開。遊覽船環灣約 25 分鐘，海灣平靜，可餵海鷗。冬季強風浪大時船班可能停駛。",
+   rows:[["小提醒","午餐會在天橋立，可先在伊根買點心墊肚子"]],map:"伊根湾めぐり遊覧船 日出桟橋"},
+  TR("🚌","包車","伊根","天橋立","約 45 分（估算）","",null,true),
+  {id:"d3c",k:"sight",t:"14:15–16:05",tbc:true,n:"天橋立（纜車／單軌電車山麓站）",stay:"約 1 小時 50 分（含午餐）",
+   d:"日本三景之一，約 3.6 公里的天然沙嘴橫跨宮津灣。搭纜車或單軌電車上傘松公園，可以彎腰從兩腿間倒看（股のぞき），橋像飛龍升天。",map:"天橋立 傘松公園"},
+  {id:"d3d",k:"food",t:"約 14:15 起（含在上述時段）",n:"午餐｜天橋立山腳或車站附近",d:"今天午餐較晚，建議先在伊根買點小點心墊肚子。",
+   rows:[["料理類型","海鮮丼／定食等（範例）"],["預算","約 ¥1,200–2,500／人（範例）"],["訂位","不需要，現場選"]],ex:true,map:"天橋立駅 周辺 食事"},
+  TR("🚌","包車","天橋立","美山","約 1.5 小時（估算）","",null,true),
+  {id:"d3e",k:"sight",t:"17:30–19:00",must:true,tbc:true,n:"美山茅草屋之里 冬灯廊",stay:"約 1.5 小時",
+   d:"美山北集落約有 38–39 棟茅葺屋，是國家重要傳統建築群保存地區。冬灯廊 2027 年舉辦期間為 1/30–2/6，每天 17:00–19:00 點燈，路地行燈與 LED 灯籠把老村莊照得像童話世界。近年雪量不穩，不保證有積雪。",
+   rows:[["小吃","村內有屋台，氣溫很低可買熱食取暖"],["停車","活動期間停車場為完全預約制，需事先預約付費（團體行程是否已處理待確認）"],["穿著","防滑鞋＋厚外套＋暖暖包"]],map:"美山かやぶきの里"},
+  TR("🚌","包車","美山","京都","約 1.5 小時（Klook 標示約 20:30 回到京都）","解散地點待確認",null,true),
+  TR("🚇🚶","地鐵或計程車","京都站","飯店 / 拉麵店","約 10–15 分","依拉麵店位置而定"),
+  {id:"d3f",k:"food",t:"20:45 起",tbc:true,n:"宵夜（拉麵）",d:"回到京都後吃碗熱呼呼的拉麵暖身。店名尚未決定。",
+   rows:[["料理類型","拉麵"],["預算","約 ¥1,000–1,500／人（範例）"],["訂位","通常不需要；請找營業到 21:30 以後的店"]],ex:true,map:"京都駅 ラーメン"}
+ ],
+ rain:null
+},
+/* ---------------------------- Day 4 ---------------------------- */
+{ n:4,date:"2/5",wd:"五",title:"下鴨神社・河合神社・除夕年夜飯",tags:["除夕"],
+ info:["2027 年農曆新年是 2/6，所以 2/5 是除夕。晚上吃壽喜燒當年夜飯。"],
+ items:[
+  TR("🚌","市巴士 4 或 205 系統","飯店附近","下鴨神社前","約 30–40 分","請用地圖查當天班次。也可搭地鐵＋京阪到出町柳再步行約 15 分",null,true),
+  {id:"d4a",k:"sight",t:"10:00–12:30",n:"下鴨神社・河合神社",stay:"約 2.5 小時",tbc:true,
+   d:"下鴨神社是世界遺產、京都最古老的神社之一，位在原生林「糺の森」中，參道又長又安靜，冬天遊客不多。境內的河合神社是女性守護與美麗之神，可以買手鏡形繪馬，用自己的化妝品畫上臉許願變美。",
+   rows:[["開放時間","約到 17:00，出發前請再確認"]],map:"下鴨神社"},
+  {id:"d4b",k:"food",t:"12:30–14:00",n:"午餐｜下鴨神社周邊",d:"在神社周邊現場選店；也可以順道吃茶店的御手洗糰子（相傳源自下鴨神社的池水泡泡）。",
+   rows:[["料理類型","日式簡餐、茶店、甜點（範例）"],["預算","約 ¥1,200–2,500／人（範例）"],["訂位","不需要"]],ex:true,map:"下鴨神社 周辺 ランチ"},
+  {id:"d4c",k:"misc",t:"14:00–17:00",n:"自由活動",d:"想逛的地方由大家決定（待確認）。",tbc:true},
+  {id:"d4d",k:"food",t:"晚餐（時間待確認）",tbc:true,n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯。除夕當晚人多，優先訂位。",
+   rows:[["料理類型","和牛壽喜燒"],["訂位","5 人；請說明人數，並問清楚取消規則"],["待確認","訂位時間與取消規則"]],map:"https://maps.app.goo.gl/gEoauLkUuKYjuae19"},
+  {id:"d4e",k:"misc",t:"提醒",n:"明天 9:00 出發",d:"明天要去勝尾寺，路途遠、巴士班次少，今晚早點休息。"}
+ ],
+ rain:{
+  d4a:{k:"misc",n:"雨天備案：縮短參拜，改去河原町／寺町室內商店街（範例）",d:"糺の森參道很長，雨天可只走到本殿與河合神社，午餐後改去室內商店街或咖啡廳。"}
+ }
+},
+/* ---------------------------- Day 5 ---------------------------- */
+{ n:5,date:"2/6",wd:"六",title:"勝尾寺・難波八阪神社・中崎町",tags:["農曆新年","順序已對調"],
+ info:["今天移動距離較長，早點出發，勝尾寺的巴士班次少。","順序已調整為：勝尾寺 → 難波八阪神社 → 中崎町（難波八阪神社 17:00 關門，先去比較保險）。","路線改走「阪急 → 梅田 → 御堂筋線直通箕面萱野 → 巴士」，比原本的北千里路線少轉乘；實際時刻待確認。"],
+ items:[
+  TR("🚶🚃🚇🚌","步行＋阪急京都線特急＋御堂筋線＋阪急巴士","飯店 → 阪急烏丸 → 梅田 → 箕面萱野 → 勝尾寺","","約 2.5 小時（含候車緩衝，09:00–11:30）",
+     "飯店步行約 7 分到阪急「烏丸」站；特急到梅田約 45 分；轉乘御堂筋線，梅田到箕面萱野約 24 分直達；再搭阪急巴士到「勝尾寺」約 20 分",
+     "巴士班次少，時刻待確認。備案：阪急京都線轉乘到北千里或箕面，再搭巴士到勝尾寺。",true),
+  {id:"d5a",k:"sight",t:"11:30–13:00",n:"勝尾寺",stay:"約 1.5 小時",tbc:true,
+   d:"位在大阪府箕面市山中的古剎，因寺名有「勝」字被稱為「勝運之寺」。最有名的是滿山滿谷的「勝ちダルマ」（達摩不倒翁），許願後帶回家，願望實現再帶回寺裡奉納。冬天山上冷冽、遊客不多。",
+   rows:[["開放","平日與週日約 8:00–17:00，週六約到 18:00（閉門前 15 分停止受理），出發前請查官網"],["入山料","約 ¥500／大人（2027 年待確認）"],["午餐","時間較晚，可先在山上買點心墊肚子"]],map:"勝尾寺"},
+  TR("🚌🚇🚶","阪急巴士＋御堂筋線＋步行","勝尾寺 → 箕面萱野 → 大國町 → 難波八阪神社","","約 1 小時 40 分（13:00–14:40）","巴士約 20 分；箕面萱野到大國町地鐵直達（約 35–40 分）；出站步行約 8 分","回程巴士時刻待確認。",true),
+  {id:"d5b",k:"sight",t:"14:40–15:20",n:"難波八阪神社",stay:"約 40 分",
+   d:"以高約 12 公尺的巨大獅子頭「獅子殿」聞名，張大嘴像要吞掉災厄，象徵驅邪、祈求勝運與考運，剛好呼應白天的勝尾寺。",
+   rows:[["開放","境內 6:00–17:00，授與所（御守、朱印）9:00–16:50，免費參拜"]],map:"難波八阪神社"},
+  TR("🚶🚇🚶","步行＋御堂筋線＋步行","難波八阪神社 → 大國町 → 梅田 → 中崎町","","約 40 分（15:20–16:00）","步行約 8 分到大國町；御堂筋線到梅田約 12 分；再步行約 10 分到中崎町"),
+  {id:"d5c",k:"sight",t:"16:00–18:00",n:"中崎町",stay:"約 2 小時",tbc:true,
+   d:"位在梅田北邊的老街區，沒被戰火波及，保留許多昭和老房子，現在是小咖啡廳、雜貨店與古著店，巷弄很有生活感，是大阪文青聚集地。",
+   rows:[["提醒","冬季小店可能提早收，營業時間待確認"]],map:"中崎町"},
+  {id:"d5d",k:"food",t:"約 16:00 起",n:"午餐／下午茶｜中崎町咖啡店（或勝尾寺）",d:"今天午餐很晚，在中崎町的咖啡店解決。",
+   rows:[["料理類型","咖啡廳輕食、甜點"],["預算","約 ¥1,000–2,000／人（範例）"],["訂位","不需要，現場選"]],ex:true,map:"中崎町 カフェ"},
+  {id:"d5e",k:"food",t:"18:00 後",tbc:true,n:"晚餐｜梅田或難波周邊",d:"週六晚上人多，確定地點後再訂位（農曆新年期間觀光客也多）。",
+   rows:[["料理類型","待定"],["預算","約 ¥3,000–5,000／人（範例）"],["訂位","建議訂位"]],ex:true,map:"梅田駅"},
+  TR("🚃🚶","阪急京都線特急＋步行","阪急梅田","阪急烏丸 → 飯店","特急約 45 分","烏丸站步行約 7 分回飯店；回去整理行李（明天 6:30 起床）")
+ ],
+ rain:{
+  d5a:{k:"misc",n:"雪天／道路結冰、巴士停駛備案：直接前往難波，增加梅田室內逛街時間（範例）",d:"山上遇雪或結冰，巴士可能減班。可改成先去難波八阪神社與中崎町，晚上在梅田的室內商場吃飯、購物。"}
+ }
+},
+/* ---------------------------- Day 6 ---------------------------- */
+{ n:6,date:"2/7",wd:"日",title:"返程",tags:["返程"],
+ info:["11:30 起飛，早上節奏要快。2/7 的 Haruka 指定席記得先訂。"],
+ items:[
+  {id:"d6a",k:"hotel",t:"06:30–07:00",n:"起床、退房",d:"退房時間雖是 11:00，但今天要提早離開。",rows:[["早餐","先確認飯店早餐開始時間；來不及就前一天買麵包或便當，在 Haruka 上吃"]],tbc:true,map:HOTEL.maps},
+  {id:"d6b",k:"food",t:"約 06:40",n:"早餐｜便利商店或前一晚買的麵包",d:"06:30 起床，簡單吃，帶到 Haruka 上也可以。",rows:[["預算","約 ¥500–800／人（範例）"],["訂位","不需要"]],ex:true,map:"コンビニ 京都 烏丸五条"},
+  TR("🚇🚄","地鐵烏丸線（或計程車）＋JR Haruka","飯店 → 京都站 → 關西機場","","約 1.5 小時（07:00–08:30）","飯店到京都站：地鐵 1 站約 5 分（含步行），或計程車約 5–10 分；Haruka 京都到關西機場約 1 小時 15 分",
+     "Haruka 班次待確認；2/7 指定席請先訂。",true),
+  {id:"d6c",k:"air",t:"08:30–09:00",n:"抵達 KIX、辦理登機",d:"第 1 航廈辦理 IT285 登機。若有在日本購物退稅，新制要在出境時於機場海關確認，請預留時間，流程待確認。",tbc:true,map:"関西国際空港 第1ターミナル"},
+  {id:"d6d",k:"air",t:"11:30 → 14:00",n:"IT285 大阪 KIX → 高雄 KHH",d:"11:30（日本時間）起飛，14:00（台灣時間）抵達高雄，飛行約 3 小時 30 分。",map:"関西国際空港 第1ターミナル"}
+ ],
+ rain:null
+}
+];
+
+/* 行前清單預設項目 */
+const CK={
+ todo:[
+  {id:"t1",text:"訂 Haruka 指定席（2/2、2/7）",note:"2/2 建議訂 Outlet 回程那一班（約 15:15–15:30 發車）"},
+  {id:"t2",text:"旅遊不便險／旅平險"},
+  {id:"t3",text:"機場接送",note:"2/2 04:30 出發前往高雄機場"},
+  {id:"t4",text:"eSIM"},
+  {id:"t5",text:"留意 2/3 18:00–20:00 的導遊 Email",note:"Klook 2/4 一日遊的集合資訊"}
+ ],
+ pack:[
+  {id:"p1",text:"護照（退稅也要用）",ex:true},
+  {id:"p2",text:"日圓現金、信用卡",ex:true},
+  {id:"p3",text:"保暖衣物（洋蔥式穿搭）、羽絨外套",ex:true},
+  {id:"p4",text:"防滑鞋（2/4 伊根・美山）",ex:true},
+  {id:"p5",text:"暖暖包、手套、帽子、圍巾",ex:true},
+  {id:"p6",text:"雨衣或輕便雨具（節分夜晚戶外）",ex:true},
+  {id:"p7",text:"行動電源、充電線、轉接頭",ex:true},
+  {id:"p8",text:"常備藥、護唇膏、護手霜",ex:true},
+  {id:"p9",text:"折疊購物袋（Outlet 購物用）",ex:true}
+ ],
+ food:[
+  {id:"f1",text:"2/5 晚餐｜壽喜燒年夜飯（5 人）",note:"和牛 壽喜燒 京都五天五 烏丸；除夕最先訂",pri:true,link:"https://maps.app.goo.gl/gEoauLkUuKYjuae19"},
+  {id:"f2",text:"2/6 晚餐｜難波或梅田",note:"週六晚上人多，確定地點後再訂位",pri:true},
+  {id:"f3",text:"2/3 晚餐 20:00–22:00｜飯店附近或河原町",note:"節分當天人多；訂位時先說明 22:30 前要出發",pri:true},
+  {id:"f4",text:"2/2 午餐｜Outlet 美食街",note:"現場選，免訂位"},
+  {id:"f5",text:"2/2 晚餐｜吉田神社屋台",note:"逛吃，免訂位"},
+  {id:"f6",text:"2/3 午餐｜大德寺周邊",note:"簡餐或精進料理"},
+  {id:"f7",text:"2/4 午餐｜天橋立",note:"建議先在伊根買點心墊肚子"},
+  {id:"f8",text:"2/4 晚餐｜20:30 之後",note:"找營業到深夜的店（目前安排吃拉麵宵夜）"},
+  {id:"f9",text:"2/6 午餐｜勝尾寺或中崎町咖啡店",note:"行程調整後約 16:00 在中崎町吃"},
+  {id:"f10",text:"2/7 早餐｜06:30 起床",note:"便利商店，或前一天買麵包"},
+  {id:"f11",text:"日式早餐｜Ito Okashi（日期待定）",note:"京都いとおかし，老町家炭火烤銀鮭＋土鍋飯。營業約 7:00–11:45（L.O. 11:15），約 ¥3,000–3,500；需預約",link:"https://www.tablecheck.com/zh-TW/kyoto-itookashi"},
+  {id:"f12",text:"居酒屋｜Sumi Roman（日期待定）",note:"阪急烏丸站步行約 3 分，約 ¥4,000。週一～五 17:00–23:30（L.O. 23:00）；週六日與假日 16:00–23:30。電話 075-746-7999"},
+  {id:"f13",text:"日式燒肉｜京洛焼肉やぶ（日期待定）",note:"阪急河原町站步行約 2 分，約 ¥4,000，17:00–翌 2:00（L.O. 1:00）。電話 075-746-6653。只訂位的取消規則較嚴，訂前請確認",link:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("京洛焼肉やぶ")}
+ ]
+};
+const CK_TITLE={todo:"行前待辦",pack:"行李準備",food:"餐廳與訂位"};
+
+/* 預算（皆為每人） */
+const SPENT=[ {n:"包車（Klook 一日遊）",pp:2725}, {n:"住宿 5 人 5 晚（合計 NT$29,735）",pp:Math.round(29735/5)}, {n:"機票",pp:19307} ];
+const BUDGET=[ {n:"大眾運輸",lo:8700,hi:10900}, {n:"門票與體驗",lo:2350,hi:4000}, {n:"餐費 6 天",lo:24000,hi:42000} ];
+
+/* 欄位預設值（可在畫面上自行修改） */
+const FIELD_DEF={ teco_tel:"06-6227-8623", teco_sos:"090-8794-4568" };
+
+/* 伴手禮與購物（皆為範例） */
+const SHOP=[
+ {k:"shopc",t:"Rinku Premium Outlets（機場旁）",items:["服飾、鞋包、運動品牌、美妝（約 250 間店）","2/2 買的東西要帶到 2/7 才出境，注意行李空間","退稅：2026/11/1 起新制，先付含稅價，出境時於機場海關確認後退款，購買日起 90 日內出境，記得帶護照；流程待確認"]},
+ {k:"shopc",t:"京都市區（飯店周邊與河原町）",items:["生八ッ橋、抹茶甜點與茶葉、京漬物、七味粉","飯店旁約 90 公尺有和菓子老舖「末富」（營業時間與是否需預約待確認）","部分商家要滿額才能退稅，條件各店不同"]},
+ {k:"shopc",t:"大阪（難波、梅田）",items:["551 蓬萊豬肉包、大阪燒／章魚燒口味零食","梅田、難波百貨地下街有大量伴手禮與熟食","消耗品與一般物品的退稅分類在新制已廢除，但仍要在 90 日內攜帶出境"]}
+];
+
+/* =====================================================================
+   程式區
+   ===================================================================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const KEY="kyoto2027_v1";
+const WD=["日","一","二","三","四","五","六"];
+const KIND={sight:"景點",food:"美食",shop:"購物",air:"機場",hotel:"住宿",misc:"安排"};
+const ICON={
+ overview:'<svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+ daily:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+ list:'<svg viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg>',
+ stay:'<svg viewBox="0 0 24 24"><path d="M3 20V8l9-5 9 5v12"/><path d="M9 20v-6h6v6M8 10h2M14 10h2"/></svg>'
+};
+const NAV=[["overview","總覽"],["daily","每日行程"],["list","行前清單"],["stay","住宿速查"]];
+
+/* ---------- 狀態 ---------- */
+const defState=()=>({done:{},mode:{},exp:{},rate:0.2,ck:{done:{},removed:{},custom:{todo:[],pack:[],food:[]}},fields:{},day:0,sum:false});
+function normalize(j){const d=defState();if(!j||typeof j!=="object")return d;
+  const s=Object.assign(d,j);s.ck=Object.assign(defState().ck,j.ck||{});
+  s.ck.custom=Object.assign({todo:[],pack:[],food:[]},(j.ck&&j.ck.custom)||{});
+  ["done","mode","exp","fields"].forEach(k=>{if(!s[k]||typeof s[k]!=="object")s[k]={}});
+  if(!(+s.rate>0))s.rate=0.2;return s}
+function load(){try{return normalize(JSON.parse(localStorage.getItem(KEY)||"null"))}catch(e){return defState()}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load();
+let view="overview";
+const reduce=()=>window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- 工具 ---------- */
+const mapUrl=q=>/^https?:/.test(q)?q:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+const yen=n=>"¥"+Math.round(n).toLocaleString("en-US");
+const ntd=n=>"NT$"+Math.round(n).toLocaleString("en-US");
+const parseStart=s=>{const m=/(\d{1,2}):(\d{2})/.exec(s||"");return m?+m[1]*60+ +m[2]:null};
+function jstNow(){const f=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+  const p={};f.formatToParts(new Date()).forEach(x=>p[x.type]=x.value);return{y:+p.year,m:+p.month,d:+p.day,h:+p.hour,mi:+p.minute}}
+function tripDay(){const j=jstNow();return Math.floor((Date.UTC(j.y,j.m-1,j.d)-Date.UTC(2027,1,2))/864e5)+1}
+const fieldVal=k=>(k in S.fields)?S.fields[k]:(FIELD_DEF[k]||"");
+
+/* ---------- 倒數 ---------- */
+function tick(){
+  const el=$("#cd");if(!el)return;
+  const start=Date.parse(TRIP.start),now=Date.now();
+  if(now<start){
+    const s=Math.floor((start-now)/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
+    el.innerHTML='<div class="cd-l">距離出發（2/2 06:55 高雄起飛）</div><div class="cd-n"><b>'+d+'</b>天 <b>'+h+'</b>時 <b>'+m+'</b>分</div><div class="cd-s">節分祭典等你來</div>';
+    return}
+  const day=tripDay();
+  if(day>=1&&day<=6){
+    const D=DAYS[day-1],j=jstNow(),nowMin=j.h*60+j.mi;
+    let nx=null;for(const it of D.items){if(it.k==="tr")continue;const t=parseStart(it.t);if(t!=null&&t>nowMin){nx=it;break}}
+    el.innerHTML='<div class="cd-l">旅行中・日本時間</div><div class="cd-n">第 <b>'+day+'</b> 天 <span style="font-size:16px">'+D.date+'（'+D.wd+'）'+esc(D.title)+'</span></div><div class="cd-s">'+(nx?'下一個行程：'+esc(nx.t)+' '+esc(nx.n):'今天的行程都結束了，好好休息')+'</div>';
+  }else{
+    el.innerHTML='<div class="cd-l">旅程結束</div><div class="cd-n">歡迎回家，整理照片與花費吧</div>';
+  }
+}
+
+/* ---------- 導覽 ---------- */
+function renderNav(){
+  $("#menu").innerHTML=NAV.map(([k,t])=>'<button class="navbtn'+(view===k?' on':'')+'" data-nav="'+k+'" aria-current="'+(view===k)+'">'+ICON[k]+'<span>'+t+'</span></button>').join("");
+}
+function parseHash(){const h=(location.hash||"#overview").slice(1).split("/");return{v:h[0],d:+h[1]||0}}
+function go(v,d){location.hash=v==="daily"?"#daily/"+(d||S.day||1):"#"+v}
+function toMenu(){const el=$("#menu");if(el)el.scrollIntoView({behavior:reduce()?"auto":"smooth",block:"start"})}
+function backBtn(){return '<button class="btn fill back" data-act="top">↑ 返回主選單</button>'}
+
+/* ---------- 總覽 ---------- */
+function barcode(){let x=0,s="";[2,1,3,1,1,2,3,1,2,2,1,3,1,2,1,1,3,2,1,2,3,1,1,2,1,3,2,1,2,1,3,1].forEach((w,i)=>{if(i%2===0)s+='<rect x="'+x.toFixed(1)+'" y="0" width="'+(w*1.4).toFixed(1)+'" height="28"/>';x+=w*1.4+.6});
+  return '<svg class="barcode" viewBox="0 0 '+x.toFixed(1)+' 28" preserveAspectRatio="none" aria-hidden="true" fill="#23406B">'+s+'</svg>'}
+function bp(f){
+  return '<div class="bp"><div class="bp-top"><span>'+f.air+'</span><span>'+f.dir+'</span></div>'+
+  '<div class="bp-main"><div class="bp-pt"><div class="code">'+f.from.c+'</div><div class="nm">'+f.from.n+'</div><div class="tm">'+f.from.t+'</div><div class="tz">'+f.from.z+'</div></div>'+
+  '<div class="bp-mid"><div class="plane">✈</div><div>'+f.dur+'</div></div>'+
+  '<div class="bp-pt r"><div class="code">'+f.to.c+'</div><div class="nm">'+f.to.n+'</div><div class="tm">'+f.to.t+'</div><div class="tz">'+f.to.z+'</div></div></div>'+
+  '<div class="bp-cut"></div>'+
+  '<div class="bp-grid"><div><small>航班</small><b>'+f.no+'</b></div><div><small>日期</small><b>'+f.date+'</b></div>'+
+  '<div><small>出發航廈</small><b>'+f.from.term+'</b></div><div><small>抵達航廈</small><b>'+f.to.term+'</b></div>'+
+  '<div><small>登機門</small><input class="bpi" data-field="gate_'+f.id+'" value="'+esc(fieldVal('gate_'+f.id))+'" placeholder="待確認" aria-label="登機門"></div>'+'<div><small>座位</small><input class="bpi" data-field="seat_'+f.id+'" value="'+esc(fieldVal('seat_'+f.id))+'" placeholder="待確認" aria-label="座位"></div></div>'+'<div class="acts" style="padding:0 14px"><a class="btn" target="_blank" rel="noopener" href="https://www.flightaware.com/live/flight/TTW'+f.no.slice(2)+'">即時狀態 FlightAware</a>'+'<a class="btn" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/'+f.no.toLowerCase()+'">Flightradar24</a>'+'<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/search?q='+f.no+'+flight+status">Google 查詢</a></div>'+'<p style="padding:6px 14px 0;font-size:15px">航班即時狀態通常在起飛前 1–2 天才查得到，點上面連結會開啟即時頁面。登機門、座位可直接在欄位填寫。</p>'+
+  '<p style="padding:6px 14px 0;font-size:15px">日本比台灣快 1 小時，以上時間已依各地當地時間標示。</p>'+barcode()+'</div>';
+}
+function ckAll(cat){
+  const base=CK[cat].filter(x=>!S.ck.removed[x.id]);
+  return base.concat(S.ck.custom[cat]||[]);
+}
+function ckStat(){let t=0,d=0;Object.keys(CK).forEach(c=>ckAll(c).forEach(x=>{t++;if(S.ck.done[x.id])d++}));return{t,d,p:t?Math.round(d/t*100):0}}
+function ovHTML(){
+  const st=ckStat();
+  return '<h2 class="stitle">旅行總覽</h2>'+
+   FLIGHTS.map(bp).join("")+
+   '<div class="card"><h3 style="font-size:18px">旅行資訊</h3><dl class="kv" style="margin-top:6px">'+
+   '<dt>日期</dt><dd>2027/2/2（二）– 2/7（日），6 天 5 夜</dd>'+
+   '<dt>人數</dt><dd>5 人同行</dd>'+
+   '<dt>主題</dt><dd>節分祭典＋京都近郊小眾路線（伊根、天橋立、美山、大阪近郊）</dd>'+
+   '<dt>住宿</dt><dd>'+HOTEL.name+'（全程同一間）</dd>'+
+   '<dt>節日</dt><dd>2/3 節分；2/5 除夕；2/6 農曆新年</dd></dl></div>'+
+   '<div class="card"><h3 style="font-size:18px">目前進度</h3>'+
+   '<p style="margin:6px 0 4px">行前清單 '+st.d+' / '+st.t+' 項（'+st.p+'%）</p><div class="prog"><i style="width:'+st.p+'%"></i></div>'+
+   '<div class="acts"><button class="btn" data-nav="list">看行前清單</button><button class="btn" data-nav="daily">看每日行程</button></div></div>'+
+   '<p class="foot">資料皆存在這支手機的瀏覽器裡，換手機或清除瀏覽資料會消失，也不會與同行者同步。可到「住宿速查」最下方匯出備份。</p>'+backBtn();
+}
+
+/* ---------- 每日行程 ---------- */
+/* ---------- 天氣：出發前 16 天內自動連網（Open-Meteo，免金鑰），其餘顯示範例 ---------- */
+const WX_KEY="kyoto2027_wx";
+const KY={n:"京都",lat:35.0116,lon:135.7681};
+const WX_LOC={1:[KY],2:[KY],3:[{n:"伊根",lat:35.6745,lon:135.2870},{n:"美山",lat:35.30,lon:135.57}],4:[KY],5:[{n:"大阪",lat:34.6937,lon:135.5023}],6:[KY]};
+let WX=(()=>{try{return JSON.parse(localStorage.getItem(WX_KEY)||"null")||{}}catch(e){return {}}})();
+function wxIcon(c,snow){
+  if(snow>0||[71,73,75,77,85,86].includes(c))return"🌨️";
+  if(c===0)return"☀️";if(c===1||c===2)return"⛅";if(c===3)return"☁️";if(c===45||c===48)return"🌫️";
+  if(c>=51&&c<=57)return"🌦️";if(c>=61&&c<=67||c>=80&&c<=82)return"🌧️";if(c>=95)return"⛈️";return"☁️";
+}
+const wxInWindow=()=>Date.now()>=Date.parse(TRIP.start)-17*864e5;
+async function refreshWx(force){
+  if(!wxInWindow())return;
+  if(!force&&WX.t&&Date.now()-WX.t<3*36e5&&WX.days)return;
+  const uniq={};Object.values(WX_LOC).flat().forEach(l=>{uniq[l.lat+","+l.lon]=l});
+  const res={};
+  await Promise.all(Object.keys(uniq).map(async k=>{
+    const l=uniq[k];
+    const u="https://api.open-meteo.com/v1/forecast?latitude="+l.lat+"&longitude="+l.lon+"&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,snowfall_sum&timezone=Asia%2FTokyo&forecast_days=16";
+    const r=await fetch(u);if(!r.ok)throw new Error("wx "+r.status);
+    res[k]=(await r.json()).daily;
+  }));
+  const days={};
+  for(const n of Object.keys(WX_LOC)){
+    const date="2027-02-0"+(+n+1),locs=[];
+    WX_LOC[n].forEach(l=>{const d=res[l.lat+","+l.lon];const i=d?d.time.indexOf(date):-1;
+      if(i>=0)locs.push({n:l.n,hi:Math.round(d.temperature_2m_max[i]),lo:Math.round(d.temperature_2m_min[i]),p:d.precipitation_probability_max[i]||0,snow:d.snowfall_sum[i]||0,code:d.weather_code[i]})});
+    if(locs.length)days[n]=locs;
+  }
+  if(Object.keys(days).length){WX={t:Date.now(),days};try{localStorage.setItem(WX_KEY,JSON.stringify(WX))}catch(e){}}
+}
+function wxGet(n){
+  const L=WX.days&&WX.days[n];if(!L)return null;
+  const base=WEATHER[n];
+  const hi=Math.max(...L.map(x=>x.hi)),lo=Math.min(...L.map(x=>x.lo)),p=Math.max(...L.map(x=>x.p)),snow=L.reduce((a,x)=>a+x.snow,0);
+  let wear=base.wear;
+  if(lo<=0)wear+=" 預報最低溫在 0°C 以下，請加強保暖並注意路面結冰。";
+  if(p>=60)wear+=" 降雨／降雪機率偏高，請備好雨具或防水外套。";
+  return{i:wxIcon(L[0].code,snow),hi,lo,p,u:snow>0?"降雪":"降雨",wear,alert:base.alert,live:true,locs:L,t:WX.t};
+}
+function updSum(){const e=$("#sum");if(e&&view==="daily")e.outerHTML=wxHTML(DAYS[S.day-1])}
+function wxHTML(D){
+  const live=wxGet(D.n),w=live||WEATHER[D.n];const open=S.sum;
+  const tm=live?new Date(live.t).toLocaleString("zh-TW",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false}):"";
+  const detail=live
+    ?'<p><b>各地預報：</b>'+live.locs.map(x=>x.n+" "+x.hi+"°/"+x.lo+"°，"+(x.snow>0?"降雪":"降雨")+" "+x.p+"%").join("；")+'</p><p style="font-size:15px">資料來源 Open-Meteo，更新於 '+tm+'。</p>'
+    :'<p style="font-size:15px">目前為「範例」數值。出發前 16 天內會自動連網更新成實際預報。</p>';
+  return '<div class="card sticky" id="sum"><div class="sum-row"><span class="ic" aria-hidden="true">'+w.i+'</span>'+
+   '<span class="tp">'+w.hi+'° / '+w.lo+'°C</span><span>'+w.u+' '+w.p+'%</span>'+(live?'<span class="tg ok" style="margin:0">即時</span>':'<span class="tg ex" style="margin:0">範例</span>')+
+   (w.alert?'<span class="warn">'+w.alert+'</span>':'')+
+   '<button class="sum-btn" data-sum="1" aria-expanded="'+open+'">'+(open?'收合 ▴':'詳情 ▾')+'</button></div>'+
+   (open?'<div class="sum-more"><p><b>穿搭：</b>'+w.wear+'</p>'+detail+
+   (wxInWindow()?'<p><button class="btn sm" data-wxr="1">🔄 重新抓取天氣</button></p>':'')+
+   '<p><b>住宿：</b>'+HOTEL.name+'<br>五條站步行約 4 分｜阪急烏丸站步行約 7 分｜京都站過去地鐵 1 站</p>'+
+   '<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">🗺️ 飯店地圖</a></div>':'')+
+   '</div>';
+}
+function tagsOf(it,extra){
+  return (it.must?'<span class="tg must">必去</span>':'')+(it.tbc?'<span class="tg tbc">待確認</span>':'')+(it.ex?'<span class="tg ex">範例</span>':'')+(it.mid?'<span class="tg mid">跨午夜</span>':'')+(extra||'');
+}
+function itHTML(it,i,orig){
+  return '<div class="it '+it.k+' pop" id="c-'+it.id+'" style="--i:'+i+'">'+
+   '<div class="top"><span class="time">'+it.t+'</span><span class="kind">'+(KIND[it.k]||"安排")+'</span>'+tagsOf(it,orig?'<span class="tg ex">雨／雪替代</span>':'')+'</div>'+
+   (orig?'<div class="orig">原：'+orig+'</div>':'')+
+   '<h3>'+it.n+'</h3>'+(it.stay?'<div class="stay">⏱ 預計停留 '+it.stay+'</div>':'')+
+   (it.d?'<p class="d">'+it.d+'</p>':'')+
+   (it.rows||[]).map(r=>'<div class="row"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>').join("")+
+   '<div class="acts">'+
+   (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">🗺️ 地圖</a>':'')+'</div></div>';
+}
+function trHTML(t,i){
+  const route=t.from?('<span class="w">'+t.from+(t.to?' → '+t.to:'')+'</span>'):'';
+  return '<div class="tr'+(t.tbc?' alert':'')+' pop" style="--i:'+i+'"><span class="m">'+t.mode+' '+t.route+'</span>'+route+
+   '<span class="w">⏱ '+t.dur+'</span>'+(t.walk?'<span class="w">'+(/步行/.test(t.walk)?'🚶 ':'📍 ')+t.walk+'</span>':'')+(t.note?'<span class="nt">'+(t.tbc?'⚠️ ':'')+t.note+'</span>':'')+(t.tbc?'<span class="tg tbc" style="margin:2px 0 0">待確認</span>':'')+'</div>';
+}
+function expHTML(n){
+  const list=S.exp["d"+n]||[];const sum=list.reduce((a,b)=>a+(+b.jpy||0),0);
+  return '<h3 style="font-size:18px">💴 今日花費紀錄</h3>'+
+   '<div class="exp-f"><input id="expL" type="text" placeholder="項目（如：午餐）" maxlength="30"><input id="expY" type="number" inputmode="numeric" placeholder="日圓 ¥" min="0"><button class="btn fill" data-exp-add="'+n+'">加入</button></div>'+
+   (list.length?list.map((e,i)=>'<div class="exp-i"><span>'+esc(e.label||"花費")+'</span><span>'+yen(e.jpy)+'</span><button data-exp-del="'+n+':'+i+'" aria-label="刪除">✕</button></div>').join(""):'<p style="font-size:15px">還沒有紀錄。</p>')+
+   '<p style="margin-top:8px"><b>今日小計：'+yen(sum)+' ≈ '+ntd(sum*S.rate)+'</b></p>'+
+   '<label class="fld" style="margin-top:6px"><span>匯率（¥1 = NT$ ?）</span><input type="number" inputmode="decimal" step="0.001" min="0" value="'+S.rate+'" data-rate="1"></label>';
+}
+function dailyHTML(){
+  if(!(S.day>=1&&S.day<=6)){const t=tripDay();S.day=(t>=1&&t<=6)?t:1}
+  const D=DAYS[S.day-1];const mode=S.mode["d"+D.n]||"sun";
+  const hasRain=!!D.rain;
+  let idx=0,out="";
+  const rainOn=mode==="rain"&&hasRain;
+  D.items.forEach(it=>{
+    if(it.k==="tr"){out+=trHTML(it,idx++);return}
+    const rep=rainOn&&D.rain[it.id];
+    out+=(rep?itHTML(Object.assign({id:it.id,t:it.t,ex:true,map:it.map},rep),idx++,it.n):itHTML(it,idx++));
+    out+='<div class="gap"></div>';
+  });
+  return '<h2 class="stitle">每日行程</h2>'+
+   '<div class="days">'+DAYS.map(d=>'<button class="dbtn'+(d.n===S.day?' on':'')+'" data-day="'+d.n+'"><b>'+d.date+'</b><span>'+d.wd+'・Day '+d.n+'</span>'+(d.n===2?'<i>節分</i>':d.n===4?'<i>除夕</i>':d.n===5?'<i>農曆新年</i>':'')+'</button>').join("")+'</div>'+
+   wxHTML(D)+
+   '<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）'+D.title+'</h2><div class="meta">'+D.tags.map(t=>'<span class="tg pri" style="margin:0 6px 0 0">'+t+'</span>').join("")+'</div></div>'+
+   (D.alert?'<div class="info"><p>😴 '+D.alert+'</p></div>':'')+
+   '<div class="info">'+D.info.map(x=>'<p>'+x+'</p>').join("")+'</div>'+
+   (hasRain?'<div class="seg" role="group" aria-label="天氣方案"><button data-mode="sun" class="'+(!rainOn?'on':'')+'">☀️ 晴天行程</button><button data-mode="rain" class="'+(rainOn?'on':'')+'">☔ 雨／雪備案</button></div>'+(rainOn?'<div class="info"><p>以下替代方案皆為「範例」，只替換受天氣影響的項目，其餘照原行程。</p></div>':''):
+     (D.noRain?'<div class="info"><p>'+D.noRain+'</p></div>':''))+
+   '<div class="tl" id="tl">'+out+'</div>'+
+   '<div class="card" id="exp-box" style="margin-top:14px">'+expHTML(D.n)+'</div>'+backBtn();
+}
+
+/* ---------- 行前清單 ---------- */
+function ckRow(cat,x,custom){
+  const done=!!S.ck.done[x.id];
+  const note=x.note?'<small>'+esc(x.note)+'</small>':'';
+  return '<div class="ck'+(done?' is-done':'')+'"><label class="ckl"><input type="checkbox" data-ck="'+esc(x.id)+'"'+(done?' checked':'')+'><span class="txt">'+esc(x.text)+
+   (x.pri?'<span class="tg pri">優先</span>':'')+(x.ex?'<span class="tg ex">範例</span>':'')+note+'</span></label>'+
+   (x.link?'<a class="btn" style="margin-top:6px" target="_blank" rel="noopener" href="'+esc(x.link)+'">🔗</a>':'')+
+   '<button class="x" data-ck-del="'+cat+':'+esc(x.id)+'" aria-label="移除">✕</button></div>';
+}
+function listHTML(){
+  const st=ckStat();
+  let h='<h2 class="stitle">行前清單</h2><div class="card"><b>整體準備進度：'+st.d+' / '+st.t+'（'+st.p+'%）</b><div class="prog" style="margin-top:8px"><i style="width:'+st.p+'%"></i></div></div>';
+  Object.keys(CK).forEach(cat=>{
+    const items=ckAll(cat);const d=items.filter(x=>S.ck.done[x.id]).length;
+    h+='<div class="card"><h3 style="font-size:19px">'+CK_TITLE[cat]+'<span class="tg ok">'+d+' / '+items.length+'</span></h3>'+
+      items.map(x=>ckRow(cat,x)).join("")+
+      '<form class="add" data-ck-add="'+cat+'"><input type="text" placeholder="新增項目…" maxlength="60" aria-label="新增項目"><button class="btn fill" type="submit">新增</button></form></div>';
+  });
+  return h+backBtn();
+}
+
+/* ---------- 住宿速查 ---------- */
+function fld(key,label,ph){return '<label class="fld"><span>'+label+'</span><input type="text" data-field="'+key+'" value="'+esc(fieldVal(key))+'" placeholder="'+(ph||"可自行填寫")+'"></label>'}
+function stayHTML(){
+  const spentPP=SPENT.reduce((a,b)=>a+b.pp,0);
+  const lo=BUDGET.reduce((a,b)=>a+b.lo,0),hi=BUDGET.reduce((a,b)=>a+b.hi,0);
+  const rec=Object.values(S.exp).reduce((a,l)=>a+l.reduce((x,y)=>x+(+y.jpy||0),0),0);
+  const P=TRIP.people;
+  return '<h2 class="stitle">住宿速查</h2>'+
+  '<div class="card" style="background:var(--t-neutral)"><h3 style="font-size:19px">'+HOTEL.name+'</h3><p style="font-size:15px">'+HOTEL.jp+'</p>'+
+   '<dl class="kv" style="margin-top:8px">'+
+   '<dt>地址</dt><dd>'+HOTEL.addr+'<br><span style="font-size:15px">'+HOTEL.addrJp+'</span></dd>'+
+   '<dt>最近車站</dt><dd>地鐵烏丸線「五條」站步行約 4 分；阪急「烏丸」站步行約 7 分；京都站過去地鐵 1 站</dd>'+
+   '<dt>入住</dt><dd>'+HOTEL.checkin+'</dd><dt>退房</dt><dd>'+HOTEL.checkout+'</dd>'+
+   '<dt>訂房編號</dt><dd><b>'+HOTEL.booking+'</b></dd><dt>設施</dt><dd>大浴場、女性湯上りラウンジ、投幣洗衣</dd></dl>'+
+   '<label class="fld" style="margin-top:10px"><span>詳細地址／房號備註（自行填寫）</span><input type="text" data-field="hotel_note" value="'+esc(fieldVal("hotel_note"))+'" placeholder="例如：房號、樓層、櫃台電話"></label>'+
+   '<a class="btn fill" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">🗺️ 開啟 Google 地圖</a></div>'+
+
+  '<h3 class="stitle" style="font-size:18px">伴手禮與退稅提醒<span class="tg ex">範例</span></h3>'+
+  SHOP.map(s=>'<details class="acc '+s.k+'"><summary>'+s.t+'</summary><div class="in"><ul>'+s.items.map(x=>'<li>'+x+'</li>').join("")+'</ul></div></details>').join("")+
+
+  '<h3 class="stitle" style="font-size:18px;margin-top:14px">旅遊資訊速查</h3>'+
+  '<div class="card"><h3 style="font-size:17px">餐廳訂位編號</h3>'+
+   fld("rsv_sukiyaki","2/5 壽喜燒年夜飯（和牛 壽喜燒 京都五天五 烏丸）","訂位編號／時間")+
+   fld("rsv_0206","2/6 晚餐（難波或梅田）","店名／訂位編號")+
+   fld("rsv_0203","2/3 晚餐（20:00–22:00）","店名／訂位編號")+
+   fld("rsv_other","其他餐廳（Ito Okashi、Sumi Roman、京洛焼肉やぶ）","日期／訂位編號")+
+  '</div>'+
+  '<div class="card"><h3 style="font-size:17px">保險資料</h3>'+fld("ins_co","保險公司")+fld("ins_no","保單號碼")+fld("ins_tel","24 小時理賠專線")+'</div>'+
+  '<div class="card"><h3 style="font-size:17px">緊急聯絡電話</h3>'+
+   '<dl class="kv" style="margin:6px 0 10px"><dt>警察</dt><dd><a href="tel:110"><b>110</b></a></dd><dt>消防、救護</dt><dd><a href="tel:119"><b>119</b></a></dd></dl>'+
+   fld("teco_tel","台北駐大阪經濟文化辦事處（辦公室）")+
+   fld("teco_sos","台北駐大阪經濟文化辦事處（急難救助，僅限緊急事件）")+
+   '<p style="font-size:15px">辦事處電話為查證所得預填，可自行修改；日本境內直撥，手機漫遊請加 +81 並省略開頭 0。外交部旅外國人急難救助全球免付費專線：國內 0800-085-095，海外請撥 +886-800-085-095。出發前請至外交部領務局官網再核對一次。</p></div>'+
+
+  '<h3 class="stitle" style="font-size:18px;margin-top:14px">旅遊預算彙整</h3>'+
+  '<div class="card"><h3 style="font-size:17px">已支出（每人）</h3><table class="tbl">'+
+   SPENT.map(x=>'<tr><td>'+x.n+'</td><td>'+ntd(x.pp)+'</td></tr>').join("")+
+   '<tr class="tot"><td>已支出小計</td><td>'+ntd(spentPP)+'</td></tr></table>'+
+   '<h3 style="font-size:17px;margin-top:14px">預算<span class="tg ex">範例</span>（每人）</h3><table class="tbl">'+
+   BUDGET.map(x=>'<tr><td>'+x.n+'<br><span style="font-size:15px">'+yen(x.lo)+"–"+yen(x.hi)+'</span></td><td>'+ntd(x.lo*S.rate)+"–"+ntd(x.hi*S.rate)+'</td></tr>').join("")+
+   '<tr class="tot"><td>預算小計<br><span style="font-size:15px">'+yen(lo)+"–"+yen(hi)+'</span></td><td>'+ntd(lo*S.rate)+"–"+ntd(hi*S.rate)+'</td></tr></table>'+
+   '<h3 style="font-size:17px;margin-top:14px">總預算（每人）</h3><p><b style="font-size:20px">'+ntd(spentPP+lo*S.rate)+" – "+ntd(spentPP+hi*S.rate)+'</b></p>'+
+   '<p style="font-size:15px">5 人合計約 '+ntd((spentPP+lo*S.rate)*P)+" – "+ntd((spentPP+hi*S.rate)*P)+'（匯率 ¥1 = NT$'+S.rate+'）</p>'+
+   '<p style="margin-top:8px">每日花費紀錄累計：<b>'+yen(rec)+' ≈ '+ntd(rec*S.rate)+'</b></p>'+
+   '<label class="fld" style="margin-top:6px"><span>匯率（¥1 = NT$ ?）</span><input type="number" inputmode="decimal" step="0.001" min="0" value="'+S.rate+'" data-rate="1"></label></div>'+
+
+  '<div class="card"><h3 style="font-size:17px">資料備份</h3><p style="font-size:15px;margin:4px 0 8px">勾選、花費、清單與欄位都只存在這支手機的瀏覽器。換手機前請先匯出。</p>'+
+   '<div class="acts"><button class="btn" data-export="1">⬇️ 匯出備份檔</button><button class="btn" data-copy="1">📋 複製備份文字</button></div>'+
+   '<label class="fld" style="margin-top:10px"><span>匯入：選擇備份檔</span><input type="file" accept=".json,application/json" data-import-file="1"></label>'+
+   '<label class="fld"><span>或貼上備份文字</span><textarea id="impTxt" placeholder="貼上備份內容"></textarea></label>'+
+   '<div class="acts"><button class="btn fill" data-import-txt="1">匯入</button><button class="btn" data-reset="1">清除全部資料</button></div><p id="bkMsg" style="font-size:15px;margin-top:6px"></p></div>'+
+
+  '<div class="card" style="background:var(--t-neutral)"><h3 style="font-size:17px">查證備註</h3><ul style="margin:6px 0 0;padding-left:1.2em;font-size:15px">'+
+   '<li>Outlet 休館日（2 月第 3 個週四）、營業時間：大阪觀光局、Premium Outlets 官網資料</li>'+
+   '<li>日本新免稅制（2026/11/1 起退款方式）：觀光庁、財務省關稅局</li>'+
+   '<li>吉田神社、八坂神社、廬山寺、壬生寺：京都觀光 Navi 與京都總合觀光案內所（2026 年資料，2027 年時間尚未公布）</li>'+
+   '<li>美山冬灯廊期間與停車預約：活動主辦資訊（雪灯廊官網）</li>'+
+   '<li>勝尾寺開放時間、難波八阪神社時間、北大阪急行直通箕面萱野：各官方／市府資料</li>'+
+   '<li>天氣：Open-Meteo 免費預報（出發前 16 天內自動更新，之前為範例）；航班即時狀態請用航班卡片上的連結</li>'+
+   '<li>餐廳營業時間：Gurunavi、TableCheck、Tabelog 等公開資料（請以店家為準）</li></ul></div>'+
+  backBtn();
+}
+
+/* ---------- 主渲染 ---------- */
+function render(){
+  const h=parseHash();
+  view=["overview","daily","list","stay"].includes(h.v)?h.v:"overview";
+  if(h.d>=1&&h.d<=6)S.day=h.d;
+  renderNav();
+  const c=$("#content");
+  c.innerHTML=view==="overview"?ovHTML():view==="daily"?dailyHTML():view==="list"?listHTML():stayHTML();
+  tick();
+}
+
+/* ---------- 事件 ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a");if(!t)return;
+  if(t.dataset.nav){go(t.dataset.nav);return}
+  if(t.dataset.day){S.day=+t.dataset.day;save();go("daily",S.day);return}
+  if(t.dataset.act==="top"){toMenu();return}
+  if(t.dataset.sum){S.sum=!S.sum;save();const D=DAYS[S.day-1];$("#sum").outerHTML=wxHTML(D);return}
+  if(t.dataset.wxr){t.textContent='抓取中…';refreshWx(true).then(updSum).catch(()=>{t.textContent='抓取失敗，請稍後再試'});return}
+  if(t.dataset.mode){S.mode["d"+S.day]=t.dataset.mode;save();render();return}
+  if(t.dataset.expAdd){
+    const n=+t.dataset.expAdd,l=$("#expL").value.trim(),y=parseFloat($("#expY").value);
+    if(!(y>=0)){ $("#expY").focus();return}
+    (S.exp["d"+n]=S.exp["d"+n]||[]).push({label:l,jpy:y});save();$("#exp-box").innerHTML=expHTML(n);return}
+  if(t.dataset.expDel){
+    const [n,i]=t.dataset.expDel.split(":").map(Number);(S.exp["d"+n]||[]).splice(i,1);save();$("#exp-box").innerHTML=expHTML(n);return}
+  if(t.dataset.ckDel){
+    const [cat,id]=t.dataset.ckDel.split(":");
+    if(CK[cat]&&CK[cat].some(x=>x.id===id))S.ck.removed[id]=true;
+    else S.ck.custom[cat]=(S.ck.custom[cat]||[]).filter(x=>x.id!==id);
+    delete S.ck.done[id];save();render();return}
+  if(t.dataset.export){exportData();return}
+  if(t.dataset.copy){copyData();return}
+  if(t.dataset.importTxt){importText($("#impTxt").value);return}
+  if(t.dataset.reset){if(confirm("確定要清除這支手機上的所有勾選、花費與清單資料嗎？此動作無法復原。")){S=defState();save();render();}return}
+});
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.dataset.ck){S.ck.done[t.dataset.ck]=t.checked;save();render();return}
+  if(t.dataset.rate){const v=parseFloat(t.value);if(v>0){S.rate=v;save();render()}return}
+  if(t.dataset.importFile&&t.files&&t.files[0]){const r=new FileReader();r.onload=()=>importText(String(r.result));r.readAsText(t.files[0]);return}
+});
+document.addEventListener("input",e=>{const t=e.target;if(t.dataset.field){S.fields[t.dataset.field]=t.value;save()}});
+document.addEventListener("submit",e=>{
+  const f=e.target.closest("form[data-ck-add]");if(!f)return;e.preventDefault();
+  const cat=f.dataset.ckAdd,inp=f.querySelector("input"),v=inp.value.trim();if(!v)return;
+  (S.ck.custom[cat]=S.ck.custom[cat]||[]).push({id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),text:v});
+  save();render();
+});
+window.addEventListener("hashchange",render);
+
+/* ---------- 備份 ---------- */
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="kyoto2027-backup.json";document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);msg("已匯出備份檔。");
+}
+function copyData(){
+  const s=JSON.stringify(S);
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(()=>msg("已複製備份文字，可貼到備忘錄保存。"),()=>msg("複製失敗，請改用匯出備份檔。"))}
+  else msg("此瀏覽器不支援複製，請改用匯出備份檔。");
+}
+function importText(txt){
+  try{const j=JSON.parse(txt);if(!j||typeof j!=="object")throw 0;S=normalize(j);save();render();setTimeout(()=>msg("匯入完成。"),50)}
+  catch(e){msg("匯入失敗：內容不是有效的備份資料。")}
+}
+function msg(t){const m=$("#bkMsg");if(m)m.textContent=t}
+
+/* ---------- 啟動 ---------- */
+render();
+setInterval(tick,30000);
+refreshWx().then(updSum).catch(()=>{});
+</script>
+</body>
+</html>
