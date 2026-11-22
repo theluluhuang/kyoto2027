@@ -428,7 +428,7 @@ const DAYS=[
    rows:[["開放時間","約到 17:00，出發前請再確認"],["時間提醒","11:15 前要離開，12:15 出發去祇園，13:00 要看撒豆"]],map:"下鴨神社"},
   TR("🚌🚃","市巴士或京阪本線＋步行","下鴨神社","New Babe Kyoto","約 35–40 分（11:15–11:55）","實際路線請用地圖確認",null,true),
   {id:"d2l",k:"food",t:"11:55–12:30",tbc:true,n:"午餐｜New Babe Kyoto",d:"午餐在這間吃。位在烏丸與四條西南側一帶（依地圖座標），離八坂神社約 2 公里，吃完要立刻出發。",
-   rows:[["料理類型","待補（以店家菜單為準）"],["訂位","待確認；節分期間人多，可能要排隊"],["時間提醒","12:30 前要離開，13:00 要到八坂神社看撒豆"]],map:"https://maps.app.goo.gl/FXzXCnri688qnDPY9"},
+   rows:[["料理類型","待補（以店家菜單為準）"],["訂位","1 個月前開放（約 2027/1/3），連結見「餐廳 → 預約」"],["時間提醒","12:30 前要離開，13:00 要到八坂神社看撒豆"]],map:"https://maps.app.goo.gl/FXzXCnri688qnDPY9"},
   TR("🚕🚶","計程車或巴士＋步行","New Babe Kyoto","八坂神社","約 25–30 分（12:30–13:00）","節分期間路面擁擠，建議搭計程車縮短時間；13:00 撒豆可能只能站在後排",null,true),
   {id:"d2c",k:"sight",t:"13:00–14:00",must:true,tbc:true,n:"八坂神社 藝妓舞妓撒豆（先斗町）",stay:"約 1 小時",
    d:"節分當天，八坂神社舞殿上由藝妓、舞妓獻舞並撒福豆，是京都節分最具代表性的場面。人潮很多，建議提前 30–40 分鐘卡位。",
@@ -575,7 +575,7 @@ const CK={
   {id:"f4",text:"2/2 午餐｜Outlet 美食街",note:"現場選，免訂位"},
   {id:"f15",text:"2/2 晚餐 20:00｜Sumi Roman（烏丸）",note:"每月 1 日公布，2 個月前開放訂位，約 2026/12/1",pri:true,link:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/"},
   {id:"f16",text:"2/3 早餐｜Smart Coffee（08:00–08:40）",note:"吃完約 08:50 出發去下鴨神社",link:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6"},
-  {id:"f6",text:"2/3 午餐｜New Babe Kyoto（11:55–12:30）",note:"12:30 前要出發去八坂神社",link:"https://maps.app.goo.gl/FXzXCnri688qnDPY9"},
+  {id:"f6",text:"2/3 午餐 11:55｜New Babe Kyoto",note:"1 個月前開放訂位（約 2027/1/3）；12:30 前要出發去八坂神社",pri:true,link:"https://maps.app.goo.gl/dH7uBwf7yGrgSfiT8"},
   {id:"f3",text:"2/3 晚餐 18:30｜京洛焼肉やぶ（河原町）",note:"1 個月前開放訂位；訂位時說明 22:30 前要出發",pri:true,link:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9"},
   {id:"f7",text:"2/4 午餐｜天橋立",note:"建議先在伊根買點心墊肚子"},
   {id:"f8",text:"2/4 晚餐｜20:30 之後",note:"找營業到深夜的店（目前安排吃拉麵宵夜）"},
@@ -602,6 +602,7 @@ const RES_DEF=[
  {id:"r3",name:"Sumi Roman（居酒屋）",date:"2027-02-02",time:"20:00",open:"2 個月前整月開放（每月 1 日公布，約 2026/12/1）",url:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/",note:"2/2 晚餐｜阪急烏丸站步行約 3 分｜炭火套餐約 ¥5,500、豪華炭燒全餐約 ¥6,600，含無限暢飲｜旺季限 2 小時，遲到超過 15 分鐘未聯絡視為取消｜電話 +81-50-1725-3365",map:"Sumi Roman 京都 烏丸"},
  {id:"r2",name:"京洛焼肉やぶ（河原町）",date:"2027-02-03",time:"18:30",open:"1 個月前開放（約 2027/1/3）",url:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9",note:"2/3 晚餐｜阪急河原町站步行約 2 分｜營業 17:00–翌 2:00｜電話 075-746-6653｜約 ¥4,000｜22:30 前要出發去吉田神社",map:"京洛焼肉やぶ"},
  {id:"r4",name:"いとおかし（日式早餐）",date:"2027-02-05",time:"09:00",open:"1 個月前整月開放（每月 1 日公布，約 2027/1/1）",url:"https://www.tablecheck.com/zh-TW/kyoto-itookashi",note:"極厚銀鮭定食 ¥2,500｜TableCheck 預約，用餐約 50 分鐘",map:"京都 いとおかし"},
+ {id:"r6",name:"New Babe Kyoto（2/3 午餐）",date:"2027-02-03",time:"11:55",open:"1 個月前開放（約 2027/1/3）",url:"https://maps.app.goo.gl/dH7uBwf7yGrgSfiT8",note:"2/3 午餐｜12:30 前要離開，13:00 要到八坂神社看撒豆",map:"https://maps.app.goo.gl/FXzXCnri688qnDPY9"},
  {id:"r5",name:"Jyuunimatsu Rokuzaemon（2/6 午餐）",date:"2027-02-06",time:"13:30",open:"1 個月前開放（約 2027/1/6）",note:"2/6 午餐｜箕面萱野站步行約 5 分｜午餐座位限 1 小時，L.O. 14:00｜人均約 ¥1,500｜電話 072-737-6274｜當天無通知取消，套餐收 100%、一般座位每人 ¥4,000｜勝尾寺 13:00 搭巴士約 13:25 到站",map:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9"},
  {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"18:30",open:"1 個月前開放（約 2027/1/5）",url:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"除夕年夜飯｜5 人｜和牛『並』¥8,800、『上』¥13,200，用餐限 120 分鐘｜電話 075-212-0500",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"}
 ];
@@ -618,7 +619,7 @@ const MEALS={
   {slot:"早餐",time:"約 08:00–08:40",st:"sug",note:"吃完約 08:50 出發去下鴨神社。",opts:[
   {n:"Smart Coffee",area:"三條、寺町一帶（依地圖座標）",kind:"喫茶店、早餐",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6",note:"營業時間請在地圖確認"}]},
  {slot:"午餐",time:"11:55–12:30",st:"sug",note:"12:30 前要出發去八坂神社。",opts:[
-  {n:"New Babe Kyoto",area:"烏丸與四條西南側一帶（依地圖座標）",kind:"待補",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/FXzXCnri688qnDPY9",note:"營業時間請在地圖確認"}]},
+  {n:"New Babe Kyoto",resId:"r6",area:"烏丸與四條西南側一帶（依地圖座標）",kind:"待補",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/FXzXCnri688qnDPY9",note:"1 個月前開放訂位（約 2027/1/3）；營業時間請在地圖確認"}]},
  {slot:"下午茶",time:"14:00–15:00",st:"sug",note:"兩場撒豆之間休息。",opts:[
   {n:"Gion Coffee Nanafuku（備案）",area:"祇園一帶（依地圖座標）",kind:"咖啡廳",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/RzJD6CaKtfXrW8h7A",note:"備案咖啡廳；營業時間請在地圖確認"},
   {n:"here 京都清水（備案）",area:"清水寺一帶（依地圖座標）",kind:"咖啡廳",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/dsSCtdfBYTzJR2hF9",note:"備案咖啡廳；營業時間請在地圖確認"},
