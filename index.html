@@ -198,7 +198,7 @@ textarea{padding:10px 12px;min-height:90px}
 .rv .rg{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:6px}
 .rv .rg label{display:block;font-size:15px;font-weight:500}
 .rv .rg .full{grid-column:1/-1}
-.rv input[type=date],.rv input[type=time],.rv input[type=text],.rv textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 10px;min-height:46px;width:100%;font-size:16px;margin-top:2px}
+.rv input[type=date],.rv input[type=time],.rv input[type=text],.rv input[type=url],.rv textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 10px;min-height:46px;width:100%;font-size:16px;margin-top:2px}
 .rv textarea{padding:8px 10px;min-height:84px;line-height:1.6}
 .rv-add{border-top:var(--line);margin-top:6px;padding-top:12px}
 .opt{border-top:1.5px dashed rgba(35,64,107,.25);margin-top:10px;padding-top:8px}
@@ -405,17 +405,14 @@ const DAYS=[
   {id:"d1g",k:"sight",t:"18:00–19:00",must:true,tbc:true,n:"吉田神社 追儺式（鬼やらい）",stay:"約 1 小時",
    d:"京都節分祭大本營。復原平安時代宮廷驅鬼儀式：戴四隻眼面具的「方相氏」帶隊，追趕紅、青、黃三隻鬼，很有古代儀式感。",
    rows:[["時間","2027 年實際開始時間待官方公布"]],map:"吉田神社 京都"},
-  {id:"d1h",k:"food",t:"19:00–19:30",n:"吉田神社參道 節分屋台，逛吃嚐鮮",d:"節分期間參道與境內擺滿攤位，例年約有 800 攤、人潮非常多。這段只逛逛、嚐點小吃，正餐留給下一站在京都市區坐下來吃。",
-   rows:[["料理類型","日式屋台小吃（章魚燒、烤物、甜點等）"],["預算","約 ¥500–1,500／人（範例）"],["訂位","不需要；人多請注意隨身物品與團體走散"]],ex:true,map:"吉田神社 京都"},
-  TR("🚕","計程車或巴士","吉田神社","晚餐餐廳","約 15–20 分","節分期間周邊可能交通管制，請預留時間"),
-  {id:"d1j",k:"food",t:"19:45–21:15",tbc:true,n:"晚餐｜京都市區（餐廳待定）",d:"追儺式後在京都市區坐下來吃一頓晚餐。建議選離飯店近、營業到晚上 10 點以上的店；候補：Sumi Roman 居酒屋（阪急烏丸站步行約 3 分）。餐廳資訊見「餐廳」分頁。",
-   rows:[["料理類型","居酒屋、京都家常菜等（待決定）"],["預算","約 ¥3,000–4,500／人（範例）"],["訂位","2/2 是週二，建議訂位（待確認）"]],ex:true,map:"Sumi Roman 京都 烏丸"},
-  TR("🚶🚕","步行或計程車","晚餐餐廳","飯店","依餐廳位置而定","若選 Sumi Roman，步行約 10 分到飯店；深夜人多時計程車可能需排隊叫車"),
-  {id:"d1i",k:"hotel",t:"21:30 後",n:"回飯店休息",d:"泡大浴場放鬆。明天可以睡晚一點，因為 2/3 要熬夜到凌晨。",map:HOTEL.maps}
+  TR("🚕","計程車或巴士","吉田神社","Sumi Roman（烏丸）","約 15–20 分（約 19:15 出發）","節分期間周邊可能交通管制，請預留時間；訂位 20:00，抵達後可先在店門口集合",null),
+  {id:"d1j",k:"food",t:"20:00–22:00",n:"晚餐｜Sumi Roman（炭爐居酒屋，烏丸）",d:"京都町家改建的炭火居酒屋，離飯店近。訂位 20:00；旺季座位限 2 小時，遲到超過 15 分鐘未聯絡會被視為取消。",
+   rows:[["推薦餐點","炭火套餐（約 ¥5,500，9 道）、阿波黑牛豪華炭燒全餐（約 ¥6,600，8 道，人氣第一），皆含無限暢飲"],["人均","約 ¥5,500–6,600（套餐；單點約 ¥4,000–6,000）"],["訂位","2 個月前開放（約 2026/12/2），連結見「餐廳 → 預約」"],["營業","週一至五 17:00–23:30（L.O. 23:00）"]],map:"Sumi Roman 京都 烏丸"},
+  TR("🚶","步行","Sumi Roman","飯店","約 10 分","22:00 結束後步行回飯店；也可叫計程車"),
+  {id:"d1i",k:"hotel",t:"22:00 後",n:"回飯店休息",d:"泡大浴場放鬆。明天可以睡晚一點，因為 2/3 要熬夜到凌晨。",map:HOTEL.maps}
  ],
  rain:{
   d1d:{k:"shop",n:"雨天備案：多逛有屋頂的店舖，縮短海邊戶外區域",d:"海濱型 Outlet 風大，雨天以室內店舖與美食街為主，並提早搭車進京都。"},
-  d1h:{k:"food",n:"雨天備案：略過屋台，追儺式後直接去吃晚餐",d:"雨中屋台人擠又泥濘，追儺式結束後直接前往餐廳，不逛屋台。"}
  }
 },
 /* ---------------------------- Day 2 ---------------------------- */
@@ -487,15 +484,17 @@ const DAYS=[
 { n:4,date:"2/5",wd:"五",title:"今宮神社・除夕年夜飯",tags:["除夕"],
  info:["2027 年農曆新年是 2/6，所以 2/5 是除夕。晚上吃壽喜燒當年夜飯。"],
  items:[
+  {id:"d4f",k:"food",t:"09:00–10:00",n:"早餐｜いとおかし（京都 いとおかし）",d:"築 150 年的老町家，炭火烤極厚銀鮭配土鍋飯。需用 TableCheck 預約，用餐約 50 分鐘。可刷信用卡，不收電子錢包。",
+   rows:[["推薦餐點","極厚銀鮭定食 ¥2,500（招牌）、銀鮭定食 京都燒 ¥2,500、刺身定食約 ¥3,000 起"],["人均","約 ¥2,500–3,000"],["訂位","1 個月前開放（約 2027/1/5）；9:00 時段是否開放以 TableCheck 為準（待確認）"]],map:"京都 いとおかし"},
   TR("🚶🚇🚌","步行＋地鐵烏丸線＋巴士","飯店 → 五條站 → 北大路 → 今宮神社前","","全程約 40 分","飯店步行約 4 分到五條站；烏丸線到北大路約 12 分；再轉巴士到「今宮神社前」"),
-  {id:"d4a",k:"sight",t:"10:00–12:00",n:"紫野・今宮神社周邊",stay:"約 2 小時",tbc:true,
+  {id:"d4a",k:"sight",t:"10:45–12:15",n:"紫野・今宮神社周邊",stay:"約 1.5 小時",tbc:true,
    d:"今宮神社以炙餅（あぶり餅）聞名，參道兩側有兩家老店對望：竹籤串小麻糬烤過後淋白味噌醬，一人份約 ¥600。旁邊的大德寺一帶安靜、遊客少。",
    rows:[["注意","兩家炙餅老店 2/3（週三）都公休，所以改排週五；兩家 2/5 是否營業與營業時間，出發前請再確認（待確認）"]],map:"今宮神社 京都"},
-  {id:"d4b",k:"food",t:"12:00–13:00",n:"午餐｜大德寺周邊簡餐或精進料理",d:"午餐在大德寺周邊找一家簡餐或精進料理。",
+  {id:"d4b",k:"food",t:"12:15–13:15",n:"午餐｜大德寺周邊簡餐或精進料理",d:"午餐在大德寺周邊找一家簡餐或精進料理。",
    rows:[["料理類型","精進料理／日式簡餐"],["預算","約 ¥1,500–3,500／人（範例）"],["訂位","簡餐現場選；精進料理店建議先查是否需預約（待確認）"]],ex:true,map:"大徳寺 京都"},
   {id:"d4c",k:"misc",t:"14:00–17:00",n:"自由活動",d:"想逛的地方由大家決定（待確認）。",tbc:true},
-  {id:"d4d",k:"food",t:"晚餐（時間待確認）",tbc:true,n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯。除夕當晚人多，優先訂位。",
-   rows:[["料理類型","和牛壽喜燒"],["訂位","5 人；請說明人數，並問清楚取消規則"],["待確認","訂位時間與取消規則"]],map:"https://maps.app.goo.gl/gEoauLkUuKYjuae19"},
+  {id:"d4d",k:"food",t:"18:30–20:30",n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯，訂位 18:30。套餐用餐限 120 分鐘，離烏丸站（阪急）步行約 1 分。",
+   rows:[["推薦餐點","和牛『並』コース ¥8,800；和牛・神戸牛『上』コース ¥13,200（皆 6 道，含稅與服務費）"],["人均","約 ¥8,800–13,200（5 人約 ¥44,000–66,000）"],["訂位","5 人；1 個月前開放（約 2027/1/5），連結見「餐廳 → 預約」"],["電話","075-212-0500"]],map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"},
   {id:"d4e",k:"misc",t:"提醒",n:"明天 9:00 出發",d:"明天要去勝尾寺，路途遠、巴士班次少，今晚早點休息。"}
  ],
  rain:{
@@ -566,28 +565,25 @@ const CK={
   {id:"p9",text:"折疊購物袋（Outlet 購物用）",ex:true}
  ],
  food:[
-  {id:"f1",text:"2/5 晚餐｜壽喜燒年夜飯（5 人）",note:"和牛 壽喜燒 京都五天五 烏丸；除夕最先訂",pri:true,link:"https://maps.app.goo.gl/gEoauLkUuKYjuae19"},
+  {id:"f1",text:"2/5 晚餐 18:30｜壽喜燒年夜飯（5 人）",note:"和牛 壽喜燒 京都五天五 烏丸；1 個月前開放訂位",pri:true,link:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"},
   {id:"f2",text:"2/6 晚餐｜難波或梅田",note:"週六晚上人多，確定地點後再訂位",pri:true},
-  {id:"f3",text:"2/3 晚餐 18:30｜飯店附近或河原町",note:"節分當天人多；訂位時先說明 22:30 前要出發",pri:true},
+  {id:"f3",text:"2/3 晚餐 18:30｜京洛焼肉やぶ（河原町）",note:"1 個月前開放訂位；訂位時說明 22:30 前要出發",pri:true,link:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9"},
   {id:"f4",text:"2/2 午餐｜Outlet 美食街",note:"現場選，免訂位"},
-  {id:"f5",text:"2/2 屋台小吃｜吉田神社（19:00–19:30）",note:"只逛吃，不當正餐"},
-  {id:"f15",text:"2/2 晚餐｜京都市區（19:45–21:15）",note:"追儺式後坐下來吃；候補 Sumi Roman，建議訂位",pri:true},
+  {id:"f15",text:"2/2 晚餐 20:00｜Sumi Roman（烏丸）",note:"2 個月前開放訂位，約 2026/12/2",pri:true,link:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/"},
   {id:"f6",text:"2/3 午餐｜下鴨神社周邊（11:15–12:15）",note:"12:15 前要出發去祇園"},
-  {id:"f14",text:"2/5 午餐｜大德寺周邊（12:00–13:00）",note:"簡餐或精進料理；精進料理先查是否需預約"},
+  {id:"f14",text:"2/5 午餐｜大德寺周邊（12:15–13:15）",note:"簡餐或精進料理；精進料理先查是否需預約"},
   {id:"f7",text:"2/4 午餐｜天橋立",note:"建議先在伊根買點心墊肚子"},
   {id:"f8",text:"2/4 晚餐｜20:30 之後",note:"找營業到深夜的店（目前安排吃拉麵宵夜）"},
   {id:"f9",text:"2/6 午餐｜勝尾寺或中崎町咖啡店",note:"行程調整後約 16:00 在中崎町吃"},
   {id:"f10",text:"2/7 早餐｜06:30 起床",note:"便利商店，或前一天買麵包"},
-  {id:"f11",text:"日式早餐｜Ito Okashi（日期待定）",note:"京都いとおかし，老町家炭火烤銀鮭＋土鍋飯。營業約 7:00–11:45（L.O. 11:15），約 ¥3,000–3,500；需預約",link:"https://www.tablecheck.com/zh-TW/kyoto-itookashi"},
-  {id:"f12",text:"居酒屋｜Sumi Roman（日期待定）",note:"阪急烏丸站步行約 3 分，約 ¥4,000。週一～五 17:00–23:30（L.O. 23:00）；週六日與假日 16:00–23:30。電話 075-746-7999"},
-  {id:"f13",text:"日式燒肉｜京洛焼肉やぶ（日期待定）",note:"阪急河原町站步行約 2 分，約 ¥4,000，17:00–翌 2:00（L.O. 1:00）。電話 075-746-6653。只訂位的取消規則較嚴，訂前請確認",link:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("京洛焼肉やぶ")}
+  {id:"f11",text:"2/5 早餐 9:00｜いとおかし（日式早餐）",note:"1 個月前開放訂位；備選時間 2/3 9:00",pri:true,link:"https://www.tablecheck.com/zh-TW/kyoto-itookashi"}
  ]
 };
 const CK_TITLE={todo:"行前待辦",pack:"行李準備",food:"餐廳與訂位"};
 
 /* 預算（皆為每人） */
 const SPENT=[ {n:"包車（Klook 一日遊）",pp:2725}, {n:"住宿 5 人 5 晚（合計 NT$29,735）",pp:Math.round(29735/5)}, {n:"機票",pp:19307} ];
-const BUDGET=[ {n:"大眾運輸",lo:8700,hi:10900}, {n:"門票與體驗",lo:2350,hi:4000}, {n:"餐費 6 天",lo:24000,hi:42000} ];
+const BUDGET=[ {n:"大眾運輸",lo:8700,hi:10900}, {n:"門票與體驗",lo:2350,hi:4000}, {n:"餐費 6 天（含 4 間預約餐廳，估算）",lo:34900,hi:55000} ];
 
 /* 欄位預設值（可在畫面上自行修改） */
 const LIGHTSPLIT="https://liff.line.me/1655320992-Y8GowEpw/g/gRdZjWTcS75ToMgJKvUs7P";
@@ -595,10 +591,10 @@ const FIELD_DEF={};
 
 /* 預約餐廳（日期、時間、訂位編號可在「餐廳 → 預約」分頁選填） */
 const RES_DEF=[
- {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"",note:"除夕年夜飯｜5 人｜請問清楚取消規則",map:"https://maps.app.goo.gl/gEoauLkUuKYjuae19"},
- {id:"r2",name:"京洛焼肉やぶ（河原町）",date:"2027-02-03",time:"18:30",note:"候補：2/3 晚餐 18:30｜阪急河原町站步行約 2 分｜營業 17:00–翌 2:00｜電話 075-746-6653｜只訂位的取消規則較嚴，訂前請確認",map:"京洛焼肉やぶ"},
- {id:"r3",name:"Sumi Roman（居酒屋）",date:"",time:"",note:"候補：2/2 晚餐｜阪急烏丸站步行約 3 分｜週一至五 17:00–23:30、週六日 16:00–23:30｜電話 075-746-7999｜約 ¥4,000",map:"Sumi Roman 京都 烏丸"},
- {id:"r4",name:"いとおかし（日式早餐）",date:"",time:"",note:"候補：2/5 早餐｜老町家炭火烤銀鮭、土鍋飯｜約 7:00–11:45（L.O. 11:15）｜約 ¥3,000–3,500｜需預約，先確認地點離飯店多遠",map:"京都 いとおかし 日式早餐",link:"https://www.tablecheck.com/zh-TW/kyoto-itookashi"}
+ {id:"r3",name:"Sumi Roman（居酒屋）",date:"2027-02-02",time:"20:00",open:"2 個月前開放（約 2026/12/2）",url:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/",note:"2/2 晚餐｜阪急烏丸站步行約 3 分｜炭火套餐約 ¥5,500、豪華炭燒全餐約 ¥6,600，含無限暢飲｜旺季限 2 小時，遲到超過 15 分鐘未聯絡視為取消｜電話 +81-50-1725-3365",map:"Sumi Roman 京都 烏丸"},
+ {id:"r2",name:"京洛焼肉やぶ（河原町）",date:"2027-02-03",time:"18:30",open:"1 個月前開放（約 2027/1/3）",url:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9",note:"2/3 晚餐｜阪急河原町站步行約 2 分｜營業 17:00–翌 2:00｜電話 075-746-6653｜約 ¥4,000｜22:30 前要出發去吉田神社",map:"京洛焼肉やぶ"},
+ {id:"r4",name:"いとおかし（日式早餐）",date:"2027-02-05",time:"09:00",alt:"2/3 9:00",open:"1 個月前開放（約 2027/1/5）",url:"https://www.tablecheck.com/zh-TW/kyoto-itookashi",note:"極厚銀鮭定食 ¥2,500｜TableCheck 預約，用餐約 50 分鐘｜備選 2/3 9:00 會與當天 08:50 出發去下鴨神社衝突，若改訂需調整行程",map:"京都 いとおかし"},
+ {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"18:30",open:"1 個月前開放（約 2027/1/5）",url:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"除夕年夜飯｜5 人｜和牛『並』¥8,800、『上』¥13,200，用餐限 120 分鐘｜電話 075-212-0500",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"}
 ];
 
 /* 每日餐廳：st → ok 已安排、todo 待訂位／待決定、sug 建議（皆為範例，營業日與價位請出發前確認） */
@@ -606,11 +602,8 @@ const MEALS={
 1:[
  {slot:"午餐",time:"12:10–14:30",st:"ok",opts:[
   {n:"Rinku Premium Outlets 美食街",area:"Outlet 內，現場選店",kind:"美食街",dishes:"拉麵、丼飯、定食、炸物（現場挑選）",pp:"約 ¥1,000–1,800",map:"りんくうプレミアム・アウトレット フードコート",note:"免訂位"}]},
- {slot:"點心",time:"19:00–19:30",st:"ok",opts:[
-  {n:"吉田神社 節分屋台",area:"吉田神社參道與境內",kind:"屋台小吃",dishes:"章魚燒、烤物、甜點（現場逛）",pp:"約 ¥500–1,500",map:"吉田神社 京都",note:"只逛吃，不當正餐；免訂位"}]},
- {slot:"晚餐",time:"19:45–21:15",st:"todo",note:"追儺式後在京都市區坐下來吃。2/2 是週二，下面兩個選項都有營業。",opts:[
-  {n:"Sumi Roman（居酒屋）",resId:"r3",area:"阪急烏丸站步行約 3 分，離飯店近",kind:"居酒屋",dishes:"居酒屋料理（以店家菜單為準）",pp:"約 ¥4,000",map:"Sumi Roman 京都 烏丸",note:"週一至五 17:00–23:30（L.O. 23:00）"},
-  {n:"先斗町・河原町 おばんざい（京都家常菜）",area:"先斗町、河原町一帶，選一家",kind:"京都家常菜、居酒屋",dishes:"おばんざい拼盤、湯葉、京野菜、日本酒",pp:"約 ¥3,000–4,500",map:"先斗町 おばんざい",note:"範例，需自行挑選店家"}]}
+ {slot:"晚餐",time:"20:00–22:00",st:"todo",note:"追儺式後前往，訂位 20:00。2/2 是週二，店家有營業。",opts:[
+  {n:"Sumi Roman（炭爐居酒屋）",resId:"r3",area:"阪急烏丸站步行約 3 分，離飯店近",kind:"炭火居酒屋",dishes:"炭火套餐（9 道）、阿波黑牛豪華炭燒全餐（8 道，人氣第一），皆含無限暢飲",pp:"約 ¥5,500–6,600（單點約 ¥4,000–6,000）",map:"Sumi Roman 京都 烏丸",note:"週一至五 17:00–23:30（L.O. 23:00）；旺季限 2 小時；遲到超過 15 分鐘未聯絡視為取消"}]}
 ],
 2:[
  {slot:"早餐",time:"08:50 前",st:"sug",note:"08:50 左右要出發，簡單吃。",opts:[
@@ -621,7 +614,7 @@ const MEALS={
  {slot:"下午茶",time:"14:00–15:00",st:"sug",note:"兩場撒豆之間休息。",opts:[
   {n:"祇園辻利 本店（茶寮）",area:"祇園四條站附近",kind:"抹茶甜點",dishes:"抹茶聖代、抹茶甜點",pp:"約 ¥1,000–1,800",map:"祇園辻利 本店",note:"節分當天人多，可能排隊"}]},
  {slot:"晚餐",time:"18:30–20:30",st:"todo",note:"22:30 前要出發去吉田神社，訂位時先說明。",opts:[
-  {n:"京洛焼肉やぶ（河原町）",resId:"r2",area:"阪急河原町站步行約 2 分",kind:"日式燒肉",dishes:"燒肉（以店家菜單為準）",pp:"約 ¥4,000",map:"京洛焼肉やぶ",note:"營業 17:00–翌 2:00（L.O. 1:00）；只訂位的取消規則較嚴，訂前請確認"}]}
+  {n:"京洛焼肉やぶ（河原町）",resId:"r2",area:"阪急河原町站步行約 2 分（木屋町・先斗町一帶）",kind:"日式燒肉",dishes:"元祖厚切蔥包牛舌、炙燒和牛タタキ、生ハラミ、特選和牛サガリ、蒜味牛舌、和牛夏多布里昂",pp:"約 ¥4,000",map:"京洛焼肉やぶ",note:"營業 17:00–翌 2:00（L.O. 1:00）；22:30 前要出發去吉田神社"}]}
 ],
 3:[
  {slot:"早餐",time:"09:05 前",st:"sug",note:"09:30 在京都駅八条口集合，簡單吃。",opts:[
@@ -636,14 +629,13 @@ const MEALS={
   {n:"京都拉麵小路",area:"京都車站大樓 10 樓",kind:"拉麵（多家名店集中）",dishes:"京都醬油、豚骨、雞白湯等，依店家",pp:"約 ¥1,000–1,500",map:"京都ラーメン小路",note:"營業時間與最後點餐請確認（可能在 22:00 前結束）"}]}
 ],
 4:[
- {slot:"早餐",time:"約 08:00–09:30",st:"sug",note:"10:00 才出發，可以吃一頓像樣的早餐。",opts:[
-  {n:"いとおかし（日式早餐）",resId:"r4",area:"需預約（請在地圖確認離飯店的距離）",kind:"日式早餐",dishes:"老町家炭火烤銀鮭、土鍋飯",pp:"約 ¥3,000–3,500",map:"京都 いとおかし 日式早餐",note:"營業約 7:00–11:45（L.O. 11:15）"},
-  {n:"飯店附近咖啡店或便利商店",area:"烏丸五條周邊",kind:"輕食",dishes:"三明治、咖啡",pp:"約 ¥500–1,000",map:"カフェ 烏丸五条"}]},
- {slot:"午餐",time:"12:00–13:00",st:"sug",note:"在大德寺、今宮神社周邊。",opts:[
+ {slot:"早餐",time:"09:00–10:00",st:"todo",note:"訂位 9:00，用餐約 50 分鐘，吃完 10:00 出發去今宮神社。",opts:[
+  {n:"いとおかし（日式早餐）",resId:"r4",area:"高辻通油小路東入，離飯店步行約 15 分（待確認）",kind:"日式早餐、老町家",dishes:"極厚銀鮭定食 ¥2,500（招牌）、銀鮭定食 京都燒 ¥2,500、刺身定食約 ¥3,000 起",pp:"約 ¥2,500–3,000",map:"京都 いとおかし",note:"營業 7:00–11:45；可刷信用卡，不收電子錢包；僅 TableCheck 線上預約"}]},
+ {slot:"午餐",time:"12:15–13:15",st:"sug",note:"在大德寺、今宮神社周邊。",opts:[
   {n:"大德寺周邊 簡餐／精進料理",area:"大德寺、紫野一帶",kind:"日式簡餐、精進料理",dishes:"定食、湯豆腐、精進料理（範例）",pp:"約 ¥1,500–3,500",map:"大徳寺 周辺 ランチ",note:"精進料理店建議先查是否需預約"},
   {n:"今宮神社 炙餅（點心）",area:"今宮神社東參道，兩家老店對望",kind:"和菓子",dishes:"炙餅（あぶり餅，竹籤小麻糬淋白味噌）",pp:"約 ¥600",map:"今宮神社 あぶり餅",note:"2/3（週三）公休，所以改排 2/5；營業情況出發前請確認"}]},
- {slot:"晚餐",time:"時間待確認",st:"todo",note:"除夕年夜飯，5 人，除夕當晚人多，優先訂位。",opts:[
-  {n:"和牛 壽喜燒 京都五天五 烏丸",resId:"r1",area:"請看地圖確認位置",kind:"和牛壽喜燒",dishes:"和牛壽喜燒（依店家套餐）",pp:"待補",map:"https://maps.app.goo.gl/gEoauLkUuKYjuae19",note:"請問清楚取消規則"}]}
+ {slot:"晚餐",time:"18:30–20:30",st:"todo",note:"除夕年夜飯，5 人，訂位 18:30；套餐用餐限 120 分鐘。",opts:[
+  {n:"和牛 壽喜燒 京都五天五 烏丸",resId:"r1",area:"四條烏丸一帶，阪急烏丸站步行約 1 分",kind:"和牛壽喜燒",dishes:"和牛『並』コース ¥8,800、和牛・神戸牛『上』コース ¥13,200（6 道）；更高等級有『特上』¥22,000、『極上』¥33,000",pp:"約 ¥8,800–13,200（5 人約 ¥44,000–66,000）",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"電話 075-212-0500；營業 11:00–23:00"}]}
 ],
 5:[
  {slot:"早餐",time:"09:00 前",st:"sug",note:"09:00 出發去勝尾寺，簡單吃。",opts:[
@@ -983,9 +975,35 @@ function resCard(r){
    '<div><div class="nm">'+esc(r.name)+' <span id="rs-'+r.id+'" class="tg '+st[0]+'">'+st[1]+'</span></div></div>'+
    '<div class="bd"><div class="rg"><label>日期<input type="date" min="2027-02-02" max="2027-02-07" value="'+esc(r.date||"")+'" data-res-f="'+r.id+':date"></label>'+
    '<label>時間<input type="time" value="'+esc(r.time||"")+'" data-res-f="'+r.id+':time"></label>'+
+   (RES_DEF.some(d=>d.id===r.id&&d.alt)?'<label>備選時間<input type="text" value="'+esc(r.alt||"")+'" placeholder="例：2/3 9:00" maxlength="30" data-res-f="'+r.id+':alt"></label>':'')+
+   '<label'+(RES_DEF.some(d=>d.id===r.id&&d.alt)?'':' class="full"')+'>開放訂位<input type="text" value="'+esc(r.open||"")+'" placeholder="例：1 個月前" maxlength="40" data-res-f="'+r.id+':open"></label>'+
+   (RES_DEF.some(d=>d.id===r.id&&d.url)?'':'<label class="full">訂位連結<input type="url" value="'+esc(r.url||"")+'" placeholder="貼上訂位網址" maxlength="300" data-res-f="'+r.id+':url"></label>')+
    '<label class="full">預約資訊（訂位人名、人數、編號、電話）<input type="text" value="'+esc(r.no||"")+'" placeholder="訂好再填" maxlength="80" data-res-f="'+r.id+':no"></label>'+
    '<label class="full">備註<textarea maxlength="300" placeholder="取消規則、特殊需求、候補店家…" data-res-f="'+r.id+':note">'+esc(r.note||"")+'</textarea></label></div>'+
-   '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+(r.link?'<a class="btn" target="_blank" rel="noopener" href="'+esc(r.link)+'">🔗 訂位頁</a>':'')+'<button class="btn" data-res-del="'+r.id+'">移除</button></div></div></div>';
+   '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+((r.url||r.link)?'<a class="btn pri" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">🔗 前往訂位</a>':'')+'<button class="btn" data-res-del="'+r.id+'">移除</button></div></div></div>';
+}
+function resOpenDate(r){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(r.date||"");const o=/(\d+)\s*(個月|週|天)前/.exec(r.open||"");
+  if(!m||!o)return null;const y=+m[1],mo=+m[2]-1,d=+m[3],n=+o[1];
+  return o[2]==="個月"?new Date(Date.UTC(y,mo-n,d)):new Date(Date.UTC(y,mo,d-n*(o[2]==="週"?7:1)));
+}
+function resSchedHTML(){
+  const W=["日","一","二","三","四","五","六"];
+  const rows=resList().filter(r=>!r.done).map(r=>({r,od:resOpenDate(r)})).sort((a,b)=>a.od&&b.od?a.od-b.od:a.od?-1:b.od?1:0);
+  const t=new Date(),today=Date.UTC(t.getFullYear(),t.getMonth(),t.getDate());
+  const item=({r,od})=>{
+    let when,left="";
+    if(od){when=od.getUTCFullYear()+"/"+(od.getUTCMonth()+1)+"/"+od.getUTCDate()+"（"+W[od.getUTCDay()]+"）";
+      const dd=Math.round((od-today)/864e5);left=dd>0?'還有 '+dd+' 天':dd===0?'今天開放':'已開放';}
+    else when="開放日待填";
+    const meal=(r.date?r.date.slice(5).replace("-","/"):"日期待定")+(r.time?" "+r.time:"");
+    return '<div class="rv" style="grid-template-columns:1fr"><div><div style="font-weight:700;font-size:17px">📌 '+when+(left?' <span class="tg tbc" style="margin:0 0 0 4px">'+left+'</span>':'')+'</div>'+
+      '<div style="font-size:16px">訂 <b>'+esc(r.name)+'</b>（用餐 '+meal+'）</div>'+
+      '<div style="font-size:15px;opacity:.85">'+(r.open?esc(r.open):'尚未填開放訂位時間')+'</div></div></div>';
+  };
+  return '<div class="card"><div class="rv-h"><h3>🗓️ 訂位時程表</h3><span class="tg tbc" style="margin:0">待訂 '+rows.length+' 間</span></div>'+
+   '<p style="font-size:15px;margin:2px 0 4px">依「開放訂位」推算的日期由早到晚排列，到時間就去訂；訂好後打勾，會自動從這裡移走。</p>'+
+   (rows.length?rows.map(item).join(""):'<p style="padding:10px 0">目前沒有待訂的餐廳 🎉</p>')+'</div>';
 }
 function resAllHTML(){
   const cmp=(a,b)=>(a.date||"9")<(b.date||"9")?-1:(a.date||"9")>(b.date||"9")?1:(a.time||"")<(b.time||"")?-1:0;
@@ -993,15 +1011,18 @@ function resAllHTML(){
   const fmt=d=>d?d.slice(5).replace("-","/"):"日期待定";
   const doneRow=r=>'<div class="rv is-sum" id="rc-'+r.id+'"><input type="checkbox" checked aria-label="取消已預約" data-res-done="'+r.id+'">'+
     '<div><div class="nm">'+esc(r.name)+'</div><div style="font-size:16px"><b>'+fmt(r.date)+(r.time?' '+esc(r.time):'')+'</b></div>'+
-    (r.no?'<div style="font-size:15px">預約資訊：'+esc(r.no)+'</div>':'')+(r.note?'<div style="font-size:15px;opacity:.85">備註：'+esc(r.note)+'</div>':'')+
-    '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+'</div></div></div>';
+    (r.alt?'<div style="font-size:15px">備選時間：'+esc(r.alt)+'</div>':'')+(r.no?'<div style="font-size:15px">預約資訊：'+esc(r.no)+'</div>':'')+(r.note?'<div style="font-size:15px;opacity:.85">備註：'+esc(r.note)+'</div>':'')+
+    '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+((r.url||r.link)?'<a class="btn" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">🔗 訂位連結</a>':'')+'</div></div></div>';
   return '<div class="card"><div class="rv-h"><h3>✅ 所有預約餐廳</h3><span class="tg ok" style="margin:0">已預約 '+done.length+' 間</span></div>'+
-   (done.length?done.map(doneRow).join(""):'<p style="padding:10px 0 2px">目前還沒有已預約的餐廳。下面打勾完成的餐廳會自動出現在這裡。</p>')+'</div>'+
+   (done.length?done.map(doneRow).join(""):'<p style="padding:10px 0 2px">目前還沒有已預約的餐廳。下方打勾完成的餐廳會自動出現在這裡。</p>')+'</div>'+
+   resSchedHTML()+
    '<div class="card"><div class="rv-h"><h3>📝 規劃要預約的餐廳</h3><span class="tg tbc" style="margin:0">待預約 '+plan.length+' 間</span></div>'+
    '<p style="font-size:15px;margin:2px 0 4px">填好預約資訊、訂位完成後打勾，就會移到上面的「所有預約餐廳」。填了日期，該日餐廳分頁也會顯示。</p>'+
    (plan.length?plan.map(resCard).join(""):'<p style="padding:10px 0">目前沒有待預約項目，可從下方新增。</p>')+
    '<form class="rv-add" data-res-add="1"><b>新增要預約的餐廳</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:6px"><label style="grid-column:1/-1;font-size:15px">餐廳名稱<input type="text" name="n" maxlength="40" required style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label>'+
-   '<label style="font-size:15px">日期<input type="date" name="d" min="2027-02-02" max="2027-02-07" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label><label style="font-size:15px">時間<input type="time" name="t" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label></div>'+
+   '<label style="font-size:15px">日期<input type="date" name="d" min="2027-02-02" max="2027-02-07" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label><label style="font-size:15px">時間<input type="time" name="t" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label>'+
+   '<label style="grid-column:1/-1;font-size:15px">開放訂位（選填）<input type="text" name="o" maxlength="40" placeholder="例：1 個月前開放" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px"></label>'+
+   '<label style="grid-column:1/-1;font-size:15px">訂位連結（選填）<input type="url" name="u" maxlength="300" placeholder="貼上訂位網址" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px" ></label></div>'+
    '<div class="acts"><button class="btn fill" type="submit">＋ 新增</button></div></form></div>';
 }
 function optHTML(o,j){
@@ -1028,7 +1049,7 @@ function foodHTML(){
    DAYS.map(d=>'<button class="dbtn'+(n===d.n?' on':'')+'" data-fday="'+d.n+'"><b>'+d.date+'</b><span>'+d.wd+'・D'+d.n+'</span></button>').join("")+'</div>';
   if(n===0)return h+'<div class="dayhead"><h2>所有預約餐廳</h2></div>'+resAllHTML()+backBtn();
   const D=DAYS[n-1];
-  const rl=resList().filter(r=>dayOfDate(r.date)===n);
+  const rl=resList().filter(r=>dayOfDate(r.date)===n).sort((a,b)=>(a.time||"99:99")<(b.time||"99:99")?-1:(a.time||"99:99")>(b.time||"99:99")?1:0);
   h+='<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）餐廳</h2></div>'+
    '<div class="info"><p>推薦餐廳、餐點與人均皆為「範例」估算，營業日與價位請出發前以地圖或店家為準。</p></div>';
   if(rl.length)h+='<div class="card"><b>📌 當天預約</b>'+rl.map(r=>'<p style="margin:4px 0 0">'+esc(r.name)+(r.time?'｜'+esc(r.time):'')+(r.done?'｜✅ 已訂位':'｜尚未訂位')+(r.no?'｜'+esc(r.no):'')+'</p>').join("")+'</div>';
@@ -1080,7 +1101,7 @@ document.addEventListener("input",e=>{const t=e.target;if(t.dataset.field){S.fie
   if(t.dataset.resF){const a=t.dataset.resF.split(":");setRes(a[0],a[1],t.value)}});
 document.addEventListener("submit",e=>{
   const rf=e.target.closest("form[data-res-add]");
-  if(rf){e.preventDefault();const n=rf.elements.n.value.trim();if(!n)return;S.resCustom.push({id:"x"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:n,date:rf.elements.d.value||"",time:rf.elements.t.value||"",no:"",note:""});save();render();return}
+  if(rf){e.preventDefault();const n=rf.elements.n.value.trim();if(!n)return;S.resCustom.push({id:"x"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:n,date:rf.elements.d.value||"",time:rf.elements.t.value||"",url:rf.elements.u.value.trim(),open:rf.elements.o.value.trim(),no:"",note:""});save();render();return}
   const f=e.target.closest("form[data-ck-add]");if(!f)return;e.preventDefault();
   const cat=f.dataset.ckAdd,inp=f.querySelector("input"),v=inp.value.trim();if(!v)return;
   (S.ck.custom[cat]=S.ck.custom[cat]||[]).push({id:"c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),text:v});
