@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -84,6 +88,8 @@ button,input,textarea{font:inherit;color:inherit}
 .tg.mid{background:var(--snow);color:var(--kyo)}
 .tg.pri{background:var(--kyo);color:#fff}
 .tg.ok{background:var(--matcha);color:#fff}
+.tg.award{background:#f4ead2;color:#684b18;border:1px solid #d9c18e}
+.scoreline{font-size:13px;color:var(--muted);margin:3px 0 7px;line-height:1.55}
 
 /* ===== Section title ===== */
 .stitle{font-size:20px;font-weight:700;margin:4px 2px 10px}
@@ -268,6 +274,34 @@ textarea{padding:10px 12px;min-height:90px}
 .resc .rg label{display:block;font-size:15px;font-weight:500}
 .resc .rg .full{grid-column:1/-1}
 .resc input,.resc textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 10px;min-height:46px;width:100%;font-size:16px;margin-top:2px}
+
+
+/* ===== 手機優先：餐廳選項與標籤 ===== */
+.opt-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opt-badges{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 6px}
+.opt-badges .tg{margin:0}
+.pick-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:23px;height:23px;border-radius:8px;background:#f5f0df;border:1px solid #d9c995;color:#8a7137;vertical-align:middle}
+.pick-icon svg{width:13px;height:13px;display:block;fill:currentColor}
+.pick-icon[aria-label]{cursor:help}
+.it .row{grid-template-columns:minmax(5.2em,auto) minmax(0,1fr)}
+@media(max-width:480px){
+ .wrap{padding:8px 10px calc(28px + env(safe-area-inset-bottom))}
+ .card,.it{padding:12px}
+ .it{border-radius:14px}
+ .it .top{gap:5px 0}
+ .it .time{font-size:16px}
+ .it h3{font-size:18px}
+ .row{grid-template-columns:5em minmax(0,1fr);gap:6px;font-size:15px;line-height:1.6}
+ .opt{margin-top:9px;padding-top:8px}
+ .opt-title{font-size:17px;line-height:1.4;gap:7px}
+ .pick-icon{width:22px;height:22px;border-radius:7px}
+ .scoreline{font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+ .tg{font-size:12px;padding:1px 7px;line-height:1.55;margin-left:3px;white-space:normal}
+ .opt-badges .tg{margin:0}
+ .days{gap:6px}
+ .dbtn{min-height:58px}
+ .navbtn{min-height:58px;font-size:16px}
+}
 
 /* ===== Motion ===== */
 .pop{animation:pop .45s cubic-bezier(.34,1.4,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
@@ -487,20 +521,20 @@ const DAYS=[
  info:["今天刻意排得鬆一點：晚一點出發，約 09:00 才出門，早餐後約 10:10 從 Smart Coffee 出發去下鴨神社；因為今晚會熬夜到凌晨，白天要留體力。撒豆實際時間公布後再微調。","本日行程跨午夜：火爐祭結束後（約 00:30）的活動仍歸屬 2/3。"],
  items:[
   TR("🚇🚶","地鐵烏丸線＋步行（或計程車）","飯店","Smart Coffee","約 20–25 分（09:00–09:25）","約 09:00 從飯店出發；Smart Coffee 在三條、寺町一帶，實際路線請用地圖確認",null,true),
-  {id:"d2h",k:"food",t:"約 09:25–10:10",tbc:true,n:"早餐｜Smart Coffee",d:"早餐在這裡吃，慢慢吃，吃完約 10:10 前往下鴨神社。營業時間請在地圖確認。",
-   rows:[["推薦餐點","雞蛋三明治 ¥750（開店必點）、鬆餅 ¥700、法式吐司 ¥700"],["人均","約 ¥700–1,500（依單點與飲料）"],["訂位","通常不用，現場排隊（待確認）"],["提醒","營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6"},
+  {id:"d2h",k:"food",t:"約 09:25–10:10",awardLabel:"Tabelog｜喫茶店百名店｜2026",n:"早餐｜Smart Coffee",d:"早餐在這裡吃，慢慢吃，吃完約 10:10 前往下鴨神社。營業時間 08:00–19:00，通常不接受預約，熱門時段可能排隊。",
+   rows:[["推薦餐點","雞蛋三明治 ¥750（開店必點）、鬆餅 ¥700、法式吐司 ¥700"],["人均","約 ¥700–1,500（依單點與飲料）"],["訂位","通常不用，現場排隊"],["營業時間","08:00–19:00；2 樓午餐 11:00–14:30（L.O.），喫茶部無休"],["提醒","價格為網路查到的參考價，以現場菜單為準"]],map:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6"},
   TR("🚌","市巴士 4 或 205 系統","Smart Coffee 周邊","下鴨神社前","約 30–40 分","約 10:10 從 Smart Coffee 周邊出發；請用地圖查當天班次。也可搭地鐵＋京阪到出町柳再步行約 15 分",null,true),
   {id:"d2a",k:"sight",t:"約 10:50–11:50",n:"下鴨神社・河合神社",stay:"約 1 小時",tbc:true,
    d:"下鴨神社是世界遺產、京都最古老的神社之一，位在原生林「糺の森」中，參道又長又安靜，冬天遊客不多。境內的河合神社是女性守護與美麗之神，可以買手鏡形繪馬，用自己的化妝品畫上臉許願變美。",
    rows:[["開放時間","約到 17:00，出發前請再確認"],["時間提醒","11:50 前離開往祇園，午餐隨意吃，13:00 到八坂神社"]],map:"下鴨神社"},
   TR("🚌🚃","市巴士或京阪本線＋步行","下鴨神社","祇園、四條河原町一帶","約 30–35 分（11:50–12:25）","實際路線請用地圖確認",null,true),
   {id:"d2l",k:"food",t:"約 12:25–12:55（彈性）",n:"午餐｜隨意吃，看到想吃的就吃",d:"早餐可能吃得很飽，午餐不刻意安排：路上看到想吃的就吃，不餓就買點小吃或甜點邊走邊吃。13:00 前到八坂神社卡位即可。想找店的話，下面三間在祇園一帶，可以參考（營業時間、菜單與價位請在地圖確認）。",
-   rows:[["推薦 1","京都和牛とんかつ 天のめし 祇園白川店（Kyoto Tonkatsu Ten no Meshi Gion Shirakawa）｜豬排；菜單與價位我沒查到，請看地圖"],["推薦 2","わだ福（Kyoto Gion Tonkatsu Wadafuku）｜豬排套餐（只供應套餐，全部是豬肉，用餐限 1.5 小時）"],["推薦 3","Gion Duck Noodles｜鴨そば ¥1,485、鴨つけ麺（莓果醬汁）¥1,650"],["人均","約 ¥1,500–3,000（依店家）"],["提醒","13:00 前到八坂神社；營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"天のめし 祇園白川店 京都"},
+   rows:[["推薦 1","京都和牛とんかつ 天のめし 祇園白川店（Kyoto Tonkatsu Ten no Meshi Gion Shirakawa）｜豬排；菜單與價位以店家最新公告為準"],["推薦 2","わだ福（Kyoto Gion Tonkatsu Wadafuku）｜豬排套餐（只供應套餐，全部是豬肉，用餐限 1.5 小時）"],["推薦 3","Gion Duck Noodles｜鴨そば、莓果風味鴨沾麵"],["人均","約 ¥1,500–3,000（依店家）"],["提醒","13:00 前到八坂神社；天のめし 12:00–23:00（料理 L.O. 22:00）；わだ福 11:00–20:00（L.O.）；Gion Duck Noodles 11:00–21:30（L.O. 21:00）；價格以現場菜單為準"]],map:"天のめし 祇園白川店 京都"},
   {id:"d2c",k:"sight",t:"13:00–15:00",must:true,tbc:true,n:"八坂神社 藝妓舞妓撒豆（先斗町、宮川町）",stay:"約 2 小時（含卡位等待）",
    d:"節分當天，八坂神社舞殿上由藝妓、舞妓獻舞並撒福豆，是京都節分最具代表性的場面。先斗町、宮川町等花街會輪流出演，人潮很多，建議提前卡位；兩場想看的話可以留在原地等。",
    rows:[["時間","13:00 開始；各花街出演時段每年不同，2027 年待官方公布，公布後再微調"],["想換口味","廬山寺「鬼法楽」、壬生寺「壬生狂言」也有節分活動，這次先不排，想去再看"]],map:"八坂神社 京都"},
   {id:"d2b",k:"food",t:"15:00–16:00",n:"咖啡廳｜祇園周邊",d:"撒豆結束後，在祇園周邊喝茶、吃甜點休息。節分當天人多，可能需要排隊。",
-   rows:[["推薦 1","祇園辻利 本店（茶寮）｜抹茶聖代、抹茶甜點"],["備案 1","Gion Coffee Nanafuku｜可頌三明治、拿鐵、可麗露（單點約 ¥200–500，2022 年價）"],["備案 2","here 京都清水｜餐點待補（清水寺一帶）"],["人均","約 ¥1,000–1,800"],["訂位","通常不用；節分人多，可能需要排隊"],["提醒","營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"祇園辻利 本店"},
+   rows:[["推薦 1","祇園辻利 本店（茶寮）｜抹茶聖代、抹茶甜點"],["備案 1","Gion Coffee Nanafuku｜可頌三明治、拿鐵、可麗露（單點約 ¥200–500，2022 年價）"],["備案 2","here Kyoto Kiyomizu｜招牌烘烤堅果摩卡、拿鐵、可麗露、清水店限定米粉歐姆蛋甜點"],["人均","約 ¥1,000–1,800"],["訂位","通常不用；節分人多，可能需要排隊"],["提醒","祇園辻利本店 10:30–21:00；茶寮都路里 10:30–20:30（L.O. 19:30）；Gion Coffee Nanafuku 07:30–18:30；here Kyoto Kiyomizu 08:30–18:00。價格以現場菜單為準"]],map:"祇園辻利 本店"},
   {id:"d2e",k:"misc",t:"16:00–18:00",n:"休息、咖啡",d:"回飯店休息或在河原町喝咖啡，補足晚上熬夜的體力。若想先買 2/4 集合前的麵包，可看 Amam Dacotan 京都。",map:HOTEL.maps},
   {id:"d2f",k:"food",t:"18:30–20:30",tbc:true,n:"晚餐｜京洛焼肉やぶ（河原町）",d:"節分當天餐廳人多，訂位建議 18:30，並說明 22:30 前要出發去吉田神社；吃完可回飯店休息、保暖，再出發。",
    rows:[["推薦餐點","元祖厚切蔥包牛舌、炙燒和牛タタキ、生ハラミ、特選和牛サガリ、蒜味牛舌、和牛夏多布里昂"],["人均","約 ¥4,000"],["訂位","需要；備註「22:30 前要出發」"],["營業","17:00–翌 2:00（L.O. 1:00），位在阪急河原町站步行約 2 分"]],map:"京洛焼肉やぶ"},
@@ -526,24 +560,24 @@ const DAYS=[
  items:[
   TR("🚶🚇🚶","步行＋地鐵烏丸線＋步行","飯店 → 五條站 → 京都站 → 八條口","","約 25 分（建議 09:05 前出發）","飯店步行約 4 分到五條站；烏丸線 1 站約 2 分；京都站到八條口步行約 10 分。也可搭計程車約 5–8 分",
      "實際集合時間與地點以導遊 Email 為準。"),
-  {id:"d3a",k:"misc",t:"09:30",n:"集合出發：京都駅八条口 貸切バス乗降場（EasyGo）",d:"Klook 一日遊集合點，請提前 10–15 分鐘到。",rows:[["附近推薦","fiveran coffee base 京都駅前｜麵包、咖啡（以當日供應為準）"],["附近推薦","Amam Dacotan 京都｜現炸甜甜圈 ¥264、冰拿鐵 ¥550（2025 年報導價；前一晚買也可以）"],["導遊資訊","前一日 18:00–20:00 以 Email 寄出"],["提醒","營業時間請在地圖確認"]],map:"京都駅 八条口"},
+  {id:"d3a",k:"misc",t:"09:30",n:"集合出發：京都駅八条口 貸切バス乗降場（EasyGo）",d:"Klook 一日遊集合點，請提前 10–15 分鐘到。",rows:[["附近推薦","fiveran coffee base 京都駅前｜麵包、咖啡（以當日供應為準）"],["附近推薦","Amam Dacotan 京都現炸甜甜圈 ¥264、冰拿鐵 ¥550（2025 年報導價；前一晚買也可以）"],["導遊資訊","前一日 18:00–20:00 以 Email 寄出"],["營業時間","fiveran coffee BASE 京都駅前 09:00–19:00（不定休）；amam dacotan 京都 08:00–19:00，麵包售完可能提早結束，咖啡區 L.O. 17:30"],["提醒","fiveran 距京都站八條口仍需步行，集合時間緊時建議前一晚先買"]],map:"京都駅 八条口"},
   TR("🚌","包車","京都","伊根","約 2.5 小時（依一日遊行程，含休息）","",null),
   {id:"d3b",k:"sight",t:"約 12:00–13:30",n:"伊根灣賞景・舟屋",stay:"約 1.5 小時",
    d:"伊根舟屋是一樓當船庫、二樓住家的海邊木造建築，約 230 戶沿灣排開。遊覽船環灣約 25 分鐘，海灣平靜，可餵海鷗。冬季強風浪大時船班可能停駛。",
-   rows:[["附近推薦","Seafood Kawasaki（伊根）｜海鮮（菜單待補）"],["提醒","午餐在天橋立，可先在伊根買點小吃墊肚子；營業時間請在地圖確認"]],map:"伊根湾めぐり遊覧船 日出桟橋"},
+   rows:[["附近推薦","川崎屋（伊根）｜農家自營食堂：自家米、當季蔬菜、伊根灣鮮魚與海鮮；10:30–15:00，人均約 ¥1,000–2,000（估算）"],["提醒","2/4 週四可營業；電話 090-2406-3355。午餐在天橋立，可先在伊根買點小吃墊肚子"]],map:"伊根湾めぐり遊覧船 日出桟橋"},
   TR("🚌","包車","伊根","天橋立","約 45 分（依一日遊行程）","",null),
   {id:"d3c",k:"sight",t:"14:15–16:05",n:"天橋立（纜車／單軌電車山麓站）",stay:"約 1 小時 50 分（含午餐）",
    d:"日本三景之一，約 3.6 公里的天然沙嘴橫跨宮津灣。搭纜車或單軌電車上傘松公園，可以彎腰從兩腿間倒看（股のぞき），橋像飛龍升天。",map:"天橋立 傘松公園"},
   {id:"d3d",k:"food",t:"約 14:15 起（含在上述時段）",n:"午餐｜天橋立",d:"今天午餐較晚，建議先在伊根買點小點心墊肚子。",
-   rows:[["推薦 1","海鮮工房 橋立物產 松葉蟹直賣｜螃蟹壽司、蟹飯（松葉蟹冬季視當日供應；店名官網寫「はしだて物産」）"],["推薦 2","天橋立山腳或車站附近 海鮮丼・定食｜海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應，現場選）"],["人均","約 ¥1,200–2,500"],["訂位","不需要，現場選"],["提醒","營業時間請在地圖確認；今天午餐較晚，先在伊根買點小吃墊肚子"]],map:"天橋立駅 周辺 食事"},
+   rows:[["推薦 1","海鮮工房 はしだて物産｜蟹飯／蟹壽司便當（當日供應為準；Tabelog 3.13；預算帶 ¥1,000–1,999）"],["推薦 2","天橋立山腳或車站附近 海鮮丼・定食｜海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應，現場選）"],["人均","約 ¥1,200–2,500"],["訂位","不需要，現場選"],["提醒","天橋立車站前海鮮工房 はしだて物産 11:00–15:00；其他海鮮丼店營業時間各異；今天午餐較晚，先在伊根買點小吃墊肚子"]],map:"天橋立駅 周辺 食事"},
   TR("🚌","包車","天橋立","美山","約 1.5 小時（依一日遊行程）","",null),
   {id:"d3e",k:"sight",t:"17:30–19:00",must:true,n:"美山茅草屋之里 冬灯廊",stay:"約 1.5 小時",
    d:"美山北集落約有 38–39 棟茅葺屋，是國家重要傳統建築群保存地區。冬灯廊 2027 年舉辦期間為 1/30–2/6，每天 17:00–19:00 點燈，路地行燈與 LED 灯籠把老村莊照得像童話世界。近年雪量不穩，不保證有積雪。",
    rows:[["小吃","村內有屋台，氣溫很低可買熱食取暖"],["停車","活動期間停車場為完全預約制，需事先預約付費（跟團行程依導遊安排）"],["穿著","防滑鞋＋厚外套＋暖暖包"]],map:"美山かやぶきの里"},
   TR("🚌","包車","美山","京都","約 1.5 小時（Klook 標示約 20:30 回到京都）","解散地點依導遊安排",null),
   TR("🚇🚶","地鐵或計程車","京都站","飯店 / 拉麵店","約 10–15 分","依拉麵店位置而定"),
-  {id:"d3f",k:"food",t:"20:45 起",n:"宵夜｜京都拉麵小路",d:"回到京都後吃碗熱呼呼的拉麵暖身。",
-   rows:[["推薦 1","京都拉麵小路（京都站大樓 10 樓）｜京都醬油、豚骨、雞白湯等，多家名店集中，依店家選"],["人均","約 ¥1,000–1,500"],["訂位","通常不需要"],["提醒","請找營業到 21:30 以後的店；可能在 22:00 前結束，要先確認"]],map:"京都駅 ラーメン"}
+  {id:"d3f",k:"food",t:"20:45 起",n:"宵夜｜京都拉麵小路",d:"回到京都後吃碗熱呼呼的拉麵暖身。京都站大樓 10 樓，官方目前列有 10 間店；以查詢到的 Tabelog 與 Google 評價參考後排序，2027 年出發前仍要確認店鋪是否更換。",
+   rows:[["館內推薦","富山ブラック 麺家いろは｜黑醬油拉麵；Tabelog 3.41＋Google 4.2","pick"],["第二選擇","祗園らぁ～めん京｜京都雞白湯；Tabelog 3.43＋Google 4.1"],["第三選擇","UNO RAMEN｜濃厚豆乳系拉麵；Tabelog 3.02＋Google 4.5"],["百名店提醒","目前官方列出的拉麵小路 10 間店，未查到 Tabelog 百名店入選店。若想改吃車站附近的百名店，可考慮「本家 第一旭 本店」（Tabelog 3.74、拉麵 WEST 百名店 2025，京都站步行約 5 分），但每週四公休，2/4 當天不能去；Gion Duck Noodles 也是 2025 百名店，但在祇園、不在小路內"],["人均／訂位","約 ¥1,000–1,500；不用訂位"],["營業","官方資訊 11:00–22:00，最後點餐 21:30；你約 20:45 抵達仍在營業時間內"]],map:"京都駅 ラーメン"}
  ],
  rain:null
 },
@@ -554,13 +588,13 @@ const DAYS=[
   {id:"d4f",k:"food",t:"09:00–10:00",n:"早餐｜いとおかし（京都 いとおかし）",d:"築 150 年的老町家，炭火烤極厚銀鮭配土鍋飯。需用 TableCheck 預約，用餐約 50 分鐘。可刷信用卡，不收電子錢包。",
    rows:[["推薦餐點","極厚銀鮭定食 ¥2,500（招牌）、銀鮭定食 京都燒 ¥2,500、刺身定食約 ¥3,000 起"],["人均","約 ¥2,500–3,000"],["訂位","1 個月前整月開放（每月 1 日公布，約 2027/1/1）；9:00 時段是否開放以 TableCheck 為準（待確認）"],["營業","7:00–11:45；可刷信用卡，不收電子錢包"]],map:"京都 いとおかし"},
   TR("🚶🚇🚌","步行＋地鐵烏丸線＋巴士","飯店 → 五條站 → 北大路 → 今宮神社前","","全程約 40 分","飯店步行約 4 分到五條站；烏丸線到北大路約 12 分；再轉巴士到「今宮神社前」"),
-  {id:"d4a",k:"sight",t:"10:45–12:15",n:"紫野・今宮神社周邊",stay:"約 1.5 小時",tbc:true,
+  {id:"d4a",k:"sight",t:"10:45–12:15",n:"紫野・今宮神社周邊",stay:"約 1.5 小時",
    d:"今宮神社以炙餅（あぶり餅）聞名，參道兩側有兩家老店對望：竹籤串小麻糬烤過後淋白味噌醬，一人份約 ¥600。旁邊的大德寺一帶安靜、遊客少。",
-   rows:[["注意","兩家炙餅老店 2/3（週三）都公休，所以改排週五；兩家 2/5 是否營業與營業時間，出發前請再確認（待確認）"]],map:"今宮神社 京都"},
+   rows:[["注意","兩家炙餅老店 2/3（週三）都公休，所以改排週五；一和、かざりや皆為 10:00–17:00，週三休；2/5（週五）正常營業"]],map:"今宮神社 京都"},
   {id:"d4g",k:"food",t:"約 12:15 起",n:"咖啡廳｜大德寺之後",d:"午餐不排，路上看到想吃的隨便吃；早餐吃很飽，要消化一下，晚餐才吃得下壽喜燒。想休息的話有一個推薦和兩間備案。",
-   rows:[["推薦 1","今宮神社 炙餅（あぶり餅）｜竹籤小麻糬淋白味噌，約 ¥600（兩家老店對望）"],["備案 1","Sarasa Nishijin（さらさ西陣）｜焦糖起司蛋糕套餐 ¥950，離大德寺約 1 公里"],["備案 2","Francois 喫茶店（フランソア喫茶室）｜蛋糕套餐（檸檬塔加咖啡約 ¥1,350–1,450），在河原町，回市區時再去"],["人均","約 ¥600–1,500"],["訂位","不需要，現場選"],["提醒","午餐不排，早餐吃很飽，先消化；營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A"},
+   rows:[["推薦 1","今宮神社 炙餅（あぶり餅）｜竹籤小麻糬淋白味噌，約 ¥600（兩家老店對望）"],["備案 1","Sarasa Nishijin（さらさ西陣）｜焦糖起司蛋糕套餐 ¥950，離大德寺約 1 公里"],["備案 2","Francois 喫茶店（フランソア喫茶室）｜經典起司蛋糕、咖啡，在河原町，回市區時再去"],["人均","約 ¥600–1,500"],["訂位","不需要，現場選"],["提醒","午餐不排，早餐吃很飽，先消化；一和、かざりや 10:00–17:00（週三休）；Sarasa Nishijin 週五 11:30–22:00（L.O. 21:00）；Francois 11:00–22:00（餐點 L.O. 20:00、飲料甜點 L.O. 21:30）；價格以現場菜單為準"]],map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A"},
   {id:"d4c",k:"misc",t:"14:00–17:00",n:"自由活動",d:"想逛的地方由大家決定（待確認）。",tbc:true},
-  {id:"d4d",k:"food",t:"18:30–20:30",n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯，訂位 18:30。套餐用餐限 120 分鐘，離烏丸站（阪急）步行約 1 分。",
+  {id:"d4d",k:"food",t:"18:30–20:30",awardLabel:"Tabelog｜壽喜燒・涮涮鍋百名店｜2026",n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯，訂位 18:30。套餐用餐限 120 分鐘，離烏丸站（阪急）步行約 1 分。",
    rows:[["推薦餐點","和牛『並』コース ¥8,800；和牛・神戸牛『上』コース ¥13,200（皆 6 道，含稅與服務費）"],["人均","約 ¥8,800–13,200（5 人約 ¥44,000–66,000）"],["訂位","5 人；1 個月前開放（約 2027/1/5），連結見「餐廳 → 預約」"],["營業","11:00–23:00；電話 075-212-0500"]],map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"},
   {id:"d4e",k:"misc",t:"提醒",n:"明天 9:00 出發",d:"明天要去勝尾寺，路途遠、巴士班次少，今晚早點休息。"}
  ],
@@ -584,15 +618,15 @@ const DAYS=[
   TR("🚇🚶","北大阪急行・御堂筋線直通＋步行","箕面萱野 → 大國町 → 難波八阪神社","","約 50 分（14:40–15:30）","14:30 用餐結束，步行約 5 分到站；箕面萱野到大國町地鐵直達約 40 分；出站步行約 8 分","直通班次約每 10 分一班，14:40 前後上車即可。"),
   {id:"d5b",k:"sight",t:"15:30–16:10",n:"難波八阪神社",stay:"約 40 分",
    d:"以高約 12 公尺的巨大獅子頭「獅子殿」聞名，張大嘴像要吞掉災厄，象徵驅邪、祈求勝運與考運，剛好呼應白天的勝尾寺。",
-   rows:[["附近推薦","千代松勝蓋飯（店名ちよ松，千日前）｜特上 5cm 焼きかつ丼 ¥2,400、上 ¥1,750、並 ¥1,250"],["附近推薦","Takoman（たこ満）｜關東煮（菜單待補）"],["開放","境內 6:00–17:00，授與所（御守、朱印）9:00–16:50，免費參拜"],["提醒","營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"難波八阪神社"},
+   rows:[["附近推薦","大阪とんかつ 道頓堀本店（舊名 ちよ松）｜5cm 厚切豬排丼；特上約 ¥2,500、一般份約 ¥1,350"],["附近推薦","Takoman（たこ萬）｜關東煮：蘿蔔、蒟蒻、豆腐、魚板、牛筋等；單品約 ¥160 起，依當日菜單"],["開放","境內 6:00–17:00，授與所（御守、朱印）9:00–16:50，免費參拜"],["提醒","道頓堀本店 11:00–21:30；Takoman 約 19:00–翌 1:30（週日休），兩家均以當日營業公告為準"]],map:"難波八阪神社"},
   TR("🚶🚇🚶","步行＋御堂筋線＋步行","難波八阪神社 → 大國町 → 梅田 → 中崎町","","約 40 分（16:10–16:50）","步行約 8 分到大國町；御堂筋線到梅田約 12 分；再步行約 10 分到中崎町，含候車緩衝","中崎町小店多在 18:00 前後收，先逛店、咖啡廳放後面。"),
   {id:"d5c",k:"sight",t:"16:50–18:10",n:"中崎町",stay:"約 1 小時 20 分",tbc:true,
    d:"位在梅田北邊的老街區，沒被戰火波及，保留許多昭和老房子，現在是小咖啡廳、雜貨店與古著店，巷弄很有生活感，是大阪文青聚集地。",
-   rows:[["附近推薦","Kagawa（讃岐烏龍麵，北新地）｜咖哩烏龍麵 ¥1,300、肉烏龍麵 ¥1,500"],["提醒","冬季小店可能提早收，營業時間待確認"]],map:"中崎町"},
+   rows:[["附近推薦","Kagawa（讃岐烏龍麵，北新地）｜咖哩烏龍麵 ¥1,300、肉烏龍麵 ¥1,500"],["提醒","Kagawa（香川）週六 18:00–翌 02:00；週一至五 18:00–翌 03:00，週日及國定假日休"]],map:"中崎町"},
   {id:"d5d",k:"food",t:"約 17:00 起",n:"咖啡廳｜中崎町",d:"午餐在箕面吃，下午逛中崎町時找間咖啡廳休息。",
-   rows:[["推薦 1","neel nakazakicho｜厚切炸豬排三明治 ¥1,480（份量大，可兩人分）、可麗餅 ¥610、抹茶拿鐵 ¥760"],["推薦 2","OSA COFFEE｜草莓冰布丁 ¥950、抹茶濃縮拿鐵 ¥780、柳橙乳酪蛋糕 ¥600"],["人均","約 ¥1,000–2,500"],["訂位","不需要，現場選（待確認）"],["提醒","營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"https://maps.app.goo.gl/ybtxvtYnD3NUUSeG6"},
+   rows:[["推薦 1","neel nakazakicho｜厚切炸豬排三明治 ¥1,480（份量大，可兩人分）、可麗餅 ¥610、抹茶拿鐵 ¥760"],["推薦 2","OSA COFFEE｜布丁 ¥550、咖啡拿鐵 ¥650、抹茶拿鐵 ¥730；招牌布丁加冰淇淋約 ¥670"],["人均","約 ¥1,000–2,500"],["訂位","不需要，現場選"],["提醒","neel nakazakicho 10:00–20:30；OSA COFFEE 10:00–18:00；價格以現場菜單為準"]],map:"https://maps.app.goo.gl/ybtxvtYnD3NUUSeG6"},
   {id:"d5e",k:"food",t:"18:00 後",tbc:true,n:"晚餐｜梅田或難波周邊",d:"週六晚上人多，確定地點後再訂位（農曆新年期間觀光客也多）。",
-   rows:[["推薦 1","千代松勝蓋飯（ちよ松）｜特上 5cm 焼きかつ丼 ¥2,400、上 ¥1,750、並 ¥1,250；味噌湯可加點蔬菜湯 ¥150"],["推薦 2","串カツ だるま（難波）｜串炸 ¥143 起、どて焼き ¥440；醬料共用不可二次沾"],["推薦 3","千房 お好み焼き（梅田）｜道頓堀焼、とんぺい焼、國產牛沙朗牛排"],["人均","約 ¥2,000–3,500"],["訂位","建議訂位或提早到"],["提醒","營業時間請在地圖確認；價格為網路查到的參考價，以現場菜單為準"]],map:"梅田駅"},
+   rows:[["推薦 1","大阪とんかつ 道頓堀本店（舊名 ちよ松）｜5cm 厚切豬排丼；特上約 ¥2,500、一般份約 ¥1,350"],["推薦 2","元祖串かつ だるま 法善寺店｜串炸約 ¥130–143 起、どて焼き約 ¥400；醬料不可二次沾"],["推薦 3","千房 ハービスPLAZA梅田支店｜招牌道頓堀燒、豚平燒、鐵板料理"],["人均","約 ¥2,000–3,500"],["訂位","建議訂位或提早到"],["提醒","道頓堀本店 11:00–21:30（售完可能提早打烊）；だるま法善寺店週六 10:30–22:30（L.O. 22:00）；千房ハービスPLAZA梅田支店週六 11:00–22:00（L.O. 21:00）；價格以現場菜單為準"]],map:"梅田駅"},
   TR("🚃🚶","阪急京都線特急＋步行","阪急梅田","阪急烏丸 → 飯店","特急約 45 分","烏丸站步行約 7 分回飯店；回去整理行李（明天 6:30 起床）")
  ],
  rain:{
@@ -689,43 +723,43 @@ const MEALS={
 ],
 2:[
   {slot:"早餐",time:"約 09:25–10:10",st:"sug",note:"慢慢吃，吃完約 10:10 前往下鴨神社。",opts:[
-  {n:"Smart Coffee",area:"三條、寺町一帶（依地圖座標）",kind:"喫茶店、早餐",dishes:"雞蛋三明治 ¥750（必點）、鬆餅 ¥700、法式吐司 ¥700",pp:"約 ¥700–1,500",map:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6",note:"推薦｜營業時間請在地圖確認"}]},
+  {n:"Smart Coffee",award:"Tabelog｜喫茶店百名店｜2026",tabelog:"3.71",google:"4.2",avg:"3.96",area:"三條、寺町一帶（依地圖座標）",kind:"喫茶店、早餐",dishes:"雞蛋三明治 ¥750（必點）、鬆餅 ¥700、法式吐司 ¥700",pp:"約 ¥700–1,500",map:"https://maps.app.goo.gl/A1Hqvw9NG5EGdXGV6",note:"推薦｜08:00–19:00；2 樓午餐 11:00–14:30（L.O.），喫茶部無休"}]},
  {slot:"午餐",time:"約 12:25–12:55（彈性）",st:"sug",note:"不刻意安排：早餐可能吃很飽，路上看到想吃的就吃，13:00 前到八坂神社。下面是祇園一帶的推薦。",opts:[
-  {n:"京都和牛とんかつ 天のめし 祇園白川店",area:"祇園白川一帶（依地圖座標）",kind:"和牛豬排",dishes:"豬排（菜單與價位我沒查到，請看地圖）",pp:"待補",map:"天のめし 祇園白川店 京都",note:"推薦｜Kyoto Tonkatsu Ten no Meshi Gion Shirakawa；營業時間請在地圖確認"},
-  {n:"わだ福",area:"祇園一帶（依地圖座標）",kind:"豬排",dishes:"豬排套餐（只供應套餐，全部是豬肉，用餐限 1.5 小時）",pp:"約 ¥2,000–3,000",map:"わだ福 祇園 とんかつ",note:"推薦｜Kyoto Gion Tonkatsu Wadafuku；營業時間請在地圖確認"},
-  {n:"Gion Duck Noodles",area:"祇園一帶（依地圖座標）",kind:"鴨肉麵",dishes:"鴨そば ¥1,485、鴨つけ麺（莓果醬汁）¥1,650",pp:"約 ¥1,500–1,900",map:"Gion Duck Noodles 京都",note:"推薦｜營業時間請在地圖確認"}]},
+  {n:"京都和牛とんかつ 天のめし 祇園白川店",tabelog:"3.08",area:"祇園白川一帶（依地圖座標）",kind:"和牛豬排",dishes:"國產豬里肌／菲力豬排定食 ¥3,300、雙拼 ¥3,740；和牛里肌／赤身定食 ¥5,280（大份 ¥6,160）；午餐限定豬排丼 ¥2,970。定食附干貝炸物與鮭魚卵",pp:"約 ¥3,300–5,280",map:"天のめし 祇園白川店 京都",note:"推薦｜12:00–23:00（料理 L.O. 22:00）"},
+  {n:"わだ福",tabelog:"3.38",google:"4.7（2024 年資料）",avg:"4.04（舊資料參考）",area:"祇園一帶（依地圖座標）",kind:"豬排",dishes:"豬排套餐（只供應套餐，全部是豬肉，用餐限 1.5 小時）",pp:"約 ¥2,000–3,000",map:"わだ福 祇園 とんかつ",note:"推薦｜11:00–20:00（L.O.）；無固定店休日"},
+  {n:"Gion Duck Noodles",award:"Tabelog｜拉麵 WEST 百名店｜2025",tabelog:"3.68",google:"4.5",avg:"4.09",topPick:true,area:"祇園一帶（依地圖座標）",kind:"鴨肉麵",dishes:"鴨そば ¥1,485、鴨つけ麺（莓果醬汁）¥1,650",pp:"約 ¥1,500–1,900",map:"Gion Duck Noodles 京都",note:"推薦｜11:00–21:30（L.O. 21:00）；不接受預約"}]},
  {slot:"下午茶",time:"15:00–16:00",st:"sug",note:"兩場撒豆之間休息。",opts:[
-  {n:"Gion Coffee Nanafuku",area:"祇園一帶（依地圖座標）",kind:"咖啡廳",dishes:"可頌三明治、拿鐵、可麗露",pp:"單品約 ¥200–500（2022 年價）",map:"https://maps.app.goo.gl/RzJD6CaKtfXrW8h7A",note:"備案｜營業時間請在地圖確認"},
-  {n:"here 京都清水",area:"清水寺一帶（依地圖座標）",kind:"咖啡廳",dishes:"以店家菜單為準",pp:"待補",map:"https://maps.app.goo.gl/dsSCtdfBYTzJR2hF9",note:"備案｜營業時間請在地圖確認"},
-  {n:"祇園辻利 本店（茶寮）",area:"祇園四條站附近",kind:"抹茶甜點",dishes:"抹茶聖代、抹茶甜點",pp:"約 ¥1,000–1,800",map:"祇園辻利 本店",note:"推薦｜節分當天人多，可能排隊"}]},
+  {n:"Gion Coffee Nanafuku",area:"祇園一帶（依地圖座標）",kind:"咖啡廳",dishes:"可頌三明治、拿鐵、可麗露",pp:"單品約 ¥200–500（2022 年價）",map:"https://maps.app.goo.gl/RzJD6CaKtfXrW8h7A",note:"備案｜07:30–18:30"},
+  {n:"here 京都清水",google:"3.5（Google 評論數僅 2 則）",area:"清水寺一帶（依地圖座標）",kind:"咖啡廳",dishes:"烘烤堅果摩卡、拿鐵、咖啡、可麗露；清水店限定米粉歐姆蛋甜點（抹茶口味）",pp:"約 ¥1,000–2,000（Tabelog 預算帶）",map:"https://maps.app.goo.gl/dsSCtdfBYTzJR2hF9",note:"備案｜11:30–22:00（L.O. 21:00；週五），週三休"},
+  {n:"祇園辻利 本店（茶寮）",award:"Tabelog｜甜點 WEST 百名店｜2018・2019",tabelog:"3.54",area:"祇園四條站附近",kind:"抹茶甜點",dishes:"抹茶聖代、抹茶甜點",pp:"約 ¥1,000–1,800",map:"祇園辻利 本店",note:"推薦｜祇園辻利 10:30–21:00；茶寮都路里 10:30–20:30（L.O. 19:30）；節分當天人多，可能排隊"}]},
  {slot:"晚餐",time:"18:30–20:30",st:"todo",note:"22:30 前要出發去吉田神社，訂位時先說明。",opts:[
   {n:"京洛焼肉やぶ（河原町）",resId:"r2",area:"阪急河原町站步行約 2 分（木屋町・先斗町一帶）",kind:"日式燒肉",dishes:"元祖厚切蔥包牛舌、炙燒和牛タタキ、生ハラミ、特選和牛サガリ、蒜味牛舌、和牛夏多布里昂",pp:"約 ¥4,000",map:"京洛焼肉やぶ",note:"營業 17:00–翌 2:00（L.O. 1:00）；22:30 前要出發去吉田神社"}]}
 ],
 3:[
  {slot:"早餐",time:"09:05 前",st:"sug",note:"09:30 在京都駅八条口集合，簡單吃。",opts:[
-  {n:"fiveran coffee base 京都駅前",area:"京都站前，離八條口集合點不遠",kind:"麵包、咖啡",dishes:"麵包、咖啡（以店家當日供應為準）",pp:"約 ¥500–1,000",map:"https://maps.app.goo.gl/8qA3S5at7WwyJ4tx7",note:"推薦｜2/4 集合前順路買麵包，帶上車吃；營業時間請在地圖確認"},
-  {n:"Amam Dacotan 京都",area:"河原町・御池一帶（依地圖座標）",kind:"麵包店",dishes:"現炸甜甜圈 ¥264、冰拿鐵 ¥550（2025 年報導價）",pp:"約 ¥500–1,000",map:"https://maps.app.goo.gl/pvZry4Rniy3Tyuac8",note:"推薦｜前一晚（2/3）要先買也可以；隔夜麵包建議上車後早點吃；營業時間請在地圖確認"},
+  {n:"fiveran coffee base 京都駅前",area:"京都站前，離八條口集合點不遠",kind:"麵包、咖啡",dishes:"麵包、咖啡（以店家當日供應為準）",pp:"約 ¥500–1,000",map:"https://maps.app.goo.gl/8qA3S5at7WwyJ4tx7",note:"推薦｜09:00–19:00（不定休）；2/4 集合前時間較趕，建議前一晚先買"},
+  {n:"Amam Dacotan 京都",award:"Tabelog｜麵包 WEST 百名店｜2026",tabelog:"3.61",area:"河原町・御池一帶（依地圖座標）",kind:"麵包店",dishes:"現炸甜甜圈 ¥264、冰拿鐵 ¥550（2025 年報導價）",pp:"約 ¥500–1,000",map:"https://maps.app.goo.gl/pvZry4Rniy3Tyuac8",note:"推薦｜08:00–19:00（不定休）；麵包售完可能提早結束，咖啡區 L.O. 17:30；前一晚買也可以"},
   {n:"飯店附近便利商店，或京都站周邊",area:"烏丸五條／京都站",kind:"輕食",dishes:"飯糰、麵包、咖啡",pp:"約 ¥500–800",map:"コンビニ 烏丸五条"}]},
  {slot:"點心",time:"約 12:00–13:30（伊根）",st:"sug",note:"午餐在天橋立，建議先在伊根買點小吃墊肚子。",opts:[
-  {n:"Seafood Kawasaki（伊根）",area:"伊根灣一帶（依地圖座標）",kind:"海鮮",dishes:"海鮮（以店家當日供應為準）",pp:"待補",map:"https://maps.app.goo.gl/pgoh4nd4dXah4f4H9",note:"推薦｜在伊根停留時想吃東西；營業時間請在地圖確認"},
+  {n:"川崎屋（伊根）",area:"伊根灣一帶（依地圖座標）",kind:"海鮮",dishes:"伊根灣當季鮮魚、海鮮與當季蔬菜，搭配自家栽種米飯；農家自營食堂",pp:"約 ¥1,000–2,000（估算；店家未公開固定價）",map:"https://maps.app.goo.gl/pgoh4nd4dXah4f4H9",note:"正式店名為「川崎屋」；10:30–15:00，週二、週三、週六、週日休（2/4 週四可營業）；電話 090-2406-3355。當日菜色與價格請現場確認"},
   {n:"伊根灣 港邊小店",area:"伊根灣、舟屋周邊",kind:"海鮮小吃",dishes:"伊根鰤魚（冬季名產，視當日供應）、海鮮串燒",pp:"約 ¥500–1,500",map:"伊根 舟屋の里公園 周辺 グルメ"}]},
  {slot:"午餐",time:"14:15–16:05（天橋立）",st:"sug",note:"Klook 行程在這段含午餐時間，時間較晚。",opts:[
-  {n:"海鮮工房 橋立物產 松葉蟹直賣",area:"天橋立一帶（依地圖座標）",kind:"海鮮、螃蟹",dishes:"螃蟹壽司、蟹飯、松葉蟹（冬季視當日供應）",pp:"待補",map:"https://maps.app.goo.gl/n2yNU8QriNN3ZzgN9",note:"推薦｜官網店名寫「はしだて物産」；營業時間請在地圖確認"},
-  {n:"天橋立 海鮮丼・定食",area:"天橋立山腳或車站附近，現場選",kind:"海鮮丼、定食",dishes:"海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應）",pp:"約 ¥1,500–3,000",map:"天橋立駅 周辺 海鮮 ランチ",note:"營業時間請確認"}]},
+  {n:"海鮮工房 橋立物產 松葉蟹直賣",area:"天橋立一帶（依地圖座標）",kind:"海鮮、螃蟹",dishes:"蟹飯／蟹壽司便當；冬季松葉蟹與當日魚貨依供應為準",pp:"約 ¥1,000–2,000（Tabelog 預算帶）",map:"https://maps.app.goo.gl/n2yNU8QriNN3ZzgN9",note:"正式店名「海鮮工房 はしだて物産」；11:00–15:00，電話 0772-22-7736。2/4 約 14:15 才到，接近打烊，請先確認當日供應並考慮外帶"},
+  {n:"天橋立 海鮮丼・定食",area:"天橋立山腳或車站附近，現場選",kind:"海鮮丼、定食",dishes:"海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應）",pp:"約 ¥1,500–3,000",map:"天橋立駅 周辺 海鮮 ランチ",note:"海鮮工房 はしだて物産 11:00–15:00；其他海鮮丼店各自營業時間不同，依現場公告為準"}]},
  {slot:"點心",time:"17:30–19:00（美山）",st:"sug",opts:[
   {n:"美山 冬灯廊 村內屋台",area:"美山茅草屋之里村內",kind:"期間限定小吃攤",dishes:"熱食、熱飲（視當天出攤）",pp:"約 ¥500–1,000",map:"美山かやぶきの里",note:"氣溫很低，可買熱食取暖"}]},
  {slot:"宵夜",time:"20:45 起",st:"sug",note:"回到京都約 20:30，之後找營業到較晚的店。",opts:[
-  {n:"京都拉麵小路",area:"京都車站大樓 10 樓",kind:"拉麵（多家名店集中）",dishes:"京都醬油、豚骨、雞白湯等，依店家",pp:"約 ¥1,000–1,500",map:"京都ラーメン小路",note:"營業時間與最後點餐請確認（可能在 22:00 前結束）"}]}
+  {n:"京都拉麵小路",area:"京都車站大樓 10 樓",kind:"拉麵（多家名店集中）",dishes:"館內首選麺家いろは（富山黑醬油）；其他可選祗園らぁ～めん京（雞白湯）、UNO RAMEN（豆乳系）。小路內現有 10 店，口味含札幌味噌、山形雲吞、富山黑醬油、京都雞白湯／雞魚介、豆乳、德島豚骨醬油、博多豚骨等",pp:"約 ¥1,000–1,500",map:"京都ラーメン小路",note:"官方目前營業 11:00–22:00（L.O. 21:30），不接受訂位。現有 10 店未查到 Tabelog 百名店入選店。車站附近百名店「本家 第一旭 本店」Tabelog 3.74、拉麵 WEST 百名店 2025，但每週四公休，2/4 不能去；Gion Duck Noodles 也是 2025 百名店，但在祇園、不在小路內"}]}
 ],
 4:[
  {slot:"早餐",time:"09:00–10:00",st:"todo",note:"訂位 9:00，用餐約 50 分鐘，吃完 10:00 出發去今宮神社。",opts:[
   {n:"いとおかし（日式早餐）",resId:"r4",area:"高辻通油小路東入，離飯店步行約 15 分（待確認）",kind:"日式早餐、老町家",dishes:"極厚銀鮭定食 ¥2,500（招牌）、銀鮭定食 京都燒 ¥2,500、刺身定食約 ¥3,000 起",pp:"約 ¥2,500–3,000",map:"京都 いとおかし",note:"營業 7:00–11:45；可刷信用卡，不收電子錢包；僅 TableCheck 線上預約"}]},
   {slot:"咖啡（備案）",time:"約 12:15 起",st:"sug",note:"午餐不排，路上看到想吃的隨便吃；早餐吃很飽，留肚子給晚餐。",opts:[
-  {n:"今宮神社 炙餅（點心）",area:"今宮神社東參道，兩家老店對望",kind:"和菓子",dishes:"炙餅（あぶり餅，竹籤小麻糬淋白味噌）",pp:"約 ¥600",map:"今宮神社 あぶり餅",note:"推薦｜兩家 2/5 是否營業請出發前確認"},
-  {n:"Sarasa Nishijin（さらさ西陣）",area:"西陣，離大德寺約 1 公里（依地圖座標）",kind:"咖啡廳",dishes:"焦糖起司蛋糕套餐 ¥950",pp:"約 ¥950–1,500",map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A",note:"備案｜營業時間請在地圖確認"},
-  {n:"Francois 喫茶店",area:"河原町、祇園四條一帶，離大德寺約 5 公里",kind:"喫茶店",dishes:"蛋糕套餐（檸檬塔加咖啡約 ¥1,350–1,450）",pp:"約 ¥1,350–1,500",map:"https://maps.app.goo.gl/8ePiMdLLEb8P8d486",note:"備案｜回市區時再去；營業時間請在地圖確認"}]},
+  {n:"今宮神社 炙餅（點心）",area:"今宮神社東參道，兩家老店對望",kind:"和菓子",dishes:"炙餅（あぶり餅，竹籤小麻糬淋白味噌）",pp:"約 ¥600",map:"今宮神社 あぶり餅",note:"一和、かざりや皆為 10:00–17:00，週三休；2/5（週五）正常營業"},
+  {n:"Sarasa Nishijin（さらさ西陣）",google:"4.0",area:"西陣，離大德寺約 1 公里（依地圖座標）",kind:"咖啡廳",dishes:"焦糖起司蛋糕套餐 ¥950",pp:"約 ¥950–1,500",map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A",note:"備案｜08:30–18:00"},
+  {n:"Francois 喫茶店",award:"Tabelog｜喫茶店百名店｜2026",tabelog:"3.73",area:"河原町、祇園四條一帶，離大德寺約 5 公里",kind:"喫茶店",dishes:"蛋糕套餐（檸檬塔加咖啡約 ¥1,350–1,450）",pp:"約 ¥1,350–1,500",map:"https://maps.app.goo.gl/8ePiMdLLEb8P8d486",note:"備案｜11:00–22:00（餐點 L.O. 20:00、飲料甜點 L.O. 21:30）；現金付款、不接受預約"}]},
  {slot:"晚餐",time:"18:30–20:30",st:"todo",note:"除夕年夜飯，5 人，訂位 18:30；套餐用餐限 120 分鐘。",opts:[
-  {n:"和牛 壽喜燒 京都五天五 烏丸",resId:"r1",area:"四條烏丸一帶，阪急烏丸站步行約 1 分",kind:"和牛壽喜燒",dishes:"和牛『並』コース ¥8,800、和牛・神戸牛『上』コース ¥13,200（6 道）；更高等級有『特上』¥22,000、『極上』¥33,000",pp:"約 ¥8,800–13,200（5 人約 ¥44,000–66,000）",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"電話 075-212-0500；營業 11:00–23:00"}]}
+  {n:"和牛 壽喜燒 京都五天五 烏丸",award:"Tabelog｜壽喜燒・涮涮鍋百名店｜2026",tabelog:"3.53",resId:"r1",area:"四條烏丸一帶，阪急烏丸站步行約 1 分",kind:"和牛壽喜燒",dishes:"和牛『並』コース ¥8,800、和牛・神戸牛『上』コース ¥13,200（6 道）；更高等級有『特上』¥22,000、『極上』¥33,000",pp:"約 ¥8,800–13,200（5 人約 ¥44,000–66,000）",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"電話 075-212-0500；營業 11:00–23:00"}]}
 ],
 5:[
  {slot:"早餐",time:"09:00 前",st:"sug",note:"09:00 出發去勝尾寺，簡單吃。",opts:[
@@ -733,15 +767,15 @@ const MEALS={
    {slot:"午餐",time:"13:30–14:30",st:"todo",note:"勝尾寺 13:00 搭巴士，約 13:25 到箕面萱野，步行約 5 分到餐廳；座位限 1 小時。",opts:[
   {n:"Jyuunimatsu Rokuzaemon（十二松六左衛門）",resId:"r5",area:"箕面キューズモール旁（箕面市西宿），離箕面萱野站步行約 5 分",kind:"牛肉燒烤涮涮鍋",dishes:"人氣滿足ランチ（前菜加牛肉飯 肉重）、焼きしゃぶセット",pp:"午餐約 ¥1,500",map:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9",note:"午餐 11:30–15:00（L.O. 14:00）；午餐套餐需前一天前預約；電話 072-737-6274"}]},
  {slot:"咖啡廳",time:"約 17:00 起（中崎町）",st:"sug",note:"逛中崎町時找一間休息。",opts:[
-  {n:"neel nakazakicho",area:"中崎町",kind:"咖啡廳",dishes:"厚切炸豬排三明治 ¥1,480（可兩人分）、可麗餅 ¥610、抹茶拿鐵 ¥760",pp:"約 ¥1,000–2,500",map:"https://maps.app.goo.gl/ybtxvtYnD3NUUSeG6",note:"推薦｜營業時間請在地圖確認"},
-  {n:"OSA COFFEE",area:"中崎町",kind:"咖啡廳",dishes:"草莓冰布丁 ¥950、抹茶濃縮拿鐵 ¥780、柳橙乳酪蛋糕 ¥600",pp:"約 ¥1,000–2,000",map:"https://maps.app.goo.gl/fVycfsVbiosWrpB27",note:"推薦｜營業時間請在地圖確認"}]},
+  {n:"neel nakazakicho",google:"4.3",area:"中崎町",kind:"咖啡廳",dishes:"厚切炸豬排三明治 ¥1,480（可兩人分）、可麗餅 ¥610、抹茶拿鐵 ¥760",pp:"約 ¥1,000–2,500",map:"https://maps.app.goo.gl/ybtxvtYnD3NUUSeG6",note:"推薦｜10:00–20:30"},
+  {n:"OSA COFFEE",tabelog:"3.45",google:"4.0（2024 年資料）",avg:"3.73（參考）",area:"中崎町",kind:"咖啡廳",dishes:"草莓冰布丁 ¥950、抹茶濃縮拿鐵 ¥780、柳橙乳酪蛋糕 ¥600",pp:"約 ¥1,000–2,000",map:"https://maps.app.goo.gl/fVycfsVbiosWrpB27",note:"推薦｜10:00–18:00"}]},
  {slot:"小吃",time:"順路（難波、梅田）",st:"sug",note:"大阪推薦小吃，逛到附近時順路吃。",opts:[
-  {n:"Takoman（たこ満）",area:"難波一帶（依地圖座標），離難波八阪神社約 2 km",kind:"關東煮",dishes:"關東煮（以店家菜單為準）",pp:"待補",map:"https://maps.app.goo.gl/sxdcxKuqiiykmLa27",note:"推薦｜營業時間請在地圖確認"},
-  {n:"Kagawa-udon Kitashinchi（讃岐烏龍麵）",area:"北新地、梅田一帶，離中崎町不遠",kind:"烏龍麵",dishes:"咖哩烏龍麵 ¥1,300、肉烏龍麵 ¥1,500",pp:"約 ¥1,000–2,000",map:"https://maps.app.goo.gl/MfHqgeaSRnS1wLk48",note:"推薦｜營業時間請在地圖確認"}]},
+  {n:"Takoman（たこ萬）",area:"難波一帶（依地圖座標），離難波八阪神社約 2 km",kind:"關東煮",dishes:"關東煮：蘿蔔、蒟蒻、豆腐、魚板、牛筋等；評論提及單品約 ¥160 起、盛合約 ¥1,470；章魚燒供應可能依時期變動",pp:"約 ¥500–1,500（依點餐）",map:"https://maps.app.goo.gl/sxdcxKuqiiykmLa27",note:"店名「たこ萬（Takoman）」；宗右衛門町；約 19:00–翌 1:30，週日休；電話 06-6211-1586。小店座位少，2/6 週六可作宵夜備案"},
+  {n:"Kagawa-udon Kitashinchi（讃岐烏龍麵）",area:"北新地、梅田一帶，離中崎町不遠",kind:"烏龍麵",dishes:"咖哩烏龍麵 ¥1,300、肉烏龍麵 ¥1,500",pp:"約 ¥1,000–2,000",map:"https://maps.app.goo.gl/MfHqgeaSRnS1wLk48",note:"推薦｜週六 18:00–翌 02:00；週日公休"}]},
  {slot:"晚餐",time:"18:00 後",st:"sug",note:"週六晚上又是農曆新年，人多，建議先決定店並訂位或提早到。",opts:[
-  {n:"千代松勝蓋飯（ちよ松）",area:"難波、日本橋一帶（依地圖座標）",kind:"勝蓋飯（豬排蓋飯）",dishes:"特上 5cm 焼きかつ丼 ¥2,400、上 ¥1,750、並 ¥1,250",pp:"約 ¥2,000–3,000",map:"https://maps.app.goo.gl/pAwYtBtLCstY7yLo8",note:"推薦｜店名實為「ちよ松」（千日前）；營業時間請在地圖確認"},
-  {n:"串カツ だるま（難波）",area:"難波一帶",kind:"大阪串炸",dishes:"串炸 ¥143 起、どて焼き ¥440（醬料共用不可二次沾）",pp:"約 ¥2,500–3,500",map:"串カツ だるま 難波",note:"推薦｜人多時需排隊；請確認各分店營業時間"},
-  {n:"千房 お好み焼き（梅田）",area:"梅田一帶",kind:"大阪燒",dishes:"道頓堀焼、とんぺい焼、國產牛沙朗牛排",pp:"約 ¥1,800（午餐約 ¥1,500）",map:"千房 梅田 お好み焼き",note:"推薦｜可先查是否可訂位"}]}
+  {n:"大阪とんかつ 道頓堀本店（舊名 ちよ松）",tabelog:"3.46",google:"3.9",avg:"3.68",area:"難波、日本橋一帶（依地圖座標）",kind:"勝蓋飯（豬排蓋飯）",dishes:"特上 5cm 焼きかつ丼 ¥2,400、上 ¥1,750、並 ¥1,250",pp:"約 ¥2,000–3,000",map:"https://maps.app.goo.gl/pAwYtBtLCstY7yLo8",note:"推薦｜11:00–21:30；豬肉售完可能提早打烊"},
+  {n:"元祖串かつ だるま 法善寺店",tabelog:"3.43",google:"4.0",avg:"3.72",topPick:true,area:"難波一帶",kind:"大阪串炸",dishes:"串炸 ¥143 起、どて焼き ¥440（醬料共用不可二次沾）",pp:"約 ¥2,500–3,500",map:"串カツ だるま 難波",note:"推薦｜週六 10:30–22:30（L.O. 22:00）；人多時需排隊"},
+  {n:"千房 ハービスPLAZA梅田支店",tabelog:"3.18",google:"4.1",avg:"3.64",area:"梅田一帶",kind:"大阪燒",dishes:"道頓堀焼、とんぺい焼、國產牛沙朗牛排",pp:"約 ¥1,800（午餐約 ¥1,500）",map:"千房 梅田 お好み焼き",note:"推薦｜週六 11:00–22:00（L.O. 21:00）；可訂位"}]}
 ],
 6:[
  {slot:"早餐",time:"06:30–07:00",st:"sug",note:"06:30 起床、07:00 前出發，快速解決。",opts:[
@@ -755,7 +789,7 @@ const MEALS={
 /* 伴手禮與購物（依行程排列） */
 const SHOP=[
  {k:"shopc",t:"2/2｜Rinku Premium Outlets（機場旁）",items:["服飾、鞋包、運動品牌、美妝（約 250 間店）","第一天就買，東西要陪你走完整趟：帶折疊行李袋或預留行李箱空間，2/3–2/6 還要逛京都、大阪","退稅：2026/11/1 起新制，先付含稅價，出境時於機場海關確認後退款，購買日起 90 日內出境；購物時帶護照，單據與商品收在同一袋","2/7 在 KIX 08:30–09:00 辦登機前，預留退稅確認的時間（細節以海關公告為準）"]},
- {k:"shopc",t:"2/3、2/5｜京都（祇園、河原町、飯店周邊）",items:["生八ッ橋、抹茶甜點與茶葉、京漬物、七味粉","2/3 在祇園（八坂神社、祇園辻利一帶）與河原町順路買；2/5 回飯店前後可再補","飯店旁約 90 公尺有和菓子老舖「末富」（營業時間與是否需預約待確認）","生菓子保存期限短，回台灣前先看標示再買；部分商家要滿額才能退稅，條件各店不同"]},
+ {k:"shopc",t:"2/3、2/5｜京都（祇園、河原町、飯店周邊）",items:["生八ッ橋、抹茶甜點與茶葉、京漬物、七味粉","2/3 在祇園（八坂神社、祇園辻利一帶）與河原町順路買；2/5 回飯店前後可再補","飯店旁約 90 公尺有和菓子老舖「末富」：09:00–17:00，週日及國定假日休；可先電話確認生菓子品項與預訂","生菓子保存期限短，回台灣前先看標示再買；部分商家要滿額才能退稅，條件各店不同"]},
  {k:"shopc",t:"2/6｜大阪（難波、梅田）：最後採買日",items:["2/7 要 06:30 起床直接去機場，沒時間買東西，伴手禮 2/6 晚餐前後買完","梅田、難波百貨地下街有大量伴手禮與熟食，週六晚上人多，建議早點逛","551 蓬萊等豬肉包、含豬肉的食品：不能帶回台灣（違規每人罰 20 萬元），建議現場吃完，伴手禮改買甜點、零食","大阪燒／章魚燒口味零食、點心類比較好帶；消耗品與一般物品的退稅分類在新制已廢除，但仍要在 90 日內攜帶出境"]},
  {k:"shopc",t:"2/7｜關西機場（出發當天）",items:["先處理退稅確認，再辦理登機，08:40 抵達後預留時間","出境後如果還有空檔，機場內可補買點心類伴手禮，品項比市區少","液體與保冷食品要放託運行李，注意重量"]}
 ];
@@ -969,8 +1003,9 @@ function wxHTML(D){
    '<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">'+IC.map+' 飯店地圖</a></div>':'')+
    '</div>';
 }
+const PICK_ICON='<span class="pick-icon" role="img" aria-label="推薦首選" title="推薦首選"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.75 5.58 6.16.9-4.46 4.35 1.05 6.14L12 16.87l-5.5 2.9 1.05-6.14L3.1 9.28l6.16-.9L12 2.8z"/></svg></span>';
 function tagsOf(it,extra){
-  return (it.must?'<span class="tg must">必去</span>':'')+(it.tbc?'<span class="tg tbc">待確認</span>':'')+(it.mid?'<span class="tg mid">跨午夜</span>':'')+(extra||'');
+  return (it.must?'<span class="tg must">必去</span>':'')+(it.tbc?'<span class="tg tbc">待確認</span>':'')+(it.mid?'<span class="tg mid">跨午夜</span>':'')+(it.awardLabel?'<span class="tg award">'+it.awardLabel+'</span>':'')+(extra||'');
 }
 function itHTML(it,i,orig){
   return '<div class="it '+it.k+' pop" id="c-'+it.id+'" style="--i:'+i+'">'+
@@ -978,7 +1013,7 @@ function itHTML(it,i,orig){
    (orig?'<div class="orig">原：'+orig+'</div>':'')+
    '<h3>'+it.n+'</h3>'+(it.stay?'<div class="stay">⏱ 預計停留 '+it.stay+'</div>':'')+
    (it.d?'<p class="d">'+it.d+'</p>':'')+
-   (it.rows||[]).map(r=>'<div class="row"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>').join("")+
+   (function(){const rows=it.rows||[];const rec=rows.map((r,idx)=>({r,idx})).filter(x=>/^(推薦|附近推薦|備案)\s*\d+/.test(String(x.r[0]||'')));const mark=rec.length>=2?rec[0].idx:-1;return rows.map((r,idx)=>'<div class="row"><b>'+(r[2]==='pick'||idx===mark?PICK_ICON+' ':'')+r[0]+'</b><span>'+r[1]+'</span></div>').join('');})()+
    '<div class="acts">'+
    (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
@@ -1181,12 +1216,14 @@ function resAllHTML(){
    '<label style="grid-column:1/-1;font-size:15px">訂位連結（選填）<input type="url" name="u" maxlength="300" placeholder="貼上訂位網址" style="border:var(--line);border-radius:12px;min-height:46px;width:100%;padding:0 10px;font-size:16px;margin-top:2px" ></label></div>'+
    '<div class="acts"><button class="btn fill" type="submit">＋ 新增</button></div></form></div>';
 }
-function optHTML(o,j){
+function optHTML(o,j,isPick){
   const r=o.resId?resGet(o.resId):null;
   let rs="";
   if(r){const pt=[];if(r.date)pt.push(r.date.slice(5).replace("-","/"));if(r.time)pt.push(r.time);if(r.no)pt.push(r.no);
     rs='<div class="row"><b>訂位</b><span>'+(pt.length?esc(pt.join("｜")):"尚未填寫，請到「預約」分頁填寫")+'</span></div>'}
-  return '<div class="opt'+(j?'':' f')+'"><h3>'+o.n+'</h3>'+
+  const badges=(o.award?'<span class="tg award">'+o.award+'</span>':'');
+  const score=(o.tabelog||o.google)?'<div class="scoreline">'+(o.tabelog?'Tabelog '+o.tabelog:'Tabelog 未查到')+(o.google?'｜Google '+o.google:'')+'</div>':'';
+  return '<div class="opt'+(j?'':' f')+'"><h3 class="opt-title">'+o.n+(isPick?PICK_ICON:'')+'</h3>'+(badges?'<div class="opt-badges">'+badges+'</div>':'')+score+
    (o.area?'<div class="row"><b>餐廳資訊</b><span>'+o.area+(o.kind?'｜'+o.kind:'')+'</span></div>':'')+
    (o.dishes?'<div class="row"><b>推薦餐點</b><span>'+o.dishes+'</span></div>':'')+
    (o.pp?'<div class="row"><b>人均</b><span>'+o.pp+'</span></div>':'')+rs+
@@ -1196,8 +1233,26 @@ function optHTML(o,j){
 function slotHTML(sl,i){
   const booked=sl.opts.some(o=>o.resId&&(resGet(o.resId)||{}).done);
   const tag=booked?'<span class="tg ok">已訂位</span>':sl.st==="ok"?'<span class="tg ok">已安排</span>':sl.st==="todo"?'<span class="tg tbc">待訂位</span>':'<span class="tg ex">建議</span>';
+  const numericScore=v=>{const m=String(v||"").match(/^\s*(\d+(?:\.\d+)?)/);return m?Number(m[1]):null;};
+  let best=-1;
+  if(sl.opts.length>1){
+    const scored=sl.opts.map((o,idx)=>({idx,t:numericScore(o.tabelog),g:numericScore(o.google),award:!!o.award,hasInfo:!!(o.dishes||o.note||o.area)}));
+    const comparable=scored.filter(x=>x.t!==null&&x.g!==null);
+    if(comparable.length>=2){
+      comparable.sort((a,b)=>((b.t+b.g)/2)-((a.t+a.g)/2)||(Number(b.award)-Number(a.award))||(b.t-a.t)||(b.g-a.g));
+      best=comparable[0].idx;
+    }else if(comparable.length===1){
+      best=comparable[0].idx;
+    }else{
+      scored.sort((a,b)=>{
+        const rank=x=>[Number(x.award),Number(x.t!==null&&x.g!==null),Number(x.t!==null||x.g!==null),x.t===null?-1:x.t,x.g===null?-1:x.g,Number(x.hasInfo)];
+        const A=rank(a),B=rank(b);for(let k=0;k<A.length;k++){if(A[k]!==B[k])return B[k]-A[k];}return a.idx-b.idx;
+      });
+      best=scored[0].idx;
+    }
+  }
   return '<div class="it food pop" style="--i:'+i+'"><div class="top"><span class="time">'+sl.time+'</span><span class="kind">'+sl.slot+'</span>'+tag+'</div>'+
-   (sl.note?'<p class="d">'+sl.note+'</p>':'')+sl.opts.map(optHTML).join("")+'</div><div class="gap"></div>';
+   (sl.note?'<p class="d">'+sl.note+'</p>':'')+sl.opts.map((o,j)=>optHTML(o,j,j===best)).join("")+'</div><div class="gap"></div>';
 }
 function foodHTML(){
   const n=(S.fday>=0&&S.fday<=6)?S.fday:0;
@@ -1206,8 +1261,7 @@ function foodHTML(){
   if(n===0)return h+'<div class="dayhead"><h2>所有預約餐廳</h2></div>'+resAllHTML()+backBtn();
   const D=DAYS[n-1];
   const rl=resList().filter(r=>dayOfDate(r.date)===n).sort((a,b)=>(a.time||"99:99")<(b.time||"99:99")?-1:(a.time||"99:99")>(b.time||"99:99")?1:0);
-  h+='<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）餐廳</h2></div>'+
-   '<div class="info"><p>營業日與價位請出發前以地圖或店家為準；標「待補」的人均表示尚未查到。</p></div>';
+  h+='<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）餐廳</h2></div>'; 
   if(rl.length)h+='<div class="card"><b>📌 當天預約</b>'+rl.map(r=>'<p style="margin:4px 0 0">'+esc(r.name)+(r.time?'｜'+esc(r.time):'')+(r.done?'｜✅ 已訂位':'｜尚未訂位')+(r.no?'｜'+esc(r.no):'')+'</p>').join("")+'</div>';
   h+=(MEALS[n]||[]).map(slotHTML).join("");
   return h+backBtn();
@@ -1289,3 +1343,7 @@ refreshWx().then(()=>{updSum();if(view==='list')render()}).catch(()=>{});
 </script>
 </body>
 </html>
+
+
+
+
