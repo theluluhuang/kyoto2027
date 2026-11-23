@@ -2,6 +2,9 @@
 
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -280,8 +283,10 @@ textarea{padding:10px 12px;min-height:90px}
 .opt-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .opt-badges{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 6px}
 .opt-badges .tg{margin:0}
-.pick-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:23px;height:23px;border-radius:8px;background:#f5f0df;border:1px solid #d9c995;color:#8a7137;vertical-align:middle}
-.pick-icon svg{width:13px;height:13px;display:block;fill:currentColor}
+.pick-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:25px;height:25px;border:0;background:transparent;color:#d99a18;vertical-align:-5px;filter:drop-shadow(0 1px 1px rgba(126,82,8,.22))}
+.pick-icon svg{width:22px;height:22px;display:block;fill:currentColor}
+.opt-title .pick-icon{margin-left:2px}
+.it .row b .pick-icon{margin-left:5px}
 .pick-icon[aria-label]{cursor:help}
 .it .row{grid-template-columns:minmax(5.2em,auto) minmax(0,1fr)}
 @media(max-width:480px){
@@ -811,7 +816,7 @@ const ICON={
  budget:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 5l4 6 4-6M12 11v8M8 14h8M8 17h8"/></svg>',
  stay:'<svg viewBox="0 0 24 24"><path d="M3 20V8l9-5 9 5v12"/><path d="M9 20v-6h6v6M8 10h2M14 10h2"/></svg>'
 };
-const NAV=[["overview","總覽"],["daily","每日行程"],["food","餐廳"],["list","行前清單"],["budget","旅遊預算"],["stay","住宿速查"]];
+const NAV=[["overview","總覽"],["list","行前清單"],["food","餐廳"],["daily","每日行程"],["budget","旅遊預算"],["stay","住宿速查"]];
 
 /* ---------- 狀態 ---------- */
 const defState=()=>({done:{},mode:{},exp:{},res:{},resRemoved:{},resCustom:[],fday:0,rate:0.2,ck:{done:{},removed:{},custom:{todo:[],pack:[],food:[]}},fields:{},day:0,sum:false});
@@ -1013,7 +1018,7 @@ function itHTML(it,i,orig){
    (orig?'<div class="orig">原：'+orig+'</div>':'')+
    '<h3>'+it.n+'</h3>'+(it.stay?'<div class="stay">⏱ 預計停留 '+it.stay+'</div>':'')+
    (it.d?'<p class="d">'+it.d+'</p>':'')+
-   (function(){const rows=it.rows||[];const rec=rows.map((r,idx)=>({r,idx})).filter(x=>/^(推薦|附近推薦|備案)\s*\d+/.test(String(x.r[0]||'')));const mark=rec.length>=2?rec[0].idx:-1;return rows.map((r,idx)=>'<div class="row"><b>'+(r[2]==='pick'||idx===mark?PICK_ICON+' ':'')+r[0]+'</b><span>'+r[1]+'</span></div>').join('');})()+
+   (function(){const rows=it.rows||[];const rec=rows.map((r,idx)=>({r,idx})).filter(x=>/^(推薦|附近推薦|備案)\s*\d+/.test(String(x.r[0]||'')));const mark=rec.length>=2?rec[0].idx:-1;return rows.map((r,idx)=>'<div class="row"><b>'+r[0]+(r[2]==='pick'||idx===mark?' '+PICK_ICON:'')+'</b><span>'+r[1]+'</span></div>').join('');})()+
    '<div class="acts">'+
    (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
