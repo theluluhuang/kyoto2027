@@ -53,11 +53,21 @@ button,input,textarea{font:inherit;color:inherit}
 .hero .sub{margin-top:4px;font-size:16px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .chip{display:inline-block;padding:1px 10px;border-radius:999px;border:var(--line);background:#fff;font-size:14px;line-height:1.7}
-.cd{margin-top:12px;border:var(--line);border-radius:12px;padding:10px 12px;background:var(--t-sight)}
+.cd{text-align:center;margin-top:12px;border:var(--line);border-radius:12px;padding:10px 12px;background:var(--t-sight)}
 .cd-l{font-size:15px;font-weight:500}
 .cd-n{font-size:18px}
 .cd-n b{font-size:30px;font-weight:700;color:var(--torii);padding:0 2px}
 .cd-s{font-size:15px;margin-top:2px}
+.cd-w{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;font-size:16px;margin-top:6px}
+.cd-w .tg{margin:0}
+.cd details{margin-top:8px;text-align:left}
+.cd summary{cursor:pointer;font-weight:700;font-size:16px;text-align:center;min-height:32px;display:flex;align-items:center;justify-content:center;gap:6px;list-style:none}
+.cd summary::-webkit-details-marker{display:none}
+.cd summary::after{content:"▾";font-size:14px}
+.cd details[open] summary::after{content:"▴"}
+.cd-sec{font-weight:700;font-size:15px;margin:8px 0 2px;color:var(--kyo)}
+.cd ul{margin:0;padding-left:1.2em;font-size:15px;line-height:1.55}
+.cd li.nx{font-weight:700;color:var(--torii)}
 
 /* ===== Nav ===== */
 .nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
@@ -132,6 +142,7 @@ button,input,textarea{font:inherit;color:inherit}
 .btn.pri{background:var(--torii);border-color:var(--torii);color:#fff}
 .btn.sm{min-height:44px}
 .btn:active{transform:scale(.98)}
+.btn .i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ===== Transit ===== */
 .tr{margin:0 0 0 16px;padding:8px 10px 8px 14px;border-left:3px dashed var(--snow);font-size:16px;line-height:1.6}
@@ -391,7 +402,7 @@ const HOTEL={
  maps:"京王プレリアホテル京都烏丸五条"
 };
 
-const WEATHER={ /* 全部為「範例」數值，非即時預報 */
+const WEATHER={ /* 預估值，非即時預報 */
  1:{i:"☁️",hi:9,lo:1,p:30,u:"降雨",wear:"洋蔥式穿搭：發熱衣＋毛衣＋防風外套。傍晚到夜間在吉田神社站著不動會很冷，建議帶暖暖包、手套。"},
  2:{i:"⛅",hi:9,lo:1,p:20,u:"降雨",wear:"白天可穿輕便些，但深夜火爐祭要在戶外站 1–2 小時，務必帶羽絨外套、暖暖包、帽子與手套。"},
  3:{i:"🌨️",hi:3,lo:-3,p:50,u:"降雪",wear:"伊根與美山山區比京都市區冷 5–6 度，路面可能結冰。請穿防滑鞋、厚羽絨外套，加圍巾、手套、毛帽與暖暖包。",alert:"伊根・美山：請穿防滑鞋＋厚外套"},
@@ -406,7 +417,7 @@ const TR=(mode,route,from,to,dur,walk,note,tbc)=>({k:"tr",mode,route,from,to,dur
 const DAYS=[
 /* ---------------------------- Day 1 ---------------------------- */
 { n:1,date:"2/2",wd:"二",title:"Outlet → 京都節分夜",tags:["出發日"],
- info:["吉田神社節分祭為期 3 天（預計 2/2–2/4），2/2 是追儺式（鬼やらい）、2/3 是火爐祭。2027 年的詳細時間官方尚未公布，皆標「待確認」。"],
+ info:["吉田神社節分祭為期 3 天（預計 2/2–2/4），2/2 是追儺式（鬼やらい）、2/3 是火爐祭。2027 年的詳細時間官方尚未公布，皆標「待確認」。","回程 Haruka 搭 15:14 的「はるか34号」（備案 15:44 的 36号），指定席先訂；14:30 前離開 Outlet。"],
  items:[
   {id:"d1a",k:"air",t:"04:30",n:"機場接送出發 → 高雄機場（KHH）",d:"搭接送車前往高雄機場，辦理 IT284 報到（建議起飛前 2.5–3 小時抵達）。",tbc:true,rows:[["待確認","接送車行、上車地點、聯絡電話"]],map:"高雄國際機場"},
   {id:"d1b",k:"air",t:"06:55 → 10:40",n:"IT284 高雄 KHH → 大阪 KIX",d:"第 1 航廈起飛、第 1 航廈降落。10:40 為日本時間（日本比台灣快 1 小時），飛行約 2 小時 45 分。",map:"関西国際空港 第1ターミナル"},
@@ -423,8 +434,8 @@ const DAYS=[
   {id:"d1e",k:"food",t:"午餐（購物時段內）",n:"Outlet 美食街 Rinku Food Park",d:"在 Outlet 內自行選店，不需訂位。",
    rows:[["料理類型","美食街，日式與各國料理皆有"],["預算","約 ¥1,000–1,800／人"],["訂位","不需要，現場選"]],map:"りんくうプレミアム・アウトレット フードコート"},
   TR("🚶🚆","步行 ＋ JR 關空快速","Outlet","關西空港站","步行約 5–6 分＋JR 約 5 分","14:30 領行李、步行回りんくうタウン站；約 14:55 搭 JR 回關西空港站（1 站）"),
-  TR("🚆","JR Haruka（指定席）","關西空港站","京都站","約 1 小時 15 分","約 15:15–15:30 發車，約 16:35–16:50 抵達；2/2 建議訂 Outlet 回程這一班",
-     "2027 年時刻表尚未公布，班次待確認。",true),
+  TR("🚆","JR Haruka（指定席）","關西空港站","京都站","約 1 小時 15–20 分（15:14–約 16:30）","搭「はるか34号」15:14 從關西空港發車，約 16:30 抵達京都；備案「はるか36号」15:44 發。Outlet 14:30 離開、約 14:55 搭 JR 回關西空港站，緩衝約 15 分",
+     "緩衝不多，14:30 前一定要離開 Outlet；趕不上就搭下一班 36号。時刻依 2026/11 版，2027 年開賣時再確認。",true),
   TR("🚇🚶","地鐵烏丸線＋步行","京都站","五條站 → 飯店","地鐵 1 站約 2 分","出站步行約 4 分到飯店"),
   {id:"d1f",k:"hotel",t:"16:50–17:20",n:"飯店 check-in、放行李",d:"京王普雷利亞飯店 京都烏丸五條。15:00 起可入住，有大浴場。",map:HOTEL.maps},
   TR("🚕","計程車或巴士","飯店","吉田神社","約 15–20 分","",
@@ -530,15 +541,15 @@ const DAYS=[
 },
 /* ---------------------------- Day 5 ---------------------------- */
 { n:5,date:"2/6",wd:"六",title:"勝尾寺・難波八阪神社・中崎町",tags:["農曆新年"],
- info:["今天移動距離較長，早點出發。路線走「阪急 → 梅田 → 御堂筋線直通箕面萱野 → 阪急巴士 30 系統」，比北千里路線少轉乘。","阪急巴士 30 系統去程首班 9:00、末班 15:00，約每 30 分一班；回程平日約每 30 分一班、末班約 17:05，週六班次較多（時刻以阪急巴士為準）。2026/10/1 起巴士不收現金，請準備 ICOCA 等 IC 卡並先儲值。"],
+ info:["今天移動距離較長，早點出發。路線走「阪急 → 梅田 → 御堂筋線直通箕面萱野 → 阪急巴士 30 系統」，比北千里路線少轉乘。","勝尾寺巴士（30 系統）：箕面萱野 → 勝尾寺 去程搭 11:00，回程搭 勝尾寺 13:00（約 13:21 到箕面萱野，剛好趕 13:30 訂位），備案是 13:20。注意 29 系統是往阪急北千里，要搭「往箕面萱野」的 30 系統。"],
  items:[
-  TR("🚶🚃🚇🚌","步行＋阪急京都線特急＋御堂筋線＋阪急巴士","飯店 → 阪急烏丸 → 梅田 → 箕面萱野 → 勝尾寺","","約 2.5 小時（含候車緩衝，09:00–11:30）",
-     "飯店步行約 7 分到阪急「烏丸」站；特急到梅田約 45 分；步行轉乘御堂筋線，梅田到箕面萱野約 26 分直達（¥480）；再搭阪急巴士 30 系統到「勝尾寺」約 22 分（¥800）。預計 11:20–11:30 抵達",
-     "建議 11:00 前後搭上巴士；阪急巴士 30 系統去程首班 9:00，約每 30 分一班。備案：阪急京都線轉乘到北千里或箕面，再搭巴士到勝尾寺。"),
+  TR("🚶🚃🚇🚌","步行＋阪急京都線特急＋御堂筋線＋阪急巴士","飯店 → 阪急烏丸 → 梅田 → 箕面萱野 → 勝尾寺","","約 2 小時 20 分（09:00–11:22）",
+     "約 09:00 從飯店出發；步行約 7 分到阪急「烏丸」站，特急（約每 10 分一班）約 45 分到梅田；步行轉乘御堂筋線，梅田到箕面萱野約 26 分直達（¥480）；10:40 前到箕面萱野，搭 11:00 發的阪急巴士 30 系統（約 21 分），11:22 到勝尾寺",
+     "去程巴士每 20 分一班（9:00–13:00，11:00、11:20、11:40…），趕不上 11:00 就搭 11:20，晚 20 分到。2026/10/1 起巴士不收現金，請先儲值西瓜卡。時刻我查到的是假日版，2/6 是週六，出發前再確認。"),
   {id:"d5a",k:"sight",t:"11:30–13:00",n:"勝尾寺",stay:"約 1.5 小時",tbc:true,
    d:"位在大阪府箕面市山中的古剎，因寺名有「勝」字被稱為「勝運之寺」。最有名的是滿山滿谷的「勝ちダルマ」（達摩不倒翁），許願後帶回家，願望實現再帶回寺裡奉納。冬天山上冷冽、遊客不多。",
    rows:[["開放","平日與週日約 8:00–17:00，週六約到 18:00（閉門前 15 分停止受理），出發前請查官網"],["入山料","約 ¥500／大人（2027 年待確認）"],["午餐","回程在箕面萱野吃（13:30 訂位），13:00 前要搭巴士下山"]],map:"勝尾寺"},
-  TR("🚌","阪急巴士 30 系統","勝尾寺","箕面萱野","約 22 分（13:00–13:25）","建議 13:00 前後搭車；平日約每 30 分一班，週六班次較多；再步行約 5 分到餐廳","回程時刻以阪急巴士為準。"),
+  TR("🚌","阪急巴士 30 系統","勝尾寺","箕面萱野","約 21 分（13:00–13:21）","搭 13:00 從勝尾寺發的巴士（往箕面萱野），約 13:21 抵達，步行約 5 分到餐廳，剛好趕 13:30 訂位；備案 13:20 發、約 13:41 到，會遲到，要先打電話給餐廳","回程每 20–30 分一班（到約 17:05）；29 系統是往北千里，請認清「往箕面萱野」。"),
   {id:"d5h",k:"food",t:"13:30–14:30",n:"午餐｜Jyuunimatsu Rokuzaemon（十二松六左衛門）",d:"牛肉燒烤涮涮鍋專門店，在箕面キューズモール旁（箕面市西宿），離箕面萱野站步行約 5 分，順路在回程轉乘點用餐。午餐座位限 1 小時，最後點餐 14:00。",
    rows:[["推薦餐點","人氣滿足ランチ（前菜加牛肉飯 肉重）、焼きしゃぶセット；午餐套餐需在前一天前預約"],["人均","午餐約 ¥1,500"],["營業","午餐 11:30–15:00（L.O. 14:00），全年無休（1/1 除外）"],["訂位","1 個月前開放（約 2027/1/6），資訊見「餐廳 → 預約」；當天無通知取消，套餐收 100%、一般座位每人 ¥4,000"],["電話","072-737-6274"]],map:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9"},
   TR("🚇🚶","北大阪急行・御堂筋線直通＋步行","箕面萱野 → 大國町 → 難波八阪神社","","約 50 分（14:40–15:30）","14:30 用餐結束，步行約 5 分到站；箕面萱野到大國町地鐵直達約 40 分；出站步行約 8 分","直通班次約每 10 分一班，14:40 前後上車即可。"),
@@ -561,13 +572,13 @@ const DAYS=[
 },
 /* ---------------------------- Day 6 ---------------------------- */
 { n:6,date:"2/7",wd:"日",title:"返程",tags:["返程"],
- info:["11:30 起飛，早上節奏要快。2/7 的 Haruka 指定席記得先訂。"],
+ info:["11:30 起飛，早上節奏要快：約 06:50 出發，搭 07:13 的「はるか7号」，08:40 抵達機場。指定席記得先訂。"],
  items:[
-  {id:"d6a",k:"hotel",t:"06:30–07:00",n:"起床、退房",d:"退房時間雖是 11:00，但今天要提早離開。",rows:[["早餐","先確認飯店早餐開始時間；來不及就前一天買麵包或便當，在 Haruka 上吃"]],tbc:true,map:HOTEL.maps},
-  {id:"d6b",k:"food",t:"約 06:40",n:"早餐｜便利商店或前一晚買的麵包",d:"06:30 起床，簡單吃，帶到 Haruka 上也可以。",rows:[["預算","約 ¥500–800／人"],["訂位","不需要"]],map:"コンビニ 京都 烏丸五条"},
-  TR("🚇🚄","地鐵烏丸線（或計程車）＋JR Haruka","飯店 → 京都站 → 關西機場","","約 1.5 小時（07:00–08:30）","飯店到京都站：地鐵 1 站約 5 分（含步行），或計程車約 5–10 分；Haruka 京都到關西機場約 1 小時 15 分",
-     "Haruka 班次待確認；2/7 指定席請先訂。",true),
-  {id:"d6c",k:"air",t:"08:30–09:00",n:"抵達 KIX、辦理登機",d:"第 1 航廈辦理 IT285 登機。若有在日本購物退稅，新制要在出境時於機場海關確認，請預留時間，流程待確認。",tbc:true,map:"関西国際空港 第1ターミナル"},
+  {id:"d6a",k:"hotel",t:"06:30–06:50",n:"起床、退房",d:"退房時間雖是 11:00，但今天要提早離開。",rows:[["早餐","先確認飯店早餐開始時間；來不及就前一天買麵包或便當，在 Haruka 上吃"]],tbc:true,map:HOTEL.maps},
+  {id:"d6b",k:"food",t:"約 06:35",n:"早餐｜便利商店或前一晚買的麵包",d:"06:30 起床，簡單吃，帶到 Haruka 上也可以。",rows:[["預算","約 ¥500–800／人"],["訂位","不需要"]],map:"コンビニ 京都 烏丸五条"},
+  TR("🚇🚄","地鐵烏丸線（或計程車）＋JR Haruka","飯店 → 京都站 → 關西機場","","約 1 小時 50 分（06:50–08:40）","約 06:50 從飯店出發，地鐵烏丸線五條站 → 京都站 1 站，約 07:00 到 JR 月台；搭 07:13 發的「はるか7号」（30 號月台），08:40 抵達關西機場",
+     "想更從容可改搭 06:44 發的「はるか5号」（08:15 到），但要 06:15 前起床。時刻依 2026 年版，2/7（週日）有開，2027 年請訂票時再確認，指定席要先訂。",true),
+  {id:"d6c",k:"air",t:"08:40–09:30",n:"抵達 KIX、辦理登機",d:"第 1 航廈辦理 IT285 登機。若有在日本購物退稅，新制要在出境時於機場海關確認，請預留時間，流程待確認。",tbc:true,map:"関西国際空港 第1ターミナル"},
   {id:"d6d",k:"air",t:"11:30 → 14:00",n:"IT285 大阪 KIX → 高雄 KHH",d:"11:30（日本時間）起飛，14:00（台灣時間）抵達高雄，飛行約 3 小時 30 分。",map:"関西国際空港 第1ターミナル"}
  ],
  rain:null
@@ -577,22 +588,25 @@ const DAYS=[
 /* 行前清單預設項目 */
 const CK={
  todo:[
-  {id:"t1",text:"訂 Haruka 指定席（2/2、2/7）",note:"2/2 建議訂 Outlet 回程那一班（約 15:15–15:30 發車）"},
+  {id:"t1",text:"訂 Haruka 指定席（2/2、2/7）",note:"2/2 關空→京都：はるか34号（15:14 發），備案 36号（15:44）；2/7 京都→關空：はるか7号（07:13 發）。時刻依 2026 年版，開賣時確認"},
   {id:"t2",text:"旅遊不便險／旅平險"},
   {id:"t3",text:"機場接送",note:"2/2 04:30 出發前往高雄機場"},
   {id:"t4",text:"eSIM"},
   {id:"t5",text:"留意 2/3 18:00–20:00 的導遊 Email",note:"Klook 2/4 一日遊的集合資訊"}
  ],
  pack:[
-  {id:"p1",text:"護照（退稅也要用）",ex:true},
-  {id:"p2",text:"日圓現金、信用卡",ex:true},
-  {id:"p3",text:"保暖衣物（洋蔥式穿搭）、羽絨外套",ex:true},
-  {id:"p4",text:"防滑鞋（2/4 伊根・美山）",ex:true},
-  {id:"p5",text:"暖暖包、手套、帽子、圍巾",ex:true},
-  {id:"p6",text:"雨衣或輕便雨具（節分夜晚戶外）",ex:true},
-  {id:"p7",text:"行動電源、充電線、轉接頭",ex:true},
-  {id:"p8",text:"常備藥、護唇膏、護手霜",ex:true},
-  {id:"p9",text:"折疊購物袋（Outlet 購物用）",ex:true}
+  {id:"p1",text:"護照",note:"機場、飯店 check-in、購物退稅都要出示；另存一份電子檔"},
+  {id:"p2",text:"日圓現金、信用卡、西瓜卡（先儲值）",note:"大眾運輸與超商用西瓜卡；建議換匯金額見「旅遊預算」"},
+  {id:"p3",text:"保暖衣物（洋蔥式穿搭）、羽絨外套",note:"發熱衣＋毛衣＋羽絨外套；2/3 火爐祭、2/4 山區特別冷"},
+  {id:"p4",text:"防滑鞋（2/4 伊根・美山）",note:"山區比京都市區冷 5–6 度，路面可能結冰"},
+  {id:"p5",text:"暖暖包、手套、帽子、圍巾",note:"2/3 火爐祭要在戶外站 1–2 小時，2/4 美山冬灯廊也是戶外"},
+  {id:"p6",text:"雨衣或輕便雨具",note:"2/3 夜晚戶外、2/4 山區可能降雪；2/4 一日遊沒有雨天備案"},
+  {id:"p7",text:"行動電源、充電線、轉接頭",note:"eSIM 加導航很耗電，2/4 一日遊整天在外"},
+  {id:"p8",text:"常備藥、護唇膏、護手霜",note:"冬天乾冷，戶外時間長"},
+  {id:"p9",text:"折疊購物袋或折疊行李袋",note:"2/2 Outlet 買的東西要帶到 2/7；2/6 大阪還要買伴手禮"},
+  {id:"p10",text:"好走的鞋",note:"2/3 祇園、2/5 大德寺、2/6 勝尾寺與大阪都走很多路"},
+  {id:"p11",text:"購物單據與退稅商品收在同一袋",note:"新制出境時在機場海關確認退款；2/7 08:40 抵達機場後預留時間"},
+  {id:"p12",text:"紙本或截圖：機票、訂房、Klook 憑證、Haruka 指定席",note:"手機沒電或沒訊號時備用"}
  ],
  food:[
   {id:"f4",text:"2/2 午餐｜Outlet 美食街",note:"現場選，免訂位"},
@@ -613,7 +627,15 @@ const CK_TITLE={todo:"行前待辦",pack:"行李準備",food:"餐廳與訂位"};
 
 /* 預算（皆為每人） */
 const SPENT=[ {n:"包車（Klook 一日遊）",pp:2725}, {n:"住宿 5 人 5 晚（合計 NT$29,735）",pp:Math.round(29735/5)}, {n:"機票",pp:19307} ];
-const BUDGET=[ {n:"大眾運輸",lo:8700,hi:10900}, {n:"門票與體驗",lo:2350,hi:4000}, {n:"餐費 6 天（含 4 間預約餐廳，估算）",lo:33400,hi:52500} ];
+/* pay：cash 現金（要換日幣）／ic 西瓜卡或事前購票（不換現金） */
+const BUDGET=[
+ {n:"大眾運輸（西瓜卡儲值或事前購票）",lo:8700,hi:10900,pay:"ic"},
+ {n:"超商、自動販賣機（西瓜卡）",lo:2000,hi:3000,pay:"ic"},
+ {n:"門票與體驗",lo:2350,hi:4000,pay:"cash"},
+ {n:"餐費 6 天（含 {N} 間預約餐廳，估算）",lo:36100,hi:55200,pay:"cash"},
+ {n:"伴手禮（估算）",lo:8000,hi:15000,pay:"cash"},
+ {n:"雜支（香油錢、置物櫃、小額現金）",lo:2000,hi:4000,pay:"cash"}
+];
 
 /* 欄位預設值（可在畫面上自行修改） */
 const LIGHTSPLIT="https://liff.line.me/1655320992-Y8GowEpw/g/gRdZjWTcS75ToMgJKvUs7P";
@@ -628,7 +650,7 @@ const RES_DEF=[
  {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"18:30",open:"1 個月前開放（約 2027/1/5）",url:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"除夕年夜飯｜5 人｜和牛『並』¥8,800、『上』¥13,200，用餐限 120 分鐘｜電話 075-212-0500",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"}
 ];
 
-/* 每日餐廳：st → ok 已安排、todo 待訂位／待決定、sug 建議（皆為範例，營業日與價位請出發前確認） */
+/* 每日餐廳：st → ok 已安排、todo 待訂位／待決定、sug 建議（營業日與價位請出發前確認） */
 const MEALS={
 1:[
  {slot:"午餐",time:"12:10–14:30",st:"ok",opts:[
@@ -658,7 +680,7 @@ const MEALS={
   {n:"伊根灣 港邊小店",area:"伊根灣、舟屋周邊",kind:"海鮮小吃",dishes:"伊根鰤魚（冬季名產，視當日供應）、海鮮串燒",pp:"約 ¥500–1,500",map:"伊根 舟屋の里公園 周辺 グルメ"}]},
  {slot:"午餐",time:"14:15–16:05（天橋立）",st:"sug",note:"Klook 行程在這段含午餐時間，時間較晚。",opts:[
   {n:"海鮮工房 橋立物產 松葉蟹直賣",area:"天橋立一帶（依地圖座標）",kind:"海鮮、螃蟹",dishes:"海鮮、松葉蟹（冬季，視當日供應）",pp:"待補",map:"https://maps.app.goo.gl/n2yNU8QriNN3ZzgN9",note:"天橋立想吃東西的推薦；營業時間請在地圖確認"},
-  {n:"天橋立 海鮮丼・定食",area:"天橋立山腳或車站附近，現場選",kind:"海鮮丼、定食",dishes:"海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應）",pp:"約 ¥1,500–3,000",map:"天橋立駅 周辺 海鮮 ランチ",note:"範例，營業時間請確認"}]},
+  {n:"天橋立 海鮮丼・定食",area:"天橋立山腳或車站附近，現場選",kind:"海鮮丼、定食",dishes:"海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應）",pp:"約 ¥1,500–3,000",map:"天橋立駅 周辺 海鮮 ランチ",note:"營業時間請確認"}]},
  {slot:"點心",time:"17:30–19:00（美山）",st:"sug",opts:[
   {n:"美山 冬灯廊 村內屋台",area:"美山茅草屋之里村內",kind:"期間限定小吃攤",dishes:"熱食、熱飲（視當天出攤）",pp:"約 ¥500–1,000",map:"美山かやぶきの里",note:"氣溫很低，可買熱食取暖"}]},
  {slot:"宵夜",time:"20:45 起",st:"sug",note:"回到京都約 20:30，之後找營業到較晚的店。",opts:[
@@ -694,16 +716,17 @@ const MEALS={
  {slot:"早餐",time:"06:30–07:00",st:"sug",note:"06:30 起床、07:00 前出發，快速解決。",opts:[
   {n:"便利商店，或前一晚買好的麵包",area:"飯店附近",kind:"輕食",dishes:"飯糰、麵包、咖啡（可帶到 Haruka 上吃）",pp:"約 ¥500–800",map:"コンビニ 烏丸五条"}]},
  {slot:"午餐",time:"09:00–11:00（機場）",st:"sug",note:"11:30 起飛，可在登機前於機場簡單吃。",opts:[
-  {n:"關西機場 第 1 航廈 餐廳",area:"KIX 第 1 航廈",kind:"機場簡餐",dishes:"拉麵、丼飯、咖哩等",pp:"約 ¥1,000–1,800",map:"関西国際空港 第1ターミナル レストラン",note:"範例，是否趕得及依登機流程為準"}]}
+  {n:"關西機場 第 1 航廈 餐廳",area:"KIX 第 1 航廈",kind:"機場簡餐",dishes:"拉麵、丼飯、咖哩等",pp:"約 ¥1,000–1,800",map:"関西国際空港 第1ターミナル レストラン",note:"是否趕得及依登機流程為準"}]}
 ]
 };
 
 
-/* 伴手禮與購物（皆為範例） */
+/* 伴手禮與購物（依行程排列） */
 const SHOP=[
- {k:"shopc",t:"Rinku Premium Outlets（機場旁）",items:["服飾、鞋包、運動品牌、美妝（約 250 間店）","2/2 買的東西要帶到 2/7 才出境，注意行李空間","退稅：2026/11/1 起新制，先付含稅價，出境時於機場海關確認後退款，購買日起 90 日內出境，記得帶護照；流程待確認"]},
- {k:"shopc",t:"京都市區（飯店周邊與河原町）",items:["生八ッ橋、抹茶甜點與茶葉、京漬物、七味粉","飯店旁約 90 公尺有和菓子老舖「末富」（營業時間與是否需預約待確認）","部分商家要滿額才能退稅，條件各店不同"]},
- {k:"shopc",t:"大阪（難波、梅田）",items:["551 蓬萊豬肉包、大阪燒／章魚燒口味零食","梅田、難波百貨地下街有大量伴手禮與熟食","消耗品與一般物品的退稅分類在新制已廢除，但仍要在 90 日內攜帶出境"]}
+ {k:"shopc",t:"2/2｜Rinku Premium Outlets（機場旁）",items:["服飾、鞋包、運動品牌、美妝（約 250 間店）","第一天就買，東西要陪你走完整趟：帶折疊行李袋或預留行李箱空間，2/3–2/6 還要逛京都、大阪","退稅：2026/11/1 起新制，先付含稅價，出境時於機場海關確認後退款，購買日起 90 日內出境；購物時帶護照，單據與商品收在同一袋","2/7 在 KIX 08:30–09:00 辦登機前，預留退稅確認的時間（細節以海關公告為準）"]},
+ {k:"shopc",t:"2/3、2/5｜京都（祇園、河原町、飯店周邊）",items:["生八ッ橋、抹茶甜點與茶葉、京漬物、七味粉","2/3 在祇園（八坂神社、祇園辻利一帶）與河原町順路買；2/5 回飯店前後可再補","飯店旁約 90 公尺有和菓子老舖「末富」（營業時間與是否需預約待確認）","生菓子保存期限短，回台灣前先看標示再買；部分商家要滿額才能退稅，條件各店不同"]},
+ {k:"shopc",t:"2/6｜大阪（難波、梅田）：最後採買日",items:["2/7 要 06:30 起床直接去機場，沒時間買東西，伴手禮 2/6 晚餐前後買完","梅田、難波百貨地下街有大量伴手禮與熟食，週六晚上人多，建議早點逛","551 蓬萊等豬肉包、含豬肉的食品：不能帶回台灣（違規每人罰 20 萬元），建議現場吃完，伴手禮改買甜點、零食","大阪燒／章魚燒口味零食、點心類比較好帶；消耗品與一般物品的退稅分類在新制已廢除，但仍要在 90 日內攜帶出境"]},
+ {k:"shopc",t:"2/7｜關西機場（出發當天）",items:["先處理退稅確認，再辦理登機，08:40 抵達後預留時間","出境後如果還有空檔，機場內可補買點心類伴手禮，品項比市區少","液體與保冷食品要放託運行李，注意重量"]}
 ];
 
 /* =====================================================================
@@ -739,6 +762,15 @@ let view="overview";
 const reduce=()=>window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- 工具 ---------- */
+const _I=d=>'<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+d+'</svg>';
+const IC={
+ map:_I('<path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'),
+ link:_I('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+ refresh:_I('<path d="M20 11a8 8 0 0 0-14.5-4M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4M20 20v-4h-4"/>'),
+ down:_I('<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>'),
+ copy:_I('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>'),
+ book:_I('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11M9 8h6"/>')
+};
 const mapUrl=q=>/^https?:/.test(q)?q:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const yen=n=>"¥"+Math.round(n).toLocaleString("en-US");
 const ntd=n=>"NT$"+Math.round(n).toLocaleString("en-US");
@@ -748,22 +780,28 @@ function jstNow(){const f=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo"
 function tripDay(){const j=jstNow();return Math.floor((Date.UTC(j.y,j.m-1,j.d)-Date.UTC(2027,1,2))/864e5)+1}
 const fieldVal=k=>(k in S.fields)?S.fields[k]:(FIELD_DEF[k]||"");
 
-/* ---------- 倒數 ---------- */
+/* ---------- 倒數／每日摘要 ---------- */
+function setCd(el,h){if(el.dataset.h!==h){el.innerHTML=h;el.dataset.h=h}}
+function dayBrief(day){
+  const D=DAYS[day-1],j=jstNow(),nowMin=j.h*60+j.mi;
+  let nx=null;for(const it of D.items){if(it.k==="tr")continue;const t=parseStart(it.t);if(t!=null&&t>nowMin){nx=it;break}}
+  const live=wxGet(D.n),w=live||WEATHER[D.n];
+  const list=D.items.filter(it=>it.k!=="tr").map(it=>'<li'+(it===nx?' class="nx"':'')+'>'+esc(it.t)+'　'+esc(it.n)+(it===nx?'（下一個）':'')+'</li>').join("");
+  const notes=(D.info||[]).map(x=>'<li>'+esc(x)+'</li>').join("")+(w.alert?'<li>'+esc(w.alert)+'</li>':'');
+  return '<div class="cd-l">旅行中・日本時間</div><div class="cd-n">第 <b>'+day+'</b> 天 <span style="font-size:16px">'+D.date+'（'+D.wd+'）'+esc(D.title)+'</span></div>'+
+   '<div class="cd-w"><span aria-hidden="true">'+w.i+'</span><b>'+w.hi+'° / '+w.lo+'°C</b><span class="tg '+(live?'ok':'tbc')+'">'+(live?'即時':'預估')+'</span><span>'+w.u+' '+w.p+'%</span></div>'+
+   '<details open><summary>今日摘要與注意事項</summary><div class="cd-sec">今日摘要</div><ul>'+list+'</ul>'+(notes?'<div class="cd-sec">注意事項</div><ul>'+notes+'</ul>':'')+'</details>';
+}
 function tick(){
   const el=$("#cd");if(!el)return;
   const start=Date.parse(TRIP.start),now=Date.now();
   if(now<start){
     const s=Math.floor((start-now)/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
-    el.innerHTML='<div class="cd-l">距離出發（2/2 06:55 高雄起飛）</div><div class="cd-n"><b>'+d+'</b>天 <b>'+h+'</b>時 <b>'+m+'</b>分</div><div class="cd-s">節分祭典等你來</div>';
+    setCd(el,'<div class="cd-l">距離出發（2/2 06:55 高雄起飛）</div><div class="cd-n"><b>'+d+'</b>天 <b>'+h+'</b>時 <b>'+m+'</b>分</div><div class="cd-s">節分祭典等你來</div>');
     return}
   const day=tripDay();
-  if(day>=1&&day<=6){
-    const D=DAYS[day-1],j=jstNow(),nowMin=j.h*60+j.mi;
-    let nx=null;for(const it of D.items){if(it.k==="tr")continue;const t=parseStart(it.t);if(t!=null&&t>nowMin){nx=it;break}}
-    el.innerHTML='<div class="cd-l">旅行中・日本時間</div><div class="cd-n">第 <b>'+day+'</b> 天 <span style="font-size:16px">'+D.date+'（'+D.wd+'）'+esc(D.title)+'</span></div><div class="cd-s">'+(nx?'下一個行程：'+esc(nx.t)+' '+esc(nx.n):'今天的行程都結束了，好好休息')+'</div>';
-  }else{
-    el.innerHTML='<div class="cd-l">旅程結束</div><div class="cd-n">歡迎回家，整理照片與花費吧</div>';
-  }
+  if(day>=1&&day<=6)setCd(el,dayBrief(day));
+  else setCd(el,'<div class="cd-l">旅程結束</div><div class="cd-n">歡迎回家，整理照片與花費吧</div>');
 }
 
 /* ---------- 導覽 ---------- */
@@ -790,7 +828,8 @@ function bp(f){
   '<p style="padding:6px 14px 0;font-size:15px">日本比台灣快 1 小時，以上時間已依各地當地時間標示。</p>'+barcode()+'</div>';
 }
 function ckAll(cat){
-  const base=CK[cat].filter(x=>!S.ck.removed[x.id]);
+  const pw=cat==="pack"?packWx():null;
+  const base=CK[cat].filter(x=>!S.ck.removed[x.id]).map(x=>pw&&pw.notes[x.id]?Object.assign({},x,{note:pw.notes[x.id],wx:true}):x);
   return base.concat(S.ck.custom[cat]||[]);
 }
 function ckStat(){let t=0,d=0;Object.keys(CK).forEach(c=>ckAll(c).forEach(x=>{t++;if(S.ck.done[x.id])d++}));return{t,d,p:t?Math.round(d/t*100):0}}
@@ -851,6 +890,37 @@ function wxGet(n){
   if(p>=60)wear+=" 降雨／降雪機率偏高，請備好雨具或防水外套。";
   return{i:wxIcon(L[0].code,snow),hi,lo,p,u:snow>0?"降雪":"降雨",wear,alert:base.alert,live:true,locs:L,t:WX.t};
 }
+/* 出發前 10 天起，依實際預報自動調整行李建議 */
+const PACK_DAYS=10;
+const packStart=()=>new Date(Date.parse(TRIP.start)-PACK_DAYS*864e5);
+const packWxOn=()=>Date.now()>=packStart().getTime()&&!!(WX.days&&Object.keys(WX.days).length);
+function packWx(){
+  if(!packWxOn())return null;
+  const rows=[];
+  Object.keys(WX.days).forEach(n=>WX.days[n].forEach(l=>rows.push(Object.assign({},l,{dn:+n,d:"2/"+(+n+1)}))));
+  if(!rows.length)return null;
+  const minLo=Math.min(...rows.map(r=>r.lo)),maxHi=Math.max(...rows.map(r=>r.hi));
+  const wet=rows.reduce((a,r)=>r.p>a.p?r:a,rows[0]);
+  const mt=rows.filter(r=>r.dn===3);
+  const night=rows.find(r=>r.dn===2)||rows[0];
+  const notes={};
+  notes.p3="預報全程 "+minLo+"°～"+maxHi+"°C。"+(minLo<=-1?"最低溫在 0°C 以下：羽絨外套加發熱衣褲，毛帽、手套、圍巾都要帶。":minLo<=3?"偏冷：羽絨或厚外套加發熱衣，圍巾手套備著。":minLo<=8?"防風外套加毛衣、發熱衣就夠，圍巾備著。":"氣溫比預期暖，可減少厚衣，薄外套加洋蔥式穿搭即可。");
+  if(mt.length){
+    const ml=Math.min(...mt.map(r=>r.lo)),sn=mt.reduce((a,r)=>a+r.snow,0),mp=Math.max(...mt.map(r=>r.p));
+    notes.p4="2/4 伊根・美山預報最低 "+ml+"°C，"+(sn>0?"有降雪（約 "+Math.round(sn*10)/10+" cm）":"降雨／雪機率 "+mp+"%")+"。"+(ml<=1||sn>0?"路面易結冰，防滑鞋必帶。":"路面可能較乾，仍建議防滑底的鞋。");
+  }
+  const N=night.lo<=0?10:night.lo<=4?8:5;
+  notes.p5="2/3 火爐祭夜間戶外 1–2 小時，京都預報最低 "+night.lo+"°C：暖暖包每人至少 "+N+" 片，手套、帽子、圍巾都帶。";
+  notes.p6=wet.p>=50?"降雨／降雪機率最高 "+wet.p+"%（"+wet.d+"）：帶防水外套或雨衣，鞋子最好防水。":wet.p>=30?"機率最高 "+wet.p+"%（"+wet.d+"）：帶摺疊傘或輕便雨衣。":"預報降雨機率偏低（最高 "+wet.p+"%），輕便雨衣備著即可。";
+  const sum="全程 "+minLo+"°～"+maxHi+"°C；降雨／降雪機率最高 "+wet.p+"%（"+wet.d+"）";
+  return{notes,sum};
+}
+function packInfo(){
+  const st=packStart(),dt=(st.getMonth()+1)+"/"+st.getDate(),pw=packWx();
+  if(pw)return '🌤️ 已依預報自動調整（更新於 '+new Date(WX.t).toLocaleString("zh-TW",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false})+'）：'+pw.sum+'。標示「依預報」的項目備註會隨預報更新。';
+  if(Date.now()>=st.getTime())return '🌤️ 已進入出發前 10 天，連上網路後會自動依預報調整保暖、雨具與暖暖包的建議。';
+  return '🌤️ '+dt+' 起（出發前 10 天）會依天氣預報自動調整保暖、防滑、雨具與暖暖包的建議；目前是依季節與行程的預設。';
+}
 function updSum(){const e=$("#sum");if(e&&view==="daily")e.outerHTML=wxHTML(DAYS[S.day-1])}
 function wxHTML(D){
   const live=wxGet(D.n),w=live||WEATHER[D.n];const open=S.sum;
@@ -859,13 +929,13 @@ function wxHTML(D){
     ?'<p><b>各地預報：</b>'+live.locs.map(x=>x.n+" "+x.hi+"°/"+x.lo+"°，"+(x.snow>0?"降雪":"降雨")+" "+x.p+"%").join("；")+'</p><p style="font-size:15px">資料來源 Open-Meteo，更新於 '+tm+'。</p>'
     :'<p style="font-size:15px">目前為預估值，出發前 16 天內會自動連網更新成實際預報。</p>';
   return '<div class="card sticky" id="sum"><div class="sum-row"><span class="ic" aria-hidden="true">'+w.i+'</span>'+
-   '<span class="tp">'+w.hi+'° / '+w.lo+'°C</span><span>'+w.u+' '+w.p+'%</span>'+(live?'<span class="tg ok" style="margin:0">即時</span>':'')+
+   '<span class="tp">'+w.hi+'° / '+w.lo+'°C</span><span class="tg '+(live?'ok':'tbc')+'" style="margin:0">'+(live?'即時':'預估')+'</span><span>'+w.u+' '+w.p+'%</span>'+
    (w.alert?'<span class="warn">'+w.alert+'</span>':'')+
    '<button class="sum-btn" data-sum="1" aria-expanded="'+open+'">'+(open?'收合 ▴':'詳情 ▾')+'</button></div>'+
    (open?'<div class="sum-more"><p><b>穿搭：</b>'+w.wear+'</p>'+detail+
-   (wxInWindow()?'<p><button class="btn sm" data-wxr="1">🔄 重新抓取天氣</button></p>':'')+
+   (wxInWindow()?'<p><button class="btn sm" data-wxr="1">'+IC.refresh+' 重新抓取天氣</button></p>':'')+
    '<p><b>住宿：</b>'+HOTEL.name+'<br>五條站步行約 4 分｜阪急烏丸站步行約 7 分｜京都站過去地鐵 1 站</p>'+
-   '<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">🗺️ 飯店地圖</a></div>':'')+
+   '<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">'+IC.map+' 飯店地圖</a></div>':'')+
    '</div>';
 }
 function tagsOf(it,extra){
@@ -879,7 +949,7 @@ function itHTML(it,i,orig){
    (it.d?'<p class="d">'+it.d+'</p>':'')+
    (it.rows||[]).map(r=>'<div class="row"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>').join("")+
    '<div class="acts">'+
-   (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">🗺️ 地圖</a>':'')+'</div></div>';
+   (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
 function trHTML(t,i){
   const route=t.from?('<span class="w">'+t.from+(t.to?' → '+t.to:'')+'</span>'):'';
@@ -889,7 +959,7 @@ function trHTML(t,i){
 function lsCard(){
   return '<div class="card" style="margin-top:14px"><h3 style="font-size:18px">💴 記帳與分帳</h3>'+
    '<p style="margin:4px 0 8px">今天的花費統一記在 Lightsplit，5 個人的帳會自動分攤算清楚。</p>'+
-   '<a class="btn pri" target="_blank" rel="noopener" href="'+LIGHTSPLIT+'">📒 開啟 Lightsplit 記帳</a>'+
+   '<a class="btn pri" target="_blank" rel="noopener" href="'+LIGHTSPLIT+'">'+IC.book+' 開啟 Lightsplit 記帳</a>'+
    '<p style="font-size:15px;margin-top:8px">第一次開啟需要用 LINE 登入，記完帳直接回到這個頁面即可。</p></div>';
 }
 function dailyHTML(){
@@ -921,8 +991,8 @@ function ckRow(cat,x,custom){
   const done=!!S.ck.done[x.id];
   const note=x.note?'<small>'+esc(x.note)+'</small>':'';
   return '<div class="ck'+(done?' is-done':'')+'"><label class="ckl"><input type="checkbox" data-ck="'+esc(x.id)+'"'+(done?' checked':'')+'><span class="txt">'+esc(x.text)+
-   (x.pri?'<span class="tg pri">優先</span>':'')+(x.ex?'<span class="tg ex">範例</span>':'')+note+'</span></label>'+
-   (x.link?'<a class="btn" style="margin-top:6px" target="_blank" rel="noopener" href="'+esc(x.link)+'">🔗</a>':'')+
+   (x.pri?'<span class="tg pri">優先</span>':'')+(x.wx?'<span class="tg ok">依預報</span>':'')+note+'</span></label>'+
+   (x.link?'<a class="btn" style="margin-top:6px" target="_blank" rel="noopener" href="'+esc(x.link)+'" aria-label="連結">'+IC.link+'</a>':'')+
    '<button class="x" data-ck-del="'+cat+':'+esc(x.id)+'" aria-label="移除">✕</button></div>';
 }
 function listHTML(){
@@ -931,6 +1001,7 @@ function listHTML(){
   Object.keys(CK).forEach(cat=>{
     const items=ckAll(cat);const d=items.filter(x=>S.ck.done[x.id]).length;
     h+='<div class="card"><h3 style="font-size:19px">'+CK_TITLE[cat]+'<span class="tg ok">'+d+' / '+items.length+'</span></h3>'+
+      (cat==="pack"?'<p style="font-size:15px;margin:4px 0 8px">'+packInfo()+'</p>':'')+
       items.map(x=>ckRow(cat,x)).join("")+
       '<form class="add" data-ck-add="'+cat+'"><input type="text" placeholder="新增項目…" maxlength="60" aria-label="新增項目"><button class="btn fill" type="submit">新增</button></form></div>';
   });
@@ -951,16 +1022,16 @@ function stayHTML(){
    '<dt>入住</dt><dd>'+HOTEL.checkin+'</dd><dt>退房</dt><dd>'+HOTEL.checkout+'</dd>'+
    '<dt>訂房編號</dt><dd><b>'+HOTEL.booking+'</b></dd><dt>設施</dt><dd>大浴場、女性湯上りラウンジ、投幣洗衣</dd></dl>'+
    '<label class="fld" style="margin-top:10px"><span>詳細地址／房號備註（自行填寫）</span><input type="text" data-field="hotel_note" value="'+esc(fieldVal("hotel_note"))+'" placeholder="例如：房號、樓層、櫃台電話"></label>'+
-   '<a class="btn fill" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">🗺️ 開啟 Google 地圖</a></div>'+
+   '<a class="btn fill" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">'+IC.map+' 開啟 Google 地圖</a></div>'+
 
-  '<h3 class="stitle" style="font-size:18px">伴手禮與退稅提醒<span class="tg ex">範例</span></h3>'+
+  '<h3 class="stitle" style="font-size:18px">伴手禮與退稅提醒</h3>'+
   SHOP.map(s=>'<details class="acc '+s.k+'"><summary>'+s.t+'</summary><div class="in"><ul>'+s.items.map(x=>'<li>'+x+'</li>').join("")+'</ul></div></details>').join("")+
 
   '<h3 class="stitle" style="font-size:18px;margin-top:14px">旅遊資訊速查</h3>'+
   '<div class="card"><h3 style="font-size:17px">保險資料</h3>'+fld("ins_co","保險公司")+fld("ins_no","保單號碼")+fld("ins_tel","24 小時理賠專線")+'</div>'+
 
   '<div class="card"><h3 style="font-size:17px">資料備份</h3><p style="font-size:15px;margin:4px 0 8px">清單與欄位都只存在這支手機的瀏覽器。換手機前請先匯出。</p>'+
-   '<div class="acts"><button class="btn" data-export="1">⬇️ 匯出備份檔</button><button class="btn" data-copy="1">📋 複製備份文字</button></div>'+
+   '<div class="acts"><button class="btn" data-export="1">'+IC.down+' 匯出備份檔</button><button class="btn" data-copy="1">'+IC.copy+' 複製備份文字</button></div>'+
    '<label class="fld" style="margin-top:10px"><span>匯入：選擇備份檔</span><input type="file" accept=".json,application/json" data-import-file="1"></label>'+
    '<label class="fld"><span>或貼上備份文字</span><textarea id="impTxt" placeholder="貼上備份內容"></textarea></label>'+
    '<div class="acts"><button class="btn fill" data-import-txt="1">匯入</button><button class="btn" data-reset="1">清除全部資料</button></div><p id="bkMsg" style="font-size:15px;margin-top:6px"></p></div>'+
@@ -971,7 +1042,7 @@ function stayHTML(){
    '<li>吉田神社、八坂神社、廬山寺、壬生寺：京都觀光 Navi 與京都總合觀光案內所（2026 年資料，2027 年時間尚未公布）</li>'+
    '<li>美山冬灯廊期間與停車預約：活動主辦資訊（雪灯廊官網）</li>'+
    '<li>勝尾寺開放時間、難波八阪神社時間、北大阪急行直通箕面萱野：各官方／市府資料</li>'+
-   '<li>天氣：Open-Meteo 免費預報（出發前 16 天內自動更新，之前為範例）；航班即時狀態請用航班卡片上的連結</li>'+
+   '<li>天氣：Open-Meteo 免費預報（出發前 16 天內自動更新，之前為預估值）；航班即時狀態請用航班卡片上的連結</li>'+
    '<li>餐廳營業時間：Gurunavi、TableCheck、Tabelog 等公開資料（請以店家為準）</li></ul></div>'+
   backBtn();
 }
@@ -982,16 +1053,28 @@ function budgetHTML(){
   const spentPP=SPENT.reduce((a,b)=>a+b.pp,0);
   const lo=BUDGET.reduce((a,b)=>a+b.lo,0),hi=BUDGET.reduce((a,b)=>a+b.hi,0);
   const P=TRIP.people;
+  const sm=(pay,k)=>BUDGET.filter(x=>x.pay===pay).reduce((a,b)=>a+b[k],0);
+  const cLo=sm("cash","lo"),cHi=sm("cash","hi"),iLo=sm("ic","lo"),iHi=sm("ic","hi");
+  const sug=Math.ceil((cLo+cHi)/2/5000)*5000;
   return '<h2 class="stitle">旅遊預算彙整</h2>'+
   '<div class="card"><h3 style="font-size:17px">已支出（每人）</h3><table class="tbl">'+
    SPENT.map(x=>'<tr><td>'+x.n+'</td><td>'+ntd(x.pp)+'</td></tr>').join("")+
    '<tr class="tot"><td>已支出小計</td><td>'+ntd(spentPP)+'</td></tr></table>'+
-   '<h3 style="font-size:17px;margin-top:14px">預算<span class="tg ex">範例</span>（每人）</h3><table class="tbl">'+
-   BUDGET.map(x=>'<tr><td>'+x.n+'<br><span style="font-size:15px">'+yen(x.lo)+"–"+yen(x.hi)+'</span></td><td>'+ntd(x.lo*S.rate)+"–"+ntd(x.hi*S.rate)+'</td></tr>').join("")+
+   '<h3 style="font-size:17px;margin-top:14px">預算<span class="tg tbc">估算</span>（每人）</h3><table class="tbl">'+
+   BUDGET.map(x=>'<tr><td>'+x.n.replace("{N}",RES_DEF.length)+'<span class="tg '+(x.pay==="cash"?"pri":"ok")+'">'+(x.pay==="cash"?"現金":"西瓜卡")+'</span><br><span style="font-size:15px">'+yen(x.lo)+"–"+yen(x.hi)+'</span></td><td>'+ntd(x.lo*S.rate)+"–"+ntd(x.hi*S.rate)+'</td></tr>').join("")+
    '<tr class="tot"><td>預算小計<br><span style="font-size:15px">'+yen(lo)+"–"+yen(hi)+'</span></td><td>'+ntd(lo*S.rate)+"–"+ntd(hi*S.rate)+'</td></tr></table>'+
+   '<p style="font-size:15px;margin-top:6px">不含 Outlet 與個人購物（建議刷信用卡）。</p>'+
    '<h3 style="font-size:17px;margin-top:14px">總預算（每人）</h3><p><b style="font-size:20px">'+ntd(spentPP+lo*S.rate)+" – "+ntd(spentPP+hi*S.rate)+'</b></p>'+
    '<p style="font-size:15px">5 人合計約 '+ntd((spentPP+lo*S.rate)*P)+" – "+ntd((spentPP+hi*S.rate)*P)+'（匯率 ¥1 = NT$'+S.rate+'）</p>'+
    '<label class="fld" style="margin-top:6px"><span>匯率（¥1 = NT$ ?）</span><input type="number" inputmode="decimal" step="0.001" min="0" value="'+S.rate+'" data-rate="1"></label></div>'+
+  '<div class="card"><h3 style="font-size:19px">💴 需要換多少日幣（每人）</h3>'+
+   '<p>現金需求約 <b>'+yen(cLo)+" – "+yen(cHi)+'</b></p>'+
+   '<p style="font-size:20px;margin:6px 0"><b>建議換 '+yen(sug)+'</b>（約 '+ntd(sug*S.rate)+'）</p>'+
+   '<p style="font-size:15px">5 人合計約 '+yen(sug*P)+'（約 '+ntd(sug*P*S.rate)+'）。取現金需求範圍的中間值再進位，若有餐廳可刷卡可少換一些；怕不夠就抓高一點。</p>'+
+   '<table class="tbl" style="margin-top:8px">'+BUDGET.filter(x=>x.pay==="cash").map(x=>'<tr><td>'+x.n.replace("{N}",RES_DEF.length)+'</td><td>'+yen(x.lo)+"–"+yen(x.hi)+'</td></tr>').join("")+
+   '<tr class="tot"><td>現金小計</td><td>'+yen(cLo)+"–"+yen(cHi)+'</td></tr></table>'+
+   '<h3 style="font-size:17px;margin-top:14px">西瓜卡先儲值（不換現金）</h3>'+
+   '<p>大眾運輸與超商約 <b>'+yen(iLo)+" – "+yen(iHi)+'</b>，建議先儲值 '+yen(Math.ceil(iHi/1000)*1000)+'，不夠隨時可在車站或超商加值。事前購買的車票（如 Haruka 指定席）不用算在這裡。</p></div>'+
   lsCard()+backBtn();
 }
 
@@ -1023,7 +1106,7 @@ function resCard(r){
    (RES_DEF.some(d=>d.id===r.id&&d.url)?'':'<label class="full">訂位連結<input type="url" value="'+esc(r.url||"")+'" placeholder="貼上訂位網址" maxlength="300" data-res-f="'+r.id+':url"></label>')+
    '<label class="full">預約資訊（訂位人名、人數、編號、電話）<input type="text" value="'+esc(r.no||"")+'" placeholder="訂好再填" maxlength="80" data-res-f="'+r.id+':no"></label>'+
    '<label class="full">備註<textarea maxlength="300" placeholder="取消規則、特殊需求、候補店家…" data-res-f="'+r.id+':note">'+esc(r.note||"")+'</textarea></label></div>'+
-   '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+((r.url||r.link)?'<a class="btn pri" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">🔗 前往訂位</a>':'')+'<button class="btn" data-res-del="'+r.id+'">移除</button></div></div></div>';
+   '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">'+IC.map+' 地圖</a>':'')+((r.url||r.link)?'<a class="btn pri" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">'+IC.link+' 前往訂位</a>':'')+'<button class="btn" data-res-del="'+r.id+'">移除</button></div></div></div>';
 }
 function resOpenDate(r){
   const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(r.date||"");const o=/(\d+)\s*(個月|週|天)前/.exec(r.open||"");
@@ -1055,7 +1138,7 @@ function resAllHTML(){
   const doneRow=r=>'<div class="rv is-sum" id="rc-'+r.id+'"><input type="checkbox" checked aria-label="取消已預約" data-res-done="'+r.id+'">'+
     '<div><div class="nm">'+esc(r.name)+'</div><div style="font-size:16px"><b>'+fmt(r.date)+(r.time?' '+esc(r.time):'')+'</b></div>'+
     (r.alt?'<div style="font-size:15px">備選時間：'+esc(r.alt)+'</div>':'')+(r.no?'<div style="font-size:15px">預約資訊：'+esc(r.no)+'</div>':'')+(r.note?'<div style="font-size:15px;opacity:.85">備註：'+esc(r.note)+'</div>':'')+
-    '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">🗺️ 地圖</a>':'')+((r.url||r.link)?'<a class="btn" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">🔗 訂位連結</a>':'')+'</div></div></div>';
+    '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">'+IC.map+' 地圖</a>':'')+((r.url||r.link)?'<a class="btn" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">'+IC.link+' 訂位連結</a>':'')+'</div></div></div>';
   return '<div class="card"><div class="rv-h"><h3>✅ 所有預約餐廳</h3><span class="tg ok" style="margin:0">已預約 '+done.length+' 間</span></div>'+
    (done.length?done.map(doneRow).join(""):'<p style="padding:10px 0 2px">目前還沒有已預約的餐廳。下方打勾完成的餐廳會自動出現在這裡。</p>')+'</div>'+
    resSchedHTML()+
@@ -1078,7 +1161,7 @@ function optHTML(o,j){
    (o.dishes?'<div class="row"><b>推薦餐點</b><span>'+o.dishes+'</span></div>':'')+
    (o.pp?'<div class="row"><b>人均</b><span>'+o.pp+'</span></div>':'')+rs+
    (o.note?'<div class="row"><b>備註</b><span>'+o.note+'</span></div>':'')+
-   '<div class="acts">'+(o.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(o.map)+'">🗺️ 地圖</a>':'')+'</div></div>';
+   '<div class="acts">'+(o.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(o.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
 function slotHTML(sl,i){
   const booked=sl.opts.some(o=>o.resId&&(resGet(o.resId)||{}).done);
@@ -1088,7 +1171,7 @@ function slotHTML(sl,i){
 }
 function foodHTML(){
   const n=(S.fday>=0&&S.fday<=6)?S.fday:0;
-  let h='<h2 class="stitle">餐廳</h2><div class="days f4"><button class="dbtn all'+(n===0?' on':'')+'" data-fday="0"><b>📋 預約餐廳</b><span>全部清單</span></button>'+
+  let h='<h2 class="stitle">餐廳</h2><div class="days f4"><button class="dbtn all'+(n===0?' on':'')+'" data-fday="0"><b>'+IC.copy+' 預約餐廳</b><span>全部清單</span></button>'+
    DAYS.map(d=>'<button class="dbtn'+(n===d.n?' on':'')+'" data-fday="'+d.n+'"><b>'+d.date+'</b><span>'+d.wd+'・D'+d.n+'</span></button>').join("")+'</div>';
   if(n===0)return h+'<div class="dayhead"><h2>所有預約餐廳</h2></div>'+resAllHTML()+backBtn();
   const D=DAYS[n-1];
@@ -1172,7 +1255,7 @@ function msg(t){const m=$("#bkMsg");if(m)m.textContent=t}
 /* ---------- 啟動 ---------- */
 render();
 setInterval(tick,30000);
-refreshWx().then(updSum).catch(()=>{});
+refreshWx().then(()=>{updSum();if(view==='list')render()}).catch(()=>{});
 </script>
 </body>
 </html>
