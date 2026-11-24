@@ -70,6 +70,7 @@ button,input,textarea{font:inherit;color:inherit}
 .cd li.nx{font-weight:700;color:var(--torii)}
 
 /* ===== Nav ===== */
+.nav[hidden]{display:none}
 .nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
 .navbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:64px;border:var(--line);border-radius:16px;background:#fff;font-weight:700;font-size:17px;cursor:pointer;padding:8px 10px}
 .navbtn svg{width:26px;height:26px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -105,10 +106,14 @@ button,input,textarea{font:inherit;color:inherit}
 .sum-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:44px}
 .sum-row .ic{font-size:26px;line-height:1}
 .sum-row .tp{font-weight:700;font-size:17px}
-.sum-btn{margin-left:auto;min-height:44px;padding:0 12px;border:var(--line);border-radius:12px;background:#fff;cursor:pointer;font-weight:500}
+.sum-top{display:flex;align-items:center;gap:8px}
+.sum-left{flex:1;min-width:0}
+.sum-btn{flex:none;margin-left:0;min-height:44px;padding:0 12px;border:var(--line);border-radius:12px;background:#fff;cursor:pointer;font-weight:500}
 .sum-more{border-top:1.5px dashed var(--snow);margin-top:6px;padding-top:8px;font-size:16px}
 .sum-more p{margin:0 0 6px}
 .warn{background:var(--lantern);border-radius:10px;padding:2px 10px;font-weight:700;font-size:15px}
+.warn.wl{display:block;width:fit-content;max-width:100%;margin-top:6px;padding:5px 10px;font-size:14px;line-height:1.5}
+.sum-more .bl{margin:0 0 8px}
 
 /* ===== Day header ===== */
 .dayhead{margin:0 2px 10px}
@@ -273,6 +278,25 @@ textarea{padding:10px 12px;min-height:90px}
 
 
 
+/* ===== 長文字分段 / 條列 ===== */
+.bl{margin:0;padding:0;list-style:none}
+.bl li{position:relative;padding-left:1.05em;margin:0 0 5px;line-height:1.65}
+.bl li:last-child{margin-bottom:0}
+.bl li::before{content:"";position:absolute;left:.1em;top:.72em;width:.42em;height:.42em;border-radius:50%;background:rgba(35,64,107,.5)}
+.ln{display:block;margin:0 0 6px}
+.ln:last-child{margin-bottom:0}
+.rt{display:block;font-weight:700;line-height:1.5}
+.rd{display:block;margin-top:2px;color:var(--muted);font-size:.94em;line-height:1.6}
+.rd .ln{margin:0 0 2px}
+.tr .nt .bl,.tr .w .bl{margin-top:3px}
+.bl li b.lk{display:block;font-weight:700}
+.bl li.gh{padding-left:0;margin:8px 0 4px;font-weight:700;color:var(--kyo)}
+.bl li.gh:first-child{margin-top:0}
+.bl li.gh::before{display:none}
+.bl li.gh span{display:inline-block;background:rgba(35,64,107,.1);border-radius:8px;padding:0 8px}
+.bl li .lv{display:block;color:var(--ink,inherit)}
+.row a.lnk{display:inline-block;margin:2px 0;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
 /* ===== 長字串與手機閱讀排版 ===== */
 .wrap,.card,.it,.opt,.row,.row b,.row span,.info,.tr,.kv,.kv dt,.kv dd,
 .resc,.resc label,.resc .rnote,.scoreline,.d,.nt,.foot{
@@ -280,7 +304,7 @@ textarea{padding:10px 12px;min-height:90px}
   overflow-wrap:anywhere;
   word-break:normal;
 }
-.row{grid-template-columns:minmax(5.2em,auto) minmax(0,1fr)}
+.row{grid-template-columns:5.9em minmax(0,1fr)}
 .row>*{min-width:0}
 .opt-title{min-width:0;overflow-wrap:anywhere}
 a{overflow-wrap:anywhere;word-break:normal}
@@ -292,9 +316,11 @@ a{overflow-wrap:anywhere;word-break:normal}
 .pick-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:25px;height:25px;border:0;background:transparent;color:#d99a18;vertical-align:-5px;filter:drop-shadow(0 1px 1px rgba(126,82,8,.22))}
 .pick-icon svg{width:22px;height:22px;display:block;fill:currentColor}
 .opt-title .pick-icon{margin-left:2px}
-.it .row b .pick-icon{margin-left:5px}
+.it .row b{white-space:nowrap}
+.it .row b .pick-icon{margin-left:2px;width:18px;height:18px}
+.it .row b .pick-icon svg{width:17px;height:17px}
 .pick-icon[aria-label]{cursor:help}
-.it .row{grid-template-columns:minmax(5.2em,auto) minmax(0,1fr)}
+.it .row,.opt .row{grid-template-columns:5.9em minmax(0,1fr)}
 @media(max-width:480px){
  .wrap{padding:8px 10px calc(28px + env(safe-area-inset-bottom))}
  .card,.it{padding:12px}
@@ -302,7 +328,7 @@ a{overflow-wrap:anywhere;word-break:normal}
  .it .top{gap:5px 0}
  .it .time{font-size:16px}
  .it h3{font-size:18px}
- .row{grid-template-columns:4.8em minmax(0,1fr);gap:6px;font-size:15px;line-height:1.65}
+ .row,.it .row,.opt .row{grid-template-columns:5.9em minmax(0,1fr);gap:6px;font-size:15px;line-height:1.65}
  .opt{margin-top:9px;padding-top:8px}
  .opt-title{font-size:17px;line-height:1.4;gap:7px}
  .pick-icon{width:22px;height:22px;border-radius:7px}
@@ -499,14 +525,13 @@ const DAYS=[
   TR("🚆","JR 關空快速／南海空港線","關西空港站","りんくうタウン站","約 5–6 分（1 站）","JR 關空快速或南海空港線皆可到りんくうタウン站；出站步行約 6 分到 Outlet。5 人搭鐵路通常比計程車划算，無需特地叫車。"),
   {id:"d1d",k:"shop",t:"12:10–14:30",n:"Rinku Premium Outlets（りんくうプレミアム・アウトレット）",stay:"約 2 小時 20 分",
    d:"位在 KIX 對岸臨空城的海濱型 Outlet，約 250 間日系與國際品牌，臨海、有摩天輪，午餐可在美食街解決。",
-   rows:[["營業時間","2 月店舖 10:00–19:00；美食街 10:00–20:00、餐廳 11:00–21:00（各店 L.O. 不同；以官網當日公告為準）"],
-         ["休館日","每年 2 月休館 1 天；2027 年官方公告為 2/25（四），2/2 正常營業"],
-         ["置物櫃｜Main Side 1F","Food Court 美食街內：寬大型 ¥1,000、中型／大型 ¥500、小型 ¥300、冷藏小櫃 ¥300；Bagel & Bagel 旁大型 ¥500；Tasaki 後方大型 ¥500。"],
-         ["置物櫃｜Sea Side","1F Logos 旁：特大 ¥800、大 ¥500、中 ¥400、小 ¥300；1F Sergio Rossi 旁：寬大型 ¥1,000、寬中型 ¥500、大 ¥500、小 ¥300；2F Plaza 旁：大 ¥500、小 ¥300；2F United Arrows 旁：中 ¥400、小 ¥300。數量有限，依現場空位。"],
-         ["大型行李寄放","無法放入置物櫃：Main Side 1F 諮詢中心（Adidas Golf 旁）或 Sea Side 1F 迎賓中心（KitKat 旁）；¥1,000／日、僅收現金。"],
-         ["優惠券／購物券領取","南海電鐵 Rinku 數位套票附 ¥1,000 購物券：到 Main Side 1F 諮詢中心（Information Center，Adidas Golf 旁）出示 QR Code 換領；套票內店舖優惠券在消費前直接向店員出示手機票券，不需另到服務台。若要詢問一般外國旅客折扣券，Main Side 1F 諮詢中心或 Sea Side 1F 迎賓中心都可先洽詢；官方目前未保證一般折扣券一定發放。"],
-         ["退稅","帶護照。日本 2026/11/1 起改為「先付含稅價，出境時於機場海關確認後退款」，購買日起 90 日內出境；各店條件與退款流程待確認"],
-         ["官方服務資訊","置物櫃、服務台位置與行李寄放：https://www.premiumoutlets.co.jp/cht/rinku/service/；南海數位套票購物券換領規則：https://www.nankai.co.jp/traffic/digital/rinku.html"]],
+   rows:[["營業時間","店舖 10:00–19:00；美食街 10:00–20:00；餐廳 11:00–21:00；各店 L.O. 不同，以官網當日公告為準"],
+         ["休館日","每年 2 月休館 1 天；2027 年為 2/25（四），2/2 正常營業"],
+         ["置物櫃","【Main Side 1F】；Food Court 美食街內：寬大型 ¥1,000、中型／大型 ¥500、小型 ¥300、冷藏小櫃 ¥300；Bagel & Bagel 旁：大型 ¥500；Tasaki 後方：大型 ¥500；【Sea Side】；1F Logos 旁：特大 ¥800、大 ¥500、中 ¥400、小 ¥300；1F Sergio Rossi 旁：寬大型 ¥1,000、寬中型 ¥500、大 ¥500、小 ¥300；2F Plaza 旁：大 ¥500、小 ¥300；2F United Arrows 旁：中 ¥400、小 ¥300；數量有限，依現場空位"],
+         ["行李寄放","放不進置物櫃時：Main Side 1F 諮詢中心（Adidas Golf 旁）或 Sea Side 1F 迎賓中心（KitKat 旁）；¥1,000／日、僅收現金"],
+         ["優惠券","南海 Rinku 數位套票附 ¥1,000 購物券，到 Main Side 1F 諮詢中心（Adidas Golf 旁）出示 QR Code 換領；套票內店舖優惠券，消費前直接向店員出示手機票券，不需另到服務台；一般外國旅客折扣券可先洽詢 Main Side 1F 諮詢中心或 Sea Side 1F 迎賓中心，官方未保證一定發放"],
+         ["退稅","帶護照；日本 2026/11/1 起改為先付含稅價，出境時於機場海關確認後退款；購買日起 90 日內出境；各店條件與退款流程待確認"],
+         ["官方資訊",'<a class="lnk" target="_blank" rel="noopener" href="https://www.premiumoutlets.co.jp/cht/rinku/service/">置物櫃・服務台・行李寄放 ↗</a><br><a class="lnk" target="_blank" rel="noopener" href="https://www.nankai.co.jp/traffic/digital/rinku.html">南海數位套票購物券換領規則 ↗</a>']],
    map:"りんくうプレミアム・アウトレット"},
   {id:"d1e",k:"food",t:"午餐（購物時段內）",n:"午餐｜Rinku Premium Outlets 美食街",d:"在 Outlet 內自行選店，不需訂位。",
    rows:[["推薦餐點","美食街內日式與各國料理，現場選（拉麵、丼飯、定食、炸物）"],["人均","約 ¥1,000–1,800"],["訂位","不需要，現場選"]],map:"りんくうプレミアム・アウトレット フードコート"},
@@ -585,7 +610,7 @@ const DAYS=[
   {id:"d3c",k:"sight",t:"14:15–16:05",n:"天橋立（纜車／單軌電車山麓站）",stay:"約 1 小時 50 分（含午餐）",
    d:"日本三景之一，約 3.6 公里的天然沙嘴橫跨宮津灣。搭纜車或單軌電車上傘松公園，可以彎腰從兩腿間倒看（股のぞき），橋像飛龍升天。",map:"天橋立 傘松公園"},
   {id:"d3d",k:"food",t:"約 14:15 起（含在上述時段）",n:"午餐｜天橋立",d:"今天午餐較晚，建議先在伊根買點小點心墊肚子。",
-   rows:[["推薦 1","海鮮工房 はしだて物産｜蟹飯／蟹壽司便當（當日供應為準；Tabelog 3.13；預算帶 ¥1,000–1,999）","pick"],["推薦 2","天橋立山腳或車站附近 海鮮丼・定食｜海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應，現場選）"],["人均","約 ¥1,200–2,500"],["訂位","不需要，現場選"],["提醒","天橋立車站前海鮮工房 はしだて物産 11:00–15:00；其他海鮮丼店營業時間各異；今天午餐較晚，先在伊根買點小吃墊肚子"]],map:"天橋立駅 周辺 食事"},
+   rows:[["推薦 1","海鮮工房 はしだて物産｜蟹飯／蟹壽司便當（當日供應為準）；Tabelog 3.13｜預算帶 ¥1,000–1,999","pick"],["推薦 2","天橋立山腳或車站附近 海鮮丼・定食｜海鮮丼、冬季牡蠣、丹後蟹料理（視當季供應，現場選）"],["人均","約 ¥1,200–2,500"],["訂位","不需要，現場選"],["提醒","天橋立車站前海鮮工房 はしだて物産 11:00–15:00；其他海鮮丼店營業時間各異；今天午餐較晚，先在伊根買點小吃墊肚子"]],map:"天橋立駅 周辺 食事"},
   TR("🚌","包車","天橋立","美山","約 1.5 小時（依一日遊行程）","",null),
   {id:"d3e",k:"sight",t:"17:30–19:00",must:true,n:"美山茅草屋之里 冬灯廊",stay:"約 1.5 小時",
    d:"美山北集落約有 38–39 棟茅葺屋，是國家重要傳統建築群保存地區。冬灯廊 2027 年舉辦期間為 1/30–2/6，每天 17:00–19:00 點燈，路地行燈與 LED 灯籠把老村莊照得像童話世界。近年雪量不穩，不保證有積雪。",
@@ -607,8 +632,8 @@ const DAYS=[
   {id:"d4a",k:"sight",t:"10:45–12:15",n:"紫野・今宮神社周邊",stay:"約 1.5 小時",
    d:"今宮神社以炙餅（あぶり餅）聞名，參道兩側有兩家老店對望：竹籤串小麻糬烤過後淋白味噌醬，一人份約 ¥600。旁邊的大德寺一帶安靜、遊客少。",
    rows:[["注意","兩家炙餅老店 2/3（週三）都公休，所以改排週五；一和、かざりや皆為 10:00–17:00，週三休；2/5（週五）正常營業"]],map:"今宮神社 京都"},
-  {id:"d4g",k:"food",t:"約 12:15 起",n:"咖啡廳｜大德寺之後",d:"午餐不排，路上看到想吃的隨便吃；早餐吃很飽，要消化一下，晚餐才吃得下壽喜燒。想休息的話有一個推薦和兩間備案。",
-   rows:[["推薦 1","今宮神社 炙餅（あぶり餅）｜竹籤小麻糬淋白味噌，約 ¥600（兩家老店對望）","pick"],["備案 1","Sarasa Nishijin（さらさ西陣）｜焦糖起司蛋糕套餐 ¥950，離大德寺約 1 公里"],["備案 2","Francois 喫茶店（フランソア喫茶室）｜經典起司蛋糕、咖啡，在河原町，回市區時再去"],["人均","約 ¥600–1,500"],["訂位","不需要，現場選"],["提醒","午餐不排，早餐吃很飽，先消化；一和、かざりや 10:00–17:00（週三休）；Sarasa Nishijin 週五 11:30–22:00（L.O. 21:00）；Francois 11:00–22:00（餐點 L.O. 20:00、飲料甜點 L.O. 21:30）；價格以現場菜單為準"]],map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A"},
+  {id:"d4g",k:"food",t:"約 12:15 起",n:"咖啡廳｜大德寺之後",d:"午餐不排，路上看到想吃的隨便吃；早餐吃很飽，要消化一下，晚餐才吃得下壽喜燒。想休息的話有三個備案可以選。",
+   rows:[["備案 1","今宮神社 炙餅（あぶり餅）｜竹籤小麻糬淋白味噌，約 ¥600（兩家老店對望）","pick"],["備案 2","Sarasa Nishijin（さらさ西陣）｜焦糖起司蛋糕套餐 ¥950，離大德寺約 1 公里"],["備案 3","Francois 喫茶店（フランソア喫茶室）｜經典起司蛋糕、咖啡，在河原町，回市區時再去"],["人均","約 ¥600–1,500"],["訂位","不需要，現場選"],["提醒","午餐不排，早餐吃很飽，先消化；一和、かざりや 10:00–17:00（週三休）；Sarasa Nishijin 週五 11:30–22:00（L.O. 21:00）；Francois 11:00–22:00（餐點 L.O. 20:00、飲料甜點 L.O. 21:30）；價格以現場菜單為準"]],map:"https://maps.app.goo.gl/HU1HYaTkjhkcL4Q3A"},
   {id:"d4c",k:"misc",t:"14:00–17:00",n:"自由活動",d:"想逛的地方由大家決定（待確認）。",tbc:true},
   {id:"d4d",k:"food",t:"18:30–20:30",awardLabel:"Tabelog｜壽喜燒・涮涮鍋百名店｜2026",n:"除夕年夜飯｜和牛 壽喜燒 京都五天五 烏丸",d:"5 人一起吃壽喜燒年夜飯，訂位 18:30。套餐用餐限 120 分鐘，離烏丸站（阪急）步行約 1 分。",
    rows:[["推薦餐點","官方現列『並』和牛ソトヒラ ¥5,500、『上』和牛沙朗 ¥8,800、『特上』神戶牛肩肉 ¥13,200、『極上』神戶牛肋眼／沙朗 ¥22,000（皆 6 道）"],["人均","約 ¥5,500–13,200（5 人約 ¥27,500–66,000）"],["訂位","5 人；1 個月前開放（約 2027/1/5），連結見「餐廳 → 預約」"],["營業","11:00–23:00；電話 075-212-0500"]],map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"},
@@ -695,7 +720,7 @@ const CK={
   {id:"f7",text:"2/4 午餐｜天橋立",note:"建議先在伊根買點心墊肚子"},
   {id:"f8",text:"2/4 晚餐｜20:30 之後",note:"找營業到深夜的店（目前安排吃拉麵宵夜）"},
   {id:"f11",text:"2/5 早餐 9:00｜いとおかし（日式早餐）",note:"每月 1 日公布，1 個月前開放訂位（約 2027/1/1）",pri:true,link:"https://www.tablecheck.com/zh-TW/kyoto-itookashi"},
-  {id:"f14",text:"2/5 午餐｜不排",note:"路上看到想吃的隨便吃，留肚子給晚餐；備案咖啡廳 Sarasa Nishijin、Francois"},
+  {id:"f14",text:"2/5 午餐｜不排",note:"路上看到想吃的隨便吃，留肚子給晚餐；備案：炙餅、Sarasa Nishijin、Francois"},
   {id:"f1",text:"2/5 晚餐 18:30｜壽喜燒年夜飯（5 人）",note:"和牛 壽喜燒 京都五天五 烏丸；1 個月前開放訂位",pri:true,link:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"},
   {id:"f9",text:"2/6 午餐 13:30｜Jyuunimatsu Rokuzaemon（箕面萱野）",note:"1 個月前開放訂位（約 2027/1/6）；座位限 1 小時",pri:true,link:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9"},
   {id:"f2",text:"2/6 晚餐｜難波或梅田",note:"週六晚上人多，確定地點後再訂位；推薦千代松勝蓋飯",pri:true},
@@ -887,11 +912,12 @@ function tick(){
 
 /* ---------- 導覽 ---------- */
 function renderNav(){
+  $("#menu").hidden=view!=="overview";
   $("#menu").innerHTML=NAV.map(([k,t])=>'<button class="navbtn'+(view===k?' on':'')+'" data-nav="'+k+'" aria-current="'+(view===k)+'">'+ICON[k]+'<span>'+t+'</span></button>').join("");
 }
 function parseHash(){const h=(location.hash||"#overview").slice(1).split("/");return{v:h[0],d:+h[1]||0}}
 function go(v,d){location.hash=v==="daily"?"#daily/"+(d||S.day||1):v==="food"?"#food/"+(d||0):"#"+v}
-function toMenu(){const el=$("#menu");if(el)el.scrollIntoView({behavior:reduce()?"auto":"smooth",block:"start"})}
+function toMenu(){const b4=location.hash;go("overview");if(location.hash===b4||b4==="")render();window.scrollTo({top:0,behavior:reduce()?"auto":"smooth"})}
 function backBtn(){return '<button class="btn fill back" data-act="top">↑ 返回主選單</button>'}
 
 /* ---------- 總覽 ---------- */
@@ -1007,17 +1033,54 @@ function wxHTML(D){
   const live=wxGet(D.n),w=live||WEATHER[D.n];const open=S.sum;
   const tm=live?new Date(live.t).toLocaleString("zh-TW",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false}):"";
   const detail=live
-    ?'<p><b>各地預報：</b>'+live.locs.map(x=>x.n+" "+x.hi+"°/"+x.lo+"°，"+(x.snow>0?"降雪":"降雨")+" "+x.p+"%").join("；")+'</p><p style="font-size:15px">資料來源 Open-Meteo，更新於 '+tm+'。</p>'
+    ?'<p><b>各地預報</b></p><ul class="bl">'+live.locs.map(x=>'<li><b class="lk">'+x.n+'</b><span class="lv">'+x.hi+"°/"+x.lo+"°，"+(x.snow>0?"降雪":"降雨")+" "+x.p+"%"+'</span></li>').join("")+'</ul><p style="font-size:15px">資料來源 Open-Meteo，更新於 '+tm+'。</p>'
     :'<p style="font-size:15px">目前為預估值，出發前 16 天內會自動連網更新成實際預報。</p>';
-  return '<div class="card sticky" id="sum"><div class="sum-row"><span class="ic" aria-hidden="true">'+w.i+'</span>'+
+  return '<div class="card sticky" id="sum"><div class="sum-top"><div class="sum-left"><div class="sum-row"><span class="ic" aria-hidden="true">'+w.i+'</span>'+
    '<span class="tp">'+w.hi+'° / '+w.lo+'°C</span><span class="tg '+(live?'ok':'tbc')+'" style="margin:0">'+(live?'即時':'預估')+'</span><span>'+w.u+' '+w.p+'%</span>'+
-   (w.alert?'<span class="warn">'+w.alert+'</span>':'')+
+   '</div>'+
+   (w.alert?'<div class="warn wl">'+w.alert+'</div>':'')+'</div>'+
    '<button class="sum-btn" data-sum="1" aria-expanded="'+open+'">'+(open?'收合 ▴':'詳情 ▾')+'</button></div>'+
    (open?'<div class="sum-more"><p><b>穿搭：</b>'+w.wear+'</p>'+detail+
    (wxInWindow()?'<p><button class="btn sm" data-wxr="1">'+IC.refresh+' 重新抓取天氣</button></p>':'')+
-   '<p><b>住宿：</b>'+HOTEL.name+'<br>五條站步行約 4 分｜阪急烏丸站步行約 7 分｜京都站過去地鐵 1 站</p>'+
-   '<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(HOTEL.maps)+'">'+IC.map+' 飯店地圖</a></div>':'')+
+   '</div>':'')+
    '</div>';
+}
+const _plain=t=>String(t).replace(/<[^>]*>/g,"");
+function splitSemi(t){ // 以「；」切開，但括號（）內的不切
+  const out=[];let d=0,cur="";
+  for(const ch of String(t)){
+    if(ch==="（"||ch==="(")d++;else if(ch==="）"||ch===")")d=Math.max(0,d-1);
+    if(ch==="；"&&d===0){out.push(cur);cur=""}else cur+=ch;
+  }
+  out.push(cur);return out.map(x=>x.trim()).filter(Boolean);
+}
+function fmtLk(t){ // 置物櫃：地點粗體、價格換行
+  const parts=splitSemi(t).map(x=>x.replace(/[。]$/,""));
+  return '<ul class="bl">'+parts.map(x=>{if(/^【.+】$/.test(x))return '<li class="gh"><span>'+x.slice(1,-1)+'</span></li>';const i=x.indexOf("：");return i>0&&i<=22?'<li><b class="lk">'+x.slice(0,i)+'</b><span class="lv">'+x.slice(i+1)+'</span></li>':'<li>'+x+'</li>'}).join("")+'</ul>';
+}
+function fmt(t){ // 長文字 → 條列（以「；」或多句「。」切開）
+  if(t==null)return "";t=String(t);
+  if(_plain(t).length<36)return t;
+  let parts=splitSemi(t);
+  if(parts.length<2){const sn=t.split(/(?<=。)/).map(x=>x.trim()).filter(Boolean);if(sn.length>=2)parts=sn}
+  if(parts.length<2)return t;
+  return '<ul class="bl">'+parts.map(x=>'<li>'+x.replace(/[。；]$/,"")+'</li>').join("")+'</ul>';
+}
+function fmtP(t){ // 說明段落：多句時每句獨立一行
+  if(t==null)return "";t=String(t);
+  if(_plain(t).length<60)return t;
+  const sn=t.split(/(?<=。)/).map(x=>x.trim()).filter(Boolean);
+  if(sn.length<2)return t;
+  return sn.map(x=>'<span class="ln">'+x+'</span>').join("");
+}
+function rowVal(label,v){ // 推薦／備案列：店名獨立一行，說明縮小換行
+  v=String(v);
+  if(/^(推薦|備案|附近推薦)/.test(label)){
+    const i=v.indexOf("｜");
+    if(i>0)return '<span class="rt">'+v.slice(0,i)+'</span><span class="rd">'+splitSemi(v.slice(i+1)).map(x=>'<span class="ln">'+x.replace(/[。]$/,"")+'</span>').join("")+'</span>';
+  }
+  if(/置物櫃/.test(label))return fmtLk(v);
+  return fmt(v);
 }
 const PICK_ICON='<span class="pick-icon" role="img" aria-label="推薦首選" title="推薦首選"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.75 5.58 6.16.9-4.46 4.35 1.05 6.14L12 16.87l-5.5 2.9 1.05-6.14L3.1 9.28l6.16-.9L12 2.8z"/></svg></span>';
 function tagsOf(it,extra){
@@ -1028,15 +1091,15 @@ function itHTML(it,i,orig){
    '<div class="top"><span class="time">'+it.t+'</span><span class="kind">'+(KIND[it.k]||"安排")+'</span>'+tagsOf(it,orig?'<span class="tg ex">雨／雪替代</span>':'')+'</div>'+
    (orig?'<div class="orig">原：'+orig+'</div>':'')+
    '<h3>'+it.n+'</h3>'+(it.stay?'<div class="stay">⏱ 預計停留 '+it.stay+'</div>':'')+
-   (it.d?'<p class="d">'+it.d+'</p>':'')+
-   (function(){const rows=it.rows||[];return rows.map(r=>'<div class="row"><b>'+r[0]+(r[2]==='pick'?' '+PICK_ICON:'')+'</b><span>'+r[1]+'</span></div>').join('');})()+
+   (it.d?'<p class="d">'+fmtP(it.d)+'</p>':'')+
+   (function(){const rows=it.rows||[];return rows.map(r=>'<div class="row"><b>'+r[0]+(r[2]==='pick'?' '+PICK_ICON:'')+'</b><span>'+rowVal(r[0],r[1])+'</span></div>').join('');})()+
    '<div class="acts">'+
    (it.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(it.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
 function trHTML(t,i){
   const route=t.from?('<span class="w">'+t.from+(t.to?' → '+t.to:'')+'</span>'):'';
   return '<div class="tr'+(t.tbc?' alert':'')+' pop" style="--i:'+i+'"><span class="m">'+t.mode+' '+t.route+'</span>'+route+
-   '<span class="w">⏱ '+t.dur+'</span>'+(t.walk?'<span class="w">'+(/步行/.test(t.walk)?'🚶 ':'📍 ')+t.walk+'</span>':'')+(t.note?'<span class="nt">'+(t.tbc?'⚠️ ':'')+t.note+'</span>':'')+(t.tbc?'<span class="tg tbc" style="margin:2px 0 0">待確認</span>':'')+'</div>';
+   '<span class="w">⏱ '+t.dur+'</span>'+(t.walk?'<span class="w">'+(/步行/.test(t.walk)?'🚶 ':'📍 ')+fmt(t.walk)+'</span>':'')+(t.note?'<span class="nt">'+(t.tbc?'⚠️ ':'')+fmt(t.note)+'</span>':'')+(t.tbc?'<span class="tg tbc" style="margin:2px 0 0">待確認</span>':'')+'</div>';
 }
 function lsCard(){
   return '<div class="card" style="margin-top:14px"><h3 style="font-size:18px">💴 記帳與分帳</h3>'+
@@ -1061,7 +1124,7 @@ function dailyHTML(){
    wxHTML(D)+
    '<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）'+D.title+'</h2><div class="meta">'+D.tags.map(t=>'<span class="tg pri" style="margin:0 6px 0 0">'+t+'</span>').join("")+'</div></div>'+
    (D.alert?'<div class="info"><p>😴 '+D.alert+'</p></div>':'')+
-   '<div class="info">'+D.info.map(x=>'<p>'+x+'</p>').join("")+'</div>'+
+   '<div class="info">'+D.info.map(x=>'<p>'+fmtP(x)+'</p>').join("")+'</div>'+
    (hasRain?'<div class="seg" role="group" aria-label="天氣方案"><button data-mode="sun" class="'+(!rainOn?'on':'')+'">☀️ 晴天行程</button><button data-mode="rain" class="'+(rainOn?'on':'')+'">☔ 雨／雪備案</button></div>'+(rainOn?'<div class="info"><p>以下替代方案皆為「範例」，只替換受天氣影響的項目，其餘照原行程。</p></div>':''):
      (D.noRain?'<div class="info"><p>'+D.noRain+'</p></div>':''))+
    '<div class="tl" id="tl">'+out+'</div>'+
@@ -1241,9 +1304,9 @@ function optHTML(o,j,isPick){
   const score=(o.tabelog||o.google)?'<div class="scoreline">'+(o.tabelog?'Tabelog '+o.tabelog:'Tabelog 未查到')+(o.google?'｜Google '+o.google:'')+'</div>':'';
   return '<div class="opt'+(j?'':' f')+'"><h3 class="opt-title">'+o.n+(isPick?PICK_ICON:'')+'</h3>'+(badges?'<div class="opt-badges">'+badges+'</div>':'')+score+
    (o.area?'<div class="row"><b>餐廳資訊</b><span>'+o.area+(o.kind?'｜'+o.kind:'')+'</span></div>':'')+
-   (o.dishes?'<div class="row"><b>推薦餐點</b><span>'+o.dishes+'</span></div>':'')+
+   (o.dishes?'<div class="row"><b>推薦餐點</b><span>'+fmt(o.dishes)+'</span></div>':'')+
    (o.pp?'<div class="row"><b>人均</b><span>'+o.pp+'</span></div>':'')+rs+
-   (o.note?'<div class="row"><b>備註</b><span>'+o.note+'</span></div>':'')+
+   (o.note?'<div class="row"><b>備註</b><span>'+fmt(o.note)+'</span></div>':'')+
    '<div class="acts">'+(o.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(o.map)+'">'+IC.map+' 地圖</a>':'')+'</div></div>';
 }
 function slotHTML(sl,i){
@@ -1271,7 +1334,7 @@ function slotHTML(sl,i){
     }
   }
   return '<div class="it food pop" style="--i:'+i+'"><div class="top"><span class="time">'+sl.time+'</span><span class="kind">'+sl.slot+'</span>'+tag+'</div>'+
-   (sl.note?'<p class="d">'+sl.note+'</p>':'')+sl.opts.map((o,j)=>optHTML(o,j,j===best)).join("")+'</div><div class="gap"></div>';
+   (sl.note?'<p class="d">'+fmtP(sl.note)+'</p>':'')+sl.opts.map((o,j)=>optHTML(o,j,j===best)).join("")+'</div><div class="gap"></div>';
 }
 function foodHTML(){
   const n=(S.fday>=0&&S.fday<=6)?S.fday:0;
@@ -1301,7 +1364,7 @@ function render(){
 /* ---------- 事件 ---------- */
 document.addEventListener("click",e=>{
   const t=e.target.closest("button,a");if(!t)return;
-  if(t.dataset.nav){go(t.dataset.nav);return}
+  if(t.dataset.nav){const b4=location.hash;go(t.dataset.nav);if(location.hash===b4)render();window.scrollTo(0,0);return}
   if(t.dataset.day){S.day=+t.dataset.day;save();go("daily",S.day);return}
   if(t.dataset.fday!==undefined){S.fday=+t.dataset.fday;save();go("food",S.fday);return}
   if(t.dataset.resDel){const id=t.dataset.resDel;if(id.charAt(0)==="x")S.resCustom=S.resCustom.filter(x=>x.id!==id);else S.resRemoved[id]=true;save();render();return}
