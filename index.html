@@ -117,6 +117,13 @@ button,input,textarea{font:inherit;color:inherit}
 .sum-more .bl{margin:0 0 8px}
 
 /* ===== Day header ===== */
+
+.fest{position:relative;overflow:hidden;margin:0 0 12px;padding:14px 16px 14px 18px;border:2.5px solid #23406B;border-radius:18px;background:linear-gradient(135deg,#FFF3DC,#FBE0D6);box-shadow:4px 4px 0 rgba(35,64,107,.16);min-height:88px}
+.fest svg.fl{position:absolute;left:8px;top:6px;width:84px;height:100px}
+.fest svg.fr{position:absolute;right:10px;top:50%;margin-top:-34px;width:68px;height:68px;transform:rotate(-8deg)}
+
+.fest b{display:block;font-size:19px;color:#B3321F;letter-spacing:.06em;padding-right:84px}
+.fest>span{display:block;font-size:15px;color:#51668a;line-height:1.55;margin-top:3px;padding-right:84px}
 .dayhead{margin:0 2px 10px}
 .dayhead h2{font-size:21px;line-height:1.4}
 .dayhead .meta{font-size:15px}
@@ -371,7 +378,6 @@ a{overflow-wrap:anywhere;word-break:normal}
 
 /* ===== Motion ===== */
 .pop{animation:pop .45s cubic-bezier(.34,1.4,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
-@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
 .snowf{fill:#fff;animation:fall var(--t,9s) linear var(--d,0s) infinite}
 @keyframes fall{0%{transform:translate(0,-12px)}100%{transform:translate(-8px,235px)}}
 .flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick 1.6s ease-in-out infinite}
@@ -777,11 +783,11 @@ const FIELD_DEF={};
 
 /* 預約餐廳（日期、時間、訂位編號可在「餐廳 → 預約」分頁選填） */
 const RES_DEF=[
- {id:"r3",name:"炭炉まん（Sumi Roman／炭火居酒屋）",date:"2027-02-02",time:"20:00",open:"預約開放日依官方訂位頁確認",url:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/",note:"2/2 晚餐｜阪急烏丸站步行約 3–5 分｜店家頁列套餐 ¥5,500、¥6,600、¥8,800；另有席料 ¥330。週二 17:00–23:30（料理 L.O. 23:00）；電話 +81-50-1725-3365。預約規則以訂位頁為準。",map:"Sumi Roman 京都 烏丸"},
- {id:"r2",name:"京洛焼肉やぶ（河原町）",date:"2027-02-03",time:"18:30",open:"預約開放日依官方訂位頁確認",url:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9",note:"2/3 晚餐｜阪急河原町站步行約 1 分｜官方營業 17:00–翌 2:00（料理／飲料 L.O. 翌 1:00），全年無休；電話 075-746-6653。預約開放日以官方訂位頁確認。",map:"京洛焼肉やぶ"},
- {id:"r4",name:"いとおかし（日式早餐）",date:"2027-02-05",time:"09:00",open:"預約開放日依 TableCheck 實際頁面確認",url:"https://www.tablecheck.com/zh-TW/kyoto-itookashi",note:"極厚銀鮭定食 ¥2,500｜完全預約制，使用 TableCheck；官方目前列 7:00–14:30、不定休。2/5 09:00 是否開放以訂位頁為準。",map:"京都 いとおかし"},
- {id:"r5",name:"Jyuunimatsu Rokuzaemon（2/6 午餐）",date:"2027-02-06",time:"13:30",open:"預約開放日依官方訂位頁確認",note:"2/6 午餐｜箕面萱野站步行約 5 分｜午餐 11:30–15:00（L.O. 14:00）；電話 072-737-6274。菜單、午餐預約規則與取消費需再向店家確認；勝尾寺 13:00 搭巴士約 13:25 到站，時間偏緊。",map:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9"},
- {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"18:30",open:"預約開放日依官方訂位頁確認",url:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"除夕年夜飯｜5 人｜官方目前列『並』¥5,500、『上』¥8,800、『特上』¥13,200、『極上』¥22,000（各 6 道）；用餐限 120 分鐘｜電話 075-212-0500",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"}
+ {id:"r3",name:"炭炉まん（Sumi Roman／炭火居酒屋）",date:"2027-02-02",time:"20:00",open:"2 個月前，每月 1 日開放整月（以官方訂位頁為準）",url:"https://tabelog.com/tw/kyoto/A2601/A260201/26039250/",note:"2/2 晚餐｜阪急烏丸站步行約 3–5 分｜店家頁列套餐 ¥5,500、¥6,600、¥8,800；另有席料 ¥330。週二 17:00–23:30（料理 L.O. 23:00）；電話 +81-50-1725-3365。預約規則以訂位頁為準。",map:"Sumi Roman 京都 烏丸"},
+ {id:"r2",name:"京洛焼肉やぶ（河原町）",date:"2027-02-03",time:"18:30",open:"1 個月前開放（以官方訂位頁為準）",url:"https://maps.app.goo.gl/2YsqoYKssCVwkzmV9",note:"2/3 晚餐｜阪急河原町站步行約 1 分｜官方營業 17:00–翌 2:00（料理／飲料 L.O. 翌 1:00），全年無休；電話 075-746-6653。預約開放日以官方訂位頁確認。",map:"京洛焼肉やぶ"},
+ {id:"r4",name:"いとおかし（日式早餐）",date:"2027-02-05",time:"09:00",open:"1 個月前，每月 1 日公布（以 TableCheck 頁面為準）",url:"https://www.tablecheck.com/zh-TW/kyoto-itookashi",note:"極厚銀鮭定食 ¥2,500｜完全預約制，使用 TableCheck；官方目前列 7:00–14:30、不定休。2/5 09:00 是否開放以訂位頁為準。",map:"京都 いとおかし"},
+ {id:"r5",name:"Jyuunimatsu Rokuzaemon（2/6 午餐）",date:"2027-02-06",time:"13:30",open:"1 個月前開放（以官方訂位頁為準）",note:"2/6 午餐｜箕面萱野站步行約 5 分｜午餐 11:30–15:00（L.O. 14:00）；電話 072-737-6274。菜單、午餐預約規則與取消費需再向店家確認；勝尾寺 13:00 搭巴士約 13:25 到站，時間偏緊。",map:"https://maps.app.goo.gl/N1YNfunPAi1oR2gr9"},
+ {id:"r1",name:"和牛 壽喜燒 京都五天五 烏丸",date:"2027-02-05",time:"18:30",open:"1 個月前開放（以官方訂位頁為準）",url:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5",note:"除夕年夜飯｜5 人｜官方目前列『並』¥5,500、『上』¥8,800、『特上』¥13,200、『極上』¥22,000（各 6 道）；用餐限 120 分鐘｜電話 075-212-0500",map:"https://maps.app.goo.gl/wqqwBrqtephMcpgu5"}
 ];
 
 /* 每日餐廳：st → ok 已安排、todo 待訂位／待決定、sug 建議（營業日與價位請出發前確認） */
@@ -1202,6 +1208,7 @@ function dailyHTML(){
    '<div class="days">'+DAYS.map(d=>'<button class="dbtn'+(d.n===S.day?' on':'')+'" data-day="'+d.n+'"><b>'+d.date+'</b><span>'+d.wd+'・Day '+d.n+'</span>'+(d.n===2?'<i>節分</i>':d.n===4?'<i>除夕</i>':d.n===5?'<i>農曆新年</i>':'')+'</button>').join("")+'</div>'+
    wxHTML(D)+
    '<div class="dayhead"><h2>Day '+D.n+'｜'+D.date+'（'+D.wd+'）'+D.title+'</h2><div class="meta">'+D.tags.map(t=>'<span class="tg pri" style="margin:0 6px 0 0">'+t+'</span>').join("")+'</div></div>'+
+   festHTML(D)+
    (D.alert?'<div class="info"><p>😴 '+D.alert+'</p></div>':'')+
    '<div class="info">'+D.info.map(x=>'<p>'+fmtP(x)+'</p>').join("")+'</div>'+
    '<div class="expall"><button class="btn" data-expall="1">全部展開 ▾</button></div>'+
@@ -1331,6 +1338,15 @@ function resCard(r){
    '<label class="full">預約資訊（訂位人名、人數、編號、電話）<input type="text" value="'+esc(r.no||"")+'" placeholder="訂好再填" maxlength="80" data-res-f="'+r.id+':no"></label>'+
    '<label class="full">備註<textarea maxlength="300" placeholder="取消規則、特殊需求、候補店家…" data-res-f="'+r.id+':note">'+esc(r.note||"")+'</textarea></label></div>'+
    '<div class="acts">'+(r.map?'<a class="btn" target="_blank" rel="noopener" href="'+mapUrl(r.map)+'">'+IC.map+' 地圖</a>':'')+((r.url||r.link)?'<a class="btn pri" target="_blank" rel="noopener" href="'+esc(r.url||r.link)+'">'+IC.link+' 前往訂位</a>':'')+'<button class="btn" data-res-del="'+r.id+'">移除</button></div></div></div>';
+}
+
+function lantern(x,sc){return '<g transform="translate('+x+',0) scale('+sc+')"><path d="M20 0V14" stroke="#7a5a2a" stroke-width="2"/><rect x="12" y="12" width="16" height="5" rx="2" fill="#E8B64A"/><ellipse cx="20" cy="34" rx="17" ry="18" fill="#D9482F"/><path d="M20 16C12 24 12 44 20 52M20 16C28 24 28 44 20 52" stroke="#B3321F" stroke-width="1.6" fill="none"/><rect x="12" y="50" width="16" height="5" rx="2" fill="#E8B64A"/><path d="M20 55V70M16 55L14 68M24 55L26 68" stroke="#E8B64A" stroke-width="2" stroke-linecap="round"/><text x="20" y="40" font-size="15" font-weight="900" text-anchor="middle" fill="#F8D77A">福</text></g>'}
+function bowl(){return '<svg class="fr" viewBox="0 0 80 80" aria-hidden="true"><path d="M26 18C22 26 30 30 26 38M40 14C36 22 44 26 40 34M54 18C50 26 58 30 54 38" stroke="#c9b27c" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M10 44H70C68 64 56 72 40 72C24 72 12 64 10 44Z" fill="#D9482F" stroke="#23406B" stroke-width="2.5"/><path d="M10 44H70" stroke="#23406B" stroke-width="3"/><path d="M14 52H66" stroke="#E8B64A" stroke-width="3"/><rect x="48" y="14" width="3.5" height="34" rx="1.7" transform="rotate(25 48 14)" fill="#8A6A52"/><rect x="56" y="14" width="3.5" height="34" rx="1.7" transform="rotate(25 56 14)" fill="#8A6A52"/></svg>'}
+function festHTML(D){
+  const ST='<svg class="fr" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="35" fill="none" stroke="#C93A28" stroke-width="3.5"/><circle cx="40" cy="40" r="29" fill="none" stroke="#C93A28" stroke-width="1.4"/><text x="40" y="54" font-size="38" font-weight="900" text-anchor="middle" fill="#C93A28" font-family="Noto Serif CJK TC,Noto Serif CJK JP,serif">福</text></svg>';
+  if(D.n===4)return '<div class="fest"><b>除夕・團圓夜</b><span>今晚在京都吃壽喜燒年夜飯，五個人圍爐，替這一年收尾。<br>日本的除夕習慣吃「年越しそば」（跨年蕎麥麵），象徵把一年的厄運切斷；今晚的壽喜燒，也算是團圓的一餐。</span>'+ST+'</div>';
+  if(D.n===5)return '<div class="fest"><b>新年快樂・羊年大吉</b><span>2027 丁未年是羊年，在日本過農曆新年，算是難得的一次體驗。</span>'+ST+'</div>';
+  return "";
 }
 function resOpenDate(r){
   const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(r.date||"");const o=/(\d+)\s*(個月|週|天)前/.exec(r.open||"");
