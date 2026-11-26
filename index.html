@@ -952,7 +952,7 @@ function tick(){
 /* ---------- 導覽 ---------- */
 function renderNav(){
   $("#menu").hidden=view!=="overview";
-  $("#bnav").innerHTML=[["overview","首頁"],["daily","行程"],["food","餐廳"]].map(([k,t])=>'<button data-nav="'+k+'"'+(view===k?' class="on" aria-current="page"':'')+'>'+ICON[k]+'<span>'+t+'</span></button>').join("");
+  $("#bnav").innerHTML=[["food","餐廳"],["overview","首頁"],["daily","行程"]].map(([k,t])=>'<button data-nav="'+k+'"'+(view===k?' class="on" aria-current="page"':'')+'>'+ICON[k]+'<span>'+t+'</span></button>').join("");
   $("#menu").innerHTML=NAV.map(([k,t])=>'<button class="navbtn'+(view===k?' on':'')+'" data-nav="'+k+'" aria-current="'+(view===k)+'">'+ICON[k]+'<span>'+t+'</span></button>').join("");
 }
 function parseHash(){const h=(location.hash||"#overview").slice(1).split("/");return{v:h[0],d:+h[1]||0}}
