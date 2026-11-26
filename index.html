@@ -5,16 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>京都・伊根 六天五夜</title>
 <meta name="theme-color" content="#23406B">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="https://theluluhuang.github.io/kyoto2027/favicon-32.png?v=4">
-<link rel="apple-touch-icon" sizes="180x180" href="https://theluluhuang.github.io/kyoto2027/apple-touch-icon.png?v=4">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="京都旅行">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{
   --kyo:#23406B;      /* 京藍 */
@@ -30,7 +24,7 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--kyo);font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;font-size:16px;line-height:1.75;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--kyo);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Source Han Sans TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;font-size:16px;line-height:1.75;-webkit-tap-highlight-color:transparent}
 .wrap{max-width:640px;margin:0 auto;padding:12px 14px calc(96px + env(safe-area-inset-bottom))}
 h1,h2,h3,p{margin:0}
 a{color:var(--kyo)}
@@ -1527,11 +1521,9 @@ function msg(t){const m=$("#bkMsg");if(m)m.textContent=t}
 
 /* ---------- 啟動 ---------- */
 render();
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
-}
 setInterval(tick,30000);
 refreshWx().then(()=>{updSum();if(view==='list')render()}).catch(()=>{});
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
 </html>
@@ -1540,8 +1532,3 @@ refreshWx().then(()=>{updSum();if(view==='list')render()}).catch(()=>{});
 
 
 ⋮⋮⋮⋮
-隨著這段對話變長，ChatGPT 可能會忘記先前的對話細節。升級即可讓每段對話保留更多上下文。
-
-
-
-
