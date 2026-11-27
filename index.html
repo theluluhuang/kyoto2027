@@ -269,11 +269,16 @@ textarea{padding:10px 12px;min-height:90px}
 .rv .nm{font-size:18px;font-weight:700;line-height:1.45}
 .rv.is-done .nm{text-decoration:line-through;opacity:.6}
 .rv .bd{grid-column:1/-1}
-.rv .rg{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:6px}
-.rv .rg label{display:block;font-size:15px;font-weight:500}
+.rv .rg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 10px;margin-top:8px}
+.rv .rg>label{min-width:0}
+.rv input[type=date],.rv input[type=time]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;text-align:left;line-height:46px;padding:0 12px}
+.rv input::-webkit-date-and-time-value{text-align:left;min-height:1.2em}
+.rv input::-webkit-calendar-picker-indicator{margin:0}
+.rv .rg label{display:block;font-size:14px;font-weight:600;color:#51668a}
+.rv .rg label.open textarea{min-height:60px}
 .rv .rg .full{grid-column:1/-1}
 .rv input[type=date],.rv input[type=time],.rv input[type=text],.rv input[type=url],.rv textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 10px;min-height:46px;width:100%;font-size:16px;margin-top:2px}
-.rv textarea{padding:8px 10px;min-height:84px;line-height:1.6}
+.rv textarea{padding:8px 10px;min-height:140px;line-height:1.6;resize:vertical}
 .rv-add{border-top:var(--line);margin-top:6px;padding-top:12px}
 .opt{border-top:1.5px dashed rgba(35,64,107,.25);margin-top:10px;padding-top:8px}
 .opt.f{border-top:0;margin-top:4px;padding-top:0}
@@ -282,7 +287,8 @@ textarea{padding:10px 12px;min-height:90px}
 .resc .rtop b{font-size:18px}
 .resc .rtop .tg{margin:0}
 .resc .rnote{font-size:15px;margin:2px 0 0}
-.resc .rg{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:8px}
+.resc .rg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:8px}
+.resc .rg>label{min-width:0}
 .resc .rg label{display:block;font-size:15px;font-weight:500}
 .resc .rg .full{grid-column:1/-1}
 .resc input,.resc textarea{border:var(--line);border-radius:12px;background:#fff;padding:0 10px;min-height:46px;width:100%;font-size:16px;margin-top:2px}
@@ -1336,7 +1342,7 @@ function resCard(r){
    '<div class="bd"><div class="rg"><label>日期<input type="date" min="2027-02-02" max="2027-02-07" value="'+esc(r.date||"")+'" data-res-f="'+r.id+':date"></label>'+
    '<label>時間<input type="time" value="'+esc(r.time||"")+'" data-res-f="'+r.id+':time"></label>'+
    (RES_DEF.some(d=>d.id===r.id&&d.alt)?'<label>備選時間<input type="text" value="'+esc(r.alt||"")+'" placeholder="例：2/3 9:00" maxlength="30" data-res-f="'+r.id+':alt"></label>':'')+
-   '<label'+(RES_DEF.some(d=>d.id===r.id&&d.alt)?'':' class="full"')+'>開放訂位<input type="text" value="'+esc(r.open||"")+'" placeholder="例：1 個月前" maxlength="40" data-res-f="'+r.id+':open"></label>'+
+   '<label'+(RES_DEF.some(d=>d.id===r.id&&d.alt)?'':' class="full"')+'>開放訂位<textarea rows="2" style="min-height:60px" placeholder="例：1 個月前" maxlength="80" data-res-f="'+r.id+':open">'+esc(r.open||"")+'</textarea></label>'+
    (RES_DEF.some(d=>d.id===r.id&&d.url)?'':'<label class="full">訂位連結<input type="url" value="'+esc(r.url||"")+'" placeholder="貼上訂位網址" maxlength="300" data-res-f="'+r.id+':url"></label>')+
    '<label class="full">預約資訊（訂位人名、人數、編號、電話）<input type="text" value="'+esc(r.no||"")+'" placeholder="訂好再填" maxlength="80" data-res-f="'+r.id+':no"></label>'+
    '<label class="full">備註<textarea maxlength="300" placeholder="取消規則、特殊需求、候補店家…" data-res-f="'+r.id+':note">'+esc(r.note||"")+'</textarea></label></div>'+
